@@ -409,7 +409,9 @@ var maxDate=Math.max.apply(null,dates);
 
 function renderEvents(cutoff){
   eventLayer.clearLayers();
-  var filtered=cutoff?events.filter(function(e){return new Date(e.date).getTime()<=cutoff}):events;
+  var filtered;
+  if(cutoff===null){filtered=events;}
+  else{filtered=events.filter(function(e){return new Date(e.date).getTime()<=cutoff});}
   filtered.forEach(function(ev){
     var col=ev.type==='airstrike'?'#ff4444':'#ffaa00';
     var rad=relSizes[ev.energyRelevance]||7;
@@ -528,6 +530,12 @@ function setDay(dayIndex){
     slider.value=String(totalDays);
     return;
   }
+  if(dayIndex<0){
+    dateDisplay.textContent='PRE-CONFLICT';
+    renderEvents(minDate-86400000);
+    slider.value='0';
+    return;
+  }
   var cutoff=minDate+dayIndex*86400000;
   var d=new Date(cutoff);
   var dayNum=dayIndex+1;
@@ -545,8 +553,8 @@ playBtn.addEventListener('click',function(){
   if(playInterval) return;
   playBtn.style.display='none';
   stopBtn.style.display='inline-block';
-  var currentDay=0;
-  setDay(0);
+  var currentDay=-1;
+  setDay(-1);
   playInterval=setInterval(function(){
     currentDay++;
     if(currentDay>totalDays){
