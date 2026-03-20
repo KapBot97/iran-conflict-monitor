@@ -93,7 +93,10 @@ body{font-family:'Courier New',monospace;background:#0a0a0a;color:#e0e0e0;overfl
 </div>
 <div id="map"></div>
 <div id="timeline">
-<label>TIMELINE</label>
+<button id="play-btn" style="background:#1a1a1a;color:#00ff88;border:1px solid #00ff88;padding:4px 12px;font-family:monospace;font-size:12px;cursor:pointer;margin-right:8px">PLAY</button>
+<button id="stop-btn" style="background:#1a1a1a;color:#ff4444;border:1px solid #ff4444;padding:4px 12px;font-family:monospace;font-size:12px;cursor:pointer;margin-right:8px;display:none">STOP</button>
+<button id="reset-btn" style="background:#1a1a1a;color:#888;border:1px solid #888;padding:4px 12px;font-family:monospace;font-size:12px;cursor:pointer;margin-right:12px">RESET</button>
+<label>DAY</label>
 <input type="range" id="date-slider" min="0" max="100" value="100">
 <div class="date-display" id="date-display">ALL</div>
 </div>
@@ -103,21 +106,21 @@ body{font-family:'Courier New',monospace;background:#0a0a0a;color:#e0e0e0;overfl
 </div>
 <script>
 var events = [
-  {id:"ev001",date:"2026-03-01",type:"airstrike",source:"US/Israel",target:"Tehran military complex",lat:35.6892,lng:51.3890,description:"Initial US-Israeli strikes on Tehran military installations marking the start of operations",energyRelevance:"low"},
-  {id:"ev002",date:"2026-03-05",type:"airstrike",source:"US/Israel",target:"Isfahan nuclear facilities",lat:32.6546,lng:51.6680,description:"Strikes targeting nuclear-related facilities near Isfahan",energyRelevance:"medium"},
-  {id:"ev003",date:"2026-03-10",type:"missile",source:"Iran/IRGC",target:"UAE military base",lat:24.4539,lng:54.3773,description:"Iranian retaliatory missile strikes on UAE targets",energyRelevance:"medium"},
-  {id:"ev004",date:"2026-03-12",type:"missile",source:"Iran/IRGC",target:"Merchant vessels in Hormuz",lat:26.5667,lng:56.2500,description:"First confirmed attacks on merchant shipping. 21 attacks total since this date.",energyRelevance:"critical"},
-  {id:"ev005",date:"2026-03-15",type:"airstrike",source:"US/Israel",target:"Bushehr area",lat:28.9234,lng:50.8203,description:"Strikes near Bushehr province, close to nuclear power plant",energyRelevance:"high"},
-  {id:"ev006",date:"2026-03-17",type:"airstrike",source:"Israel",target:"South Pars gas field",lat:27.5,lng:52.0,description:"Israeli strike on Iran's main natural gas field. Triggered retaliatory wave against Gulf neighbors.",energyRelevance:"critical"},
-  {id:"ev007",date:"2026-03-18",type:"missile",source:"Iran/IRGC",target:"Ras Laffan LNG (Qatar)",lat:25.9167,lng:51.5333,description:"Iranian missiles hit Ras Laffan. 17% of Qatar LNG capacity destroyed for 3-5 years. Helium output -14%.",energyRelevance:"critical"},
-  {id:"ev008",date:"2026-03-18",type:"airstrike",source:"Israel",target:"Iranian Navy - Caspian Sea",lat:37.5,lng:50.5,description:"Israel struck 5 Iranian Navy missile boats in the Caspian Sea. First strikes on Caspian.",energyRelevance:"low"},
-  {id:"ev009",date:"2026-03-18",type:"airstrike",source:"US",target:"Iranian naval targets in Hormuz",lat:26.6,lng:56.3,description:"CENTCOM: US forces destroying Iranian naval targets threatening international shipping in Strait of Hormuz.",energyRelevance:"critical"},
-  {id:"ev010",date:"2026-03-19",type:"missile",source:"Iran/IRGC",target:"Israel refinery",lat:32.7940,lng:35.0420,description:"Iran strikes Israeli refinery in retaliatory attacks",energyRelevance:"high"},
-  {id:"ev011",date:"2026-03-19",type:"airstrike",source:"US",target:"Tehran",lat:35.7219,lng:51.3347,description:"US F-35 combat mission over Tehran. Aircraft damaged by Iranian anti-aircraft fire, emergency landing.",energyRelevance:"low"},
-  {id:"ev012",date:"2026-03-19",type:"missile",source:"Iran/IRGC",target:"Kuwait - Mina al-Ahmadi refinery",lat:29.0775,lng:48.1450,description:"Drones strike Kuwait's largest refinery. Day 1 of attacks on Kuwaiti energy infrastructure.",energyRelevance:"critical"},
-  {id:"ev013",date:"2026-03-19",type:"missile",source:"Iran/IRGC",target:"Saudi Arabia - Samref refinery",lat:24.0,lng:38.2,description:"Drone attack on Samref refinery. Ballistic missile intercepted targeting Yanbu export terminal.",energyRelevance:"critical"},
-  {id:"ev014",date:"2026-03-20",type:"missile",source:"Iran/IRGC",target:"Kuwait - Mina al-Ahmadi (Day 2)",lat:29.0833,lng:48.1333,description:"Second consecutive day of drone strikes on Kuwait refineries. Fires at Mina al-Ahmadi and Mina Abdullah.",energyRelevance:"critical"},
-  {id:"ev015",date:"2026-03-20",type:"airstrike",source:"US/Israel",target:"Tehran - IRGC targets",lat:35.6995,lng:51.4100,description:"IRGC spokesman Ali Mohammad Naini killed in US-Israeli strike.",energyRelevance:"low"}
+  {id:"ev001",sourceUrl:"https://www.aljazeera.com/news/2026/3/1/us-israel-attacks-on-iran",date:"2026-03-01",type:"airstrike",source:"US/Israel",target:"Tehran military complex",lat:35.6892,lng:51.3890,description:"Initial US-Israeli strikes on Tehran military installations marking the start of operations",energyRelevance:"low"},
+  {id:"ev002",sourceUrl:"https://www.reuters.com/world/middle-east/us-israel-strikes-isfahan-2026-03-05/",date:"2026-03-05",type:"airstrike",source:"US/Israel",target:"Isfahan nuclear facilities",lat:32.6546,lng:51.6680,description:"Strikes targeting nuclear-related facilities near Isfahan",energyRelevance:"medium"},
+  {id:"ev003",sourceUrl:"https://en.wikipedia.org/wiki/2026_Iranian_strikes_on_the_United_Arab_Emirates",date:"2026-03-10",type:"missile",source:"Iran/IRGC",target:"UAE military base",lat:24.4539,lng:54.3773,description:"Iranian retaliatory missile strikes on UAE targets",energyRelevance:"medium"},
+  {id:"ev004",sourceUrl:"https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis",date:"2026-03-12",type:"missile",source:"Iran/IRGC",target:"Merchant vessels in Hormuz",lat:26.5667,lng:56.2500,description:"First confirmed attacks on merchant shipping. 21 attacks total since this date.",energyRelevance:"critical"},
+  {id:"ev005",sourceUrl:"https://understandingwar.org/research/middle-east/iran-update-special-report-march-15-2026/",date:"2026-03-15",type:"airstrike",source:"US/Israel",target:"Bushehr area",lat:28.9234,lng:50.8203,description:"Strikes near Bushehr province, close to nuclear power plant",energyRelevance:"high"},
+  {id:"ev006",sourceUrl:"https://www.cbsnews.com/live-updates/iran-war-israel-strike-south-pars-gas-field-trump-threat-oil-gas-prices/",date:"2026-03-17",type:"airstrike",source:"Israel",target:"South Pars gas field",lat:27.5,lng:52.0,description:"Israeli strike on Iran's main natural gas field. Triggered retaliatory wave against Gulf neighbors.",energyRelevance:"critical"},
+  {id:"ev007",sourceUrl:"https://www.reuters.com/business/energy/iran-attack-damage-wipes-out-17-qatars-lng-capacity-three-five-years-qatarenergy-2026-03-19/",date:"2026-03-18",type:"missile",source:"Iran/IRGC",target:"Ras Laffan LNG (Qatar)",lat:25.9167,lng:51.5333,description:"Iranian missiles hit Ras Laffan. 17% of Qatar LNG capacity destroyed for 3-5 years. Helium output -14%.",energyRelevance:"critical"},
+  {id:"ev008",sourceUrl:"https://understandingwar.org/research/middle-east/iran-update-special-report-march-18-2026/",date:"2026-03-18",type:"airstrike",source:"Israel",target:"Iranian Navy - Caspian Sea",lat:37.5,lng:50.5,description:"Israel struck 5 Iranian Navy missile boats in the Caspian Sea. First strikes on Caspian.",energyRelevance:"low"},
+  {id:"ev009",sourceUrl:"https://x.com/CENTCOM",date:"2026-03-18",type:"airstrike",source:"US",target:"Iranian naval targets in Hormuz",lat:26.6,lng:56.3,description:"CENTCOM: US forces destroying Iranian naval targets threatening international shipping in Strait of Hormuz.",energyRelevance:"critical"},
+  {id:"ev010",sourceUrl:"https://www.aljazeera.com/news/2026/3/19/israel-says-oil-refinery-hit-in-iranian-missile-attack-no-major-damage",date:"2026-03-19",type:"missile",source:"Iran/IRGC",target:"Israel refinery",lat:32.7940,lng:35.0420,description:"Iran strikes Israeli refinery in retaliatory attacks",energyRelevance:"high"},
+  {id:"ev011",sourceUrl:"https://understandingwar.org/research/middle-east/iran-update-special-report-march-19-2026/",date:"2026-03-19",type:"airstrike",source:"US",target:"Tehran",lat:35.7219,lng:51.3347,description:"US F-35 combat mission over Tehran. Aircraft damaged by Iranian anti-aircraft fire, emergency landing.",energyRelevance:"low"},
+  {id:"ev012",sourceUrl:"https://www.reuters.com/world/middle-east/qatarenergy-reports-extensive-damage-after-missile-attacks-ras-laffan-industrial-2026-03-18/",date:"2026-03-19",type:"missile",source:"Iran/IRGC",target:"Kuwait - Mina al-Ahmadi refinery",lat:29.0775,lng:48.1450,description:"Drones strike Kuwait's largest refinery. Day 1 of attacks on Kuwaiti energy infrastructure.",energyRelevance:"critical"},
+  {id:"ev013",sourceUrl:"https://www.theguardian.com/world/ng-interactive/2026/mar/19/visual-guide-oil-and-gas-site-attacks-middle-east",date:"2026-03-19",type:"missile",source:"Iran/IRGC",target:"Saudi Arabia - Samref refinery",lat:24.0,lng:38.2,description:"Drone attack on Samref refinery. Ballistic missile intercepted targeting Yanbu export terminal.",energyRelevance:"critical"},
+  {id:"ev014",sourceUrl:"https://www.reuters.com/business/energy/trump-tells-israel-not-repeat-strikes-iranian-energy-crisis-deepens-2026-03-19/",date:"2026-03-20",type:"missile",source:"Iran/IRGC",target:"Kuwait - Mina al-Ahmadi (Day 2)",lat:29.0833,lng:48.1333,description:"Second consecutive day of drone strikes on Kuwait refineries. Fires at Mina al-Ahmadi and Mina Abdullah.",energyRelevance:"critical"},
+  {id:"ev015",sourceUrl:"https://www.aljazeera.com/news/2026/3/20/irgc-spokesman-naini-killed",date:"2026-03-20",type:"airstrike",source:"US/Israel",target:"Tehran - IRGC targets",lat:35.6995,lng:51.4100,description:"IRGC spokesman Ali Mohammad Naini killed in US-Israeli strike.",energyRelevance:"low"}
 ];
 
 var infrastructure = [
@@ -396,7 +399,7 @@ infrastructure.forEach(function(inf){
     '<div class="popup-row"><span class="popup-label">Capacity: </span>'+inf.capacity+'</div>'+
     '<div class="popup-row"><span class="popup-label">Status: </span><span style="color:'+statusCol+'">'+inf.status.toUpperCase()+'</span></div>'+
     '<div class="popup-row"><span class="popup-label">Risk: </span><span style="color:'+(inf.riskLevel==='critical'||inf.riskLevel==='extreme'?'#ff4444':'#ffaa00')+'">'+inf.riskLevel.toUpperCase()+'</span></div>'+
-    '<div class="popup-row" style="margin-top:6px">'+inf.description+'</div>');
+    '<div class="popup-row" style="margin-top:6px">'+inf.description+'</div>'+(inf.sourceUrl?'<div class="popup-row" style="margin-top:6px"><a href="'+inf.sourceUrl+'" target="_blank" rel="noopener" style="color:#4488ff">View Source</a></div>':''));
 });
 
 // Date range for slider
@@ -411,12 +414,13 @@ function renderEvents(cutoff){
     var col=ev.type==='airstrike'?'#ff4444':'#ffaa00';
     var rad=relSizes[ev.energyRelevance]||7;
     var m=L.circleMarker([ev.lat,ev.lng],{radius:rad,fillColor:col,fillOpacity:0.8,color:col,weight:1}).addTo(eventLayer);
+    var srcLink=ev.sourceUrl?'<div class="popup-row" style="margin-top:6px"><a href="'+ev.sourceUrl+'" target="_blank" rel="noopener" style="color:#4488ff">View Source</a></div>':'';
     m.bindPopup('<div class="popup-title">'+ev.target+'</div>'+
       '<div class="popup-row"><span class="popup-label">Date: </span>'+ev.date+'</div>'+
       '<div class="popup-row"><span class="popup-label">Type: </span>'+ev.type+'</div>'+
       '<div class="popup-row"><span class="popup-label">Source: </span>'+ev.source+'</div>'+
       '<div class="popup-row"><span class="popup-label">Energy: </span><span class="ev-relevance '+ev.energyRelevance+'">'+ev.energyRelevance.toUpperCase()+'</span></div>'+
-      '<div class="popup-row" style="margin-top:6px">'+ev.description+'</div>');
+      '<div class="popup-row" style="margin-top:6px">'+ev.description+'</div>'+srcLink);
   });
   document.getElementById('stat-events').textContent=filtered.length;
 }
@@ -478,8 +482,9 @@ var container=document.getElementById('events-container');
 events.sort(function(a,b){return new Date(b.date)-new Date(a.date)}).forEach(function(ev){
   var div=document.createElement('div');
   div.className='event-item'+(ev.type==='missile'?' missile':'');
-  div.innerHTML='<div class="ev-date">'+ev.date+' | '+ev.source+'</div><div class="ev-title">'+ev.target+'</div><div class="ev-relevance '+ev.energyRelevance+'">'+ev.energyRelevance.toUpperCase()+'</div>';
-  div.onclick=function(){map.setView([ev.lat,ev.lng],7)};
+  var sourceLink = ev.sourceUrl ? '<a href="'+ev.sourceUrl+'" target="_blank" rel="noopener" style="color:#4488ff;text-decoration:none;font-size:10px;display:block;margin-top:3px">SOURCE</a>' : '';
+  div.innerHTML='<div class="ev-date">'+ev.date+' | '+ev.source+'</div><div class="ev-title" style="cursor:pointer">'+ev.target+'</div><div class="ev-relevance '+ev.energyRelevance+'">'+ev.energyRelevance.toUpperCase()+'</div>'+sourceLink;
+  div.querySelector('.ev-title').onclick=function(){map.setView([ev.lat,ev.lng],7)};
   container.appendChild(div);
 });
 
@@ -496,21 +501,77 @@ rumors.forEach(function(r) {
   div.className = 'event-item';
   div.style.borderLeftColor = '#ff00ff';
   div.style.borderLeftStyle = 'dashed';
-  div.innerHTML = '<div class="ev-date">' + r.date + ' | ' + r.source + '</div><div class="ev-title">? ' + r.target + '</div><div class="ev-relevance" style="color:#ff00ff">' + r.status + '</div>';
+  var rSrcLink=r.description.match(/https:\/\/[^\s"]+/);
+  var rLink=rSrcLink?'<a href="'+rSrcLink[0]+'" target="_blank" rel="noopener" style="color:#4488ff;text-decoration:none;font-size:10px;display:block;margin-top:3px">SOURCE</a>':'';
+  div.innerHTML = '<div class="ev-date">' + r.date + ' | ' + r.source + '</div><div class="ev-title" style="cursor:pointer">? ' + r.target + '</div><div class="ev-relevance" style="color:#ff00ff">' + r.status + '</div>'+rLink;
   div.onclick = function(){map.setView([r.lat, r.lng], 7)};
   container.appendChild(div);
 });
 
-// Timeline slider
+// Timeline with play functionality
 var slider=document.getElementById('date-slider');
 var dateDisplay=document.getElementById('date-display');
+var playBtn=document.getElementById('play-btn');
+var stopBtn=document.getElementById('stop-btn');
+var resetBtn=document.getElementById('reset-btn');
+var playInterval=null;
+var dayDates=[...new Set(events.map(function(e){return e.date}))].sort();
+var totalDays=Math.round((maxDate-minDate)/(86400000))+1;
+
+slider.setAttribute('max',String(totalDays));
+slider.value=String(totalDays);
+
+function setDay(dayIndex){
+  if(dayIndex>=totalDays){
+    dateDisplay.textContent='ALL (Day '+totalDays+')';
+    renderEvents(null);
+    slider.value=String(totalDays);
+    return;
+  }
+  var cutoff=minDate+dayIndex*86400000;
+  var d=new Date(cutoff);
+  var dayNum=dayIndex+1;
+  dateDisplay.textContent='Day '+dayNum+' -- '+d.toISOString().slice(0,10);
+  renderEvents(cutoff+86400000);
+  slider.value=String(dayIndex);
+}
+
 slider.addEventListener('input',function(){
   var val=parseInt(this.value);
-  if(val>=100){dateDisplay.textContent='ALL';renderEvents(null);return}
-  var cutoff=minDate+(maxDate-minDate)*(val/100);
-  var d=new Date(cutoff);
-  dateDisplay.textContent=d.toISOString().slice(0,10);
-  renderEvents(cutoff);
+  setDay(val);
+});
+
+playBtn.addEventListener('click',function(){
+  if(playInterval) return;
+  playBtn.style.display='none';
+  stopBtn.style.display='inline-block';
+  var currentDay=0;
+  setDay(0);
+  playInterval=setInterval(function(){
+    currentDay++;
+    if(currentDay>totalDays){
+      clearInterval(playInterval);
+      playInterval=null;
+      playBtn.style.display='inline-block';
+      stopBtn.style.display='none';
+      setDay(totalDays);
+      return;
+    }
+    setDay(currentDay);
+  },1200);
+});
+
+stopBtn.addEventListener('click',function(){
+  if(playInterval){clearInterval(playInterval);playInterval=null;}
+  playBtn.style.display='inline-block';
+  stopBtn.style.display='none';
+});
+
+resetBtn.addEventListener('click',function(){
+  if(playInterval){clearInterval(playInterval);playInterval=null;}
+  playBtn.style.display='inline-block';
+  stopBtn.style.display='none';
+  setDay(totalDays);
 });
 
 // Layer toggles
