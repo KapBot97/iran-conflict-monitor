@@ -182,9 +182,9 @@ var hormuzLine=L.polyline([[26.0,56.0],[26.3,56.2],[26.6,56.4],[26.9,56.5]],{col
 // Render infrastructure
 infrastructure.forEach(function(inf){
   var col=typeColors[inf.type]||'#888';
-  var rad=inf.riskLevel==='critical'||inf.riskLevel==='extreme'?12:9;
-  var opts={radius:rad,fillColor:col,fillOpacity:0.7,color:inf.riskLevel==='critical'||inf.riskLevel==='extreme'?'#ff4444':'#666',weight:inf.riskLevel==='critical'||inf.riskLevel==='extreme'?3:1};
-  var m=L.circleMarker([inf.lat,inf.lng],opts).addTo(infraLayer);
+  var rad=inf.riskLevel==='critical'||inf.riskLevel==='extreme'?14:10;
+  var opts={radius:rad,fillColor:col,fillOpacity:0.85,color:inf.riskLevel==='critical'||inf.riskLevel==='extreme'?'#ff4444':'#666',weight:inf.riskLevel==='critical'||inf.riskLevel==='extreme'?3:1};
+  opts.zIndexOffset=1000;var m=L.circleMarker([inf.lat,inf.lng],opts).addTo(infraLayer);
   if(inf.riskLevel==='critical'||inf.riskLevel==='extreme'){
     var pulse=L.circleMarker([inf.lat,inf.lng],{radius:rad+6,fillColor:'transparent',fillOpacity:0,color:'#ff4444',weight:2,className:'pulse-marker'}).addTo(infraLayer);
   }
@@ -220,6 +220,9 @@ function renderEvents(cutoff){
   document.getElementById('stat-events').textContent=filtered.length;
 }
 renderEvents(null);
+
+// Bring infrastructure to front
+infraLayer.eachLayer(function(l){if(l.bringToFront)l.bringToFront();});
 
 // Stats
 document.getElementById('stat-critical').textContent=infrastructure.filter(function(i){return i.riskLevel==='critical'||i.riskLevel==='extreme'}).length;
