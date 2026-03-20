@@ -1,0 +1,122 @@
+[
+  {
+    "id": "inf001",
+    "name": "Kharg Island",
+    "type": "oil_export",
+    "lat": 29.2333,
+    "lng": 50.3167,
+    "country": "Iran",
+    "description": "Handles ~90% of Iran's oil exports. Single most critical Iranian energy chokepoint.",
+    "capacity": "~5 mb/d export capacity",
+    "status": "operational",
+    "riskLevel": "extreme"
+  },
+  {
+    "id": "inf002",
+    "name": "Ras Laffan Industrial City",
+    "type": "lng_helium",
+    "lat": 25.9167,
+    "lng": 51.5333,
+    "country": "Qatar",
+    "description": "World's largest LNG export facility and primary global helium source. North Field gas operations.",
+    "capacity": "77 mtpa LNG + major helium",
+    "status": "operational",
+    "riskLevel": "high"
+  },
+  {
+    "id": "inf003",
+    "name": "Abqaiq Processing Facility",
+    "type": "oil_processing",
+    "lat": 25.9386,
+    "lng": 49.6711,
+    "country": "Saudi Arabia",
+    "description": "World's largest oil processing facility. Processes ~7 mb/d. Hit by drones in 2019.",
+    "capacity": "~7 mb/d processing",
+    "status": "operational",
+    "riskLevel": "high"
+  },
+  {
+    "id": "inf004",
+    "name": "Ghawar Oil Field",
+    "type": "oil_field",
+    "lat": 25.4000,
+    "lng": 49.5000,
+    "country": "Saudi Arabia",
+    "description": "World's largest oil field. ~3.8 mb/d production.",
+    "capacity": "~3.8 mb/d",
+    "status": "operational",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "inf005",
+    "name": "Fujairah Oil Terminal",
+    "type": "oil_storage",
+    "lat": 25.1164,
+    "lng": 56.3414,
+    "country": "UAE",
+    "description": "Major oil storage and bunkering hub. Bypass route for Strait of Hormuz via pipeline.",
+    "capacity": "storage + pipeline bypass",
+    "status": "operational",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "inf006",
+    "name": "Strait of Hormuz",
+    "type": "chokepoint",
+    "lat": 26.5667,
+    "lng": 56.2500,
+    "country": "International",
+    "description": "Critical chokepoint: ~21% of global oil passes through. IRGC now developing vetting/approval system for transit.",
+    "capacity": "~21 mb/d transit",
+    "status": "at_risk",
+    "riskLevel": "critical"
+  },
+  {
+    "id": "inf007",
+    "name": "Bushehr Nuclear Power Plant",
+    "type": "nuclear",
+    "lat": 28.8300,
+    "lng": 50.8900,
+    "country": "Iran",
+    "description": "Iran's only operational nuclear power plant. Strikes nearby raise contamination risk.",
+    "capacity": "1 GW",
+    "status": "at_risk",
+    "riskLevel": "extreme"
+  },
+  {
+    "id": "inf008",
+    "name": "Bandar Abbas Refinery",
+    "type": "refinery",
+    "lat": 27.1865,
+    "lng": 56.2808,
+    "country": "Iran",
+    "description": "Major Iranian refinery near Strait of Hormuz. Strategic target.",
+    "capacity": "320,000 b/d",
+    "status": "operational",
+    "riskLevel": "high"
+  },
+  {
+    "id": "inf009",
+    "name": "Mina al-Ahmadi Refinery",
+    "type": "refinery",
+    "lat": 29.0775,
+    "lng": 48.1450,
+    "country": "Kuwait",
+    "description": "Kuwait's largest refinery. Struck by Iranian missiles on March 20.",
+    "capacity": "466,000 b/d",
+    "status": "damaged",
+    "riskLevel": "critical"
+  },
+  {
+    "id": "inf010",
+    "name": "Ras Tanura Terminal",
+    "type": "oil_export",
+    "lat": 26.6400,
+    "lng": 50.1600,
+    "country": "Saudi Arabia",
+    "description": "World's largest offshore oil loading facility. ~6.5 mb/d capacity.",
+    "capacity": "~6.5 mb/d",
+    "status": "operational",
+    "riskLevel": "high"
+  }
+]
