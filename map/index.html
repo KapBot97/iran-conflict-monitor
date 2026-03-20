@@ -64,6 +64,7 @@ body{font-family:'Courier New',monospace;background:#0a0a0a;color:#e0e0e0;overfl
 <div class="stat"><div class="stat-val" id="stat-events">0</div><div class="stat-label">EVENTS</div></div>
 <div class="stat"><div class="stat-val red" id="stat-critical">0</div><div class="stat-label">CRITICAL</div></div>
 <div class="stat"><div class="stat-val amber" id="stat-atrisk">0</div><div class="stat-label">AT RISK</div></div>
+<div class="stat"><div class="stat-val" id="stat-rumors" style="color:#ff00ff">0</div><div class="stat-label">RUMORS</div></div>
 </div>
 <div id="legend">
 <h3>LEGEND</h3>
@@ -74,6 +75,7 @@ body{font-family:'Courier New',monospace;background:#0a0a0a;color:#e0e0e0;overfl
 <div class="legend-item"><div class="legend-dot" style="background:#aa44ff"></div>Nuclear</div>
 <div class="legend-item"><div class="legend-dot" style="background:#ffff00"></div>Chokepoint</div>
 <div class="legend-item"><div class="legend-dot" style="background:#44ff44"></div>Pipeline</div>
+<div class="legend-item"><div class="legend-dot" style="border:2px dashed #ff00ff;background:transparent"></div>Unconfirmed / Rumor</div>
 <div class="legend-item"><div class="legend-dot" style="border:2px dashed #666;background:transparent"></div>Missile Range</div>
 </div>
 <div id="layers">
@@ -82,6 +84,7 @@ body{font-family:'Courier New',monospace;background:#0a0a0a;color:#e0e0e0;overfl
 <label><input type="checkbox" id="layer-infra" checked> Energy Infrastructure</label>
 <label><input type="checkbox" id="layer-range" checked> Missile Ranges</label>
 <label><input type="checkbox" id="layer-hormuz" checked> Hormuz Shipping Lane</label>
+<label><input type="checkbox" id="layer-rumors" checked> Unconfirmed / Rumors</label>
 </div>
 <div id="events-list">
 <h3>RECENT EVENTS</h3>
@@ -148,6 +151,16 @@ var infrastructure = [
   {id:"inf028",name:"Khurais Oil Field",type:"oil_field",lat:25.07,lng:48.17,country:"Saudi Arabia",description:"Saudi Arabia's second-largest oil field. Hit by drones in 2019 alongside Abqaiq.",capacity:"~1.5 mb/d",status:"operational",riskLevel:"high"},
   {id:"inf029",name:"Lavan Island Terminal",type:"oil_export",lat:26.8,lng:53.36,country:"Iran",description:"Iranian offshore oil export terminal in the Persian Gulf.",capacity:"~0.2 mb/d",status:"operational",riskLevel:"high"},
   {id:"inf030",name:"Assaluyeh (South Pars Complex)",type:"lng_helium",lat:27.48,lng:52.6,country:"Iran",description:"Major onshore processing hub for South Pars gas. Iran's primary gas processing center.",capacity:"major gas processing",status:"at_risk",riskLevel:"high"}
+];
+
+var rumors = [
+  {id:"rum001",date:"2026-03-20",type:"rumor",source:"Social media / unconfirmed",lat:25.94,lng:49.68,target:"Abqaiq processing facility",description:"Unconfirmed social media reports of drone activity near Abqaiq. Saudi MOD has not confirmed. High-value target (7 mb/d processing). Monitoring.",energyRelevance:"critical",status:"MONITORING",confidence:"low"},
+  {id:"rum002",date:"2026-03-20",type:"rumor",source:"Shipping sources / unconfirmed",lat:24.09,lng:38.10,target:"Yanbu port operations",description:"Reuters cited unspecified sources saying Yanbu port loadings temporarily halted after nearby Samref refinery strike. Not officially confirmed by Saudi authorities.",energyRelevance:"critical",status:"MONITORING",confidence:"medium"},
+  {id:"rum003",date:"2026-03-20",type:"rumor",source:"OSINT / satellite imagery",lat:25.12,lng:56.35,target:"Fujairah storage facilities",description:"CNBC reported fire and smoke at Fujairah oil facility on Mar 14. Iran has not claimed. UAE downplayed as minor. Satellite imagery shows plumes.",energyRelevance:"high",status:"PARTIALLY CONFIRMED",confidence:"medium"},
+  {id:"rum004",date:"2026-03-20",type:"rumor",source:"Iranian state media / unverified claims",lat:32.79,lng:35.04,target:"Haifa refinery (Israel) - second strike",description:"Iranian media claims second successful strike on Haifa refinery. Israel says 'no significant damage' from initial strike. Follow-up unconfirmed.",energyRelevance:"high",status:"MONITORING",confidence:"low"},
+  {id:"rum005",date:"2026-03-20",type:"rumor",source:"Gulf diplomatic sources / unconfirmed",lat:26.22,lng:50.55,target:"Bahrain oil infrastructure",description:"Reports of Iranian drone intercepts near Bahraini oil infrastructure. Bahrain Defense Force confirmed Iranian strikes in country but specific energy facility targeting unconfirmed.",energyRelevance:"medium",status:"MONITORING",confidence:"low"},
+  {id:"rum006",date:"2026-03-20",type:"rumor",source:"Defense analysts / speculation",lat:25.40,lng:49.50,target:"Ghawar oil field - potential target",description:"Multiple defense analysts flagging Ghawar as likely next target if escalation continues. No active threat reported. Saudi air defenses intercepted 7 ballistic missiles and 19 drones Mar 17-18.",energyRelevance:"critical",status:"WATCHLIST",confidence:"low"},
+  {id:"rum007",date:"2026-03-20",type:"rumor",source:"ISW / Pentagon sources",lat:24.43,lng:54.65,target:"Al Dhafra Air Base (Abu Dhabi)",description:"Satellite imagery confirms damage from Iranian strikes on Al Dhafra Air Base Mar 15. Energy facilities nearby. Potential secondary targeting of UAE energy assets.",energyRelevance:"medium",status:"CONFIRMED MILITARY - ENERGY ADJACENT",confidence:"high"}
 ];
 
 document.getElementById('update-time', '').textContent = new Date().toLocaleString('en-US',{timeZone:'America/New_York'}) + ' ET';
@@ -221,11 +234,55 @@ function renderEvents(cutoff){
 }
 renderEvents(null);
 
+
+// Rumors layer
+var rumorsLayer = L.layerGroup();
+
+function renderRumors() {
+  rumorsLayer.clearLayers();
+  rumors.forEach(function(r) {
+    var confColor = r.confidence === 'high' ? '#ffaa00' : r.confidence === 'medium' ? '#ff6600' : '#ff00ff';
+    var m = L.circleMarker([r.lat, r.lng], {
+      radius: 12,
+      fillColor: 'transparent',
+      fillOpacity: 0,
+      color: confColor,
+      weight: 2,
+      dashArray: '4,4',
+      className: 'pulse-marker'
+    }).addTo(rumorsLayer);
+    
+    // Add a question mark label
+    L.marker([r.lat, r.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: '<span style="color:' + confColor + ';font-size:16px;font-weight:bold;font-family:monospace;text-shadow:0 0 4px rgba(0,0,0,0.8)">?</span>',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8]
+      })
+    }).addTo(rumorsLayer);
+    
+    var statusCol = r.status === 'CONFIRMED MILITARY - ENERGY ADJACENT' ? '#ffaa00' : r.confidence === 'high' ? '#ffaa00' : '#ff00ff';
+    m.bindPopup(
+      '<div class="popup-title" style="color:#ff00ff">UNCONFIRMED / RUMOR</div>' +
+      '<div class="popup-row"><span class="popup-label">Target: </span>' + r.target + '</div>' +
+      '<div class="popup-row"><span class="popup-label">Date: </span>' + r.date + '</div>' +
+      '<div class="popup-row"><span class="popup-label">Source: </span>' + r.source + '</div>' +
+      '<div class="popup-row"><span class="popup-label">Status: </span><span style="color:' + statusCol + '">' + r.status + '</span></div>' +
+      '<div class="popup-row"><span class="popup-label">Confidence: </span><span style="color:' + confColor + '">' + r.confidence.toUpperCase() + '</span></div>' +
+      '<div class="popup-row"><span class="popup-label">Energy: </span><span class="ev-relevance ' + r.energyRelevance + '">' + r.energyRelevance.toUpperCase() + '</span></div>' +
+      '<div class="popup-row" style="margin-top:6px">' + r.description + '</div>'
+    );
+  });
+}
+renderRumors();
+
 // Bring infrastructure to front
 infraLayer.eachLayer(function(l){if(l.bringToFront)l.bringToFront();});
 
 // Stats
 document.getElementById('stat-critical').textContent=infrastructure.filter(function(i){return i.riskLevel==='critical'||i.riskLevel==='extreme'}).length;
+document.getElementById('stat-rumors').textContent=rumors.length;
 document.getElementById('stat-atrisk').textContent=infrastructure.filter(function(i){return i.status==='damaged'||i.status==='at_risk'||i.status==='closed'}).length;
 
 // Events list
@@ -235,6 +292,24 @@ events.sort(function(a,b){return new Date(b.date)-new Date(a.date)}).forEach(fun
   div.className='event-item'+(ev.type==='missile'?' missile':'');
   div.innerHTML='<div class="ev-date">'+ev.date+' | '+ev.source+'</div><div class="ev-title">'+ev.target+'</div><div class="ev-relevance '+ev.energyRelevance+'">'+ev.energyRelevance.toUpperCase()+'</div>';
   div.onclick=function(){map.setView([ev.lat,ev.lng],7)};
+  container.appendChild(div);
+});
+
+
+// Add rumors to event list
+var rumorHeader = document.createElement('h3');
+rumorHeader.style.color = '#ff00ff';
+rumorHeader.style.marginTop = '12px';
+rumorHeader.textContent = 'UNCONFIRMED / MONITORING';
+container.appendChild(rumorHeader);
+
+rumors.forEach(function(r) {
+  var div = document.createElement('div');
+  div.className = 'event-item';
+  div.style.borderLeftColor = '#ff00ff';
+  div.style.borderLeftStyle = 'dashed';
+  div.innerHTML = '<div class="ev-date">' + r.date + ' | ' + r.source + '</div><div class="ev-title">? ' + r.target + '</div><div class="ev-relevance" style="color:#ff00ff">' + r.status + '</div>';
+  div.onclick = function(){map.setView([r.lat, r.lng], 7)};
   container.appendChild(div);
 });
 
@@ -254,6 +329,7 @@ slider.addEventListener('input',function(){
 document.getElementById('layer-events').addEventListener('change',function(){this.checked?map.addLayer(eventLayer):map.removeLayer(eventLayer)});
 document.getElementById('layer-infra').addEventListener('change',function(){this.checked?map.addLayer(infraLayer):map.removeLayer(infraLayer)});
 document.getElementById('layer-range').addEventListener('change',function(){this.checked?map.addLayer(rangeLayer):map.removeLayer(rangeLayer)});
+document.getElementById('layer-rumors').addEventListener('change',function(){this.checked?map.addLayer(rumorsLayer):map.removeLayer(rumorsLayer)});
 document.getElementById('layer-hormuz').addEventListener('change',function(){this.checked?map.addLayer(hormuzLayer):map.removeLayer(hormuzLayer)});
 </script>
 </body>
