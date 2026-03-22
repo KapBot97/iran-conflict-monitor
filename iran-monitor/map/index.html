@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Iran Conflict Monitor</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Courier New',monospace;background:#0a0a0a;color:#e0e0e0;overflow:hidden;height:100dvh;width:100vw}
+
+/* ── DESKTOP LAYOUT ── */
+#sidebar{position:fixed;left:0;top:0;bottom:0;width:340px;background:#111;border-right:1px solid #333;z-index:1000;display:flex;flex-direction:column;overflow:hidden;transition:transform .25s ease}
+#sidebar-header{padding:14px 16px;border-bottom:1px solid #333;background:#0d0d0d;display:flex;align-items:center;gap:8px}
+#sidebar-header h1{font-size:13px;letter-spacing:2px;color:#00ff88;flex:1}
+#sidebar-header .updated{font-size:10px;color:#888;white-space:nowrap}
+#menu-toggle{display:none;background:none;border:none;color:#00ff88;font-size:22px;cursor:pointer;padding:2px 6px;line-height:1}
+#stats{display:flex;gap:8px;padding:10px 14px;border-bottom:1px solid #333;font-size:10px}
+.stat{flex:1;text-align:center}
+.stat-val{font-size:18px;font-weight:bold;color:#00ff88}
+.stat-label{color:#888;margin-top:2px;font-size:9px;letter-spacing:.5px}
+.stat-val.red{color:#ff4444}
+.stat-val.amber{color:#ffaa00}
+#legend{padding:10px 14px;border-bottom:1px solid #333;font-size:11px}
+#legend h3{color:#888;margin-bottom:7px;font-size:10px;letter-spacing:1px}
+.legend-item{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:11px}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+#layers{padding:10px 14px;border-bottom:1px solid #333;font-size:11px}
+#layers h3{color:#888;margin-bottom:7px;font-size:10px;letter-spacing:1px}
+#layers label{display:inline-flex;align-items:center;margin-bottom:5px;cursor:pointer;margin-right:10px;font-size:11px}
+#layers input{margin-right:5px;accent-color:#00ff88}
+#events-list{flex:1;overflow-y:auto;padding:8px 14px;-webkit-overflow-scrolling:touch}
+#events-list h3{color:#888;margin-bottom:7px;font-size:10px;letter-spacing:1px;position:sticky;top:0;background:#111;padding:4px 0;z-index:1}
+.event-item{padding:9px 10px;margin-bottom:6px;background:#1a1a1a;border-left:3px solid #ff4444;cursor:pointer;font-size:11px;border-radius:2px;-webkit-tap-highlight-color:rgba(0,255,136,.1)}
+.event-item:active{background:#222}
+.event-item.missile{border-left-color:#ffaa00}
+.event-item .ev-date{color:#888;font-size:10px}
+.event-item .ev-title{color:#e0e0e0;margin-top:3px;line-height:1.3}
+.event-item .ev-relevance{margin-top:3px;font-size:10px}
+.ev-relevance.critical{color:#ff4444}
+.ev-relevance.high{color:#ffaa00}
+.ev-relevance.medium{color:#ffff00}
+.ev-relevance.low{color:#888}
+
+/* Map + timeline – desktop */
+#map{position:fixed;left:340px;top:0;right:0;bottom:54px}
+#timeline{position:fixed;left:340px;bottom:0;right:0;height:54px;background:#111;border-top:1px solid #333;display:flex;align-items:center;padding:0 16px;z-index:1000;gap:8px}
+#timeline label{font-size:10px;color:#888;white-space:nowrap}
+#timeline input[type=range]{flex:1;accent-color:#00ff88;min-width:0}
+.date-display{font-size:10px;color:#00ff88;min-width:80px;text-align:right;white-space:nowrap}
+.tl-btn{background:#1a1a1a;border:1px solid #444;font-family:monospace;font-size:11px;cursor:pointer;padding:4px 9px;white-space:nowrap;border-radius:2px;-webkit-tap-highlight-color:transparent}
+#play-btn{color:#00ff88;border-color:#00ff88}
+#stop-btn{color:#ff4444;border-color:#ff4444;display:none}
+#reset-btn{color:#888}
+
+/* Hormuz alert */
+#hormuz-alert{position:fixed;right:12px;top:12px;background:rgba(255,0,0,.15);border:1px solid #ff4444;padding:8px 12px;z-index:1001;font-size:10px;max-width:260px;border-radius:2px}
+#hormuz-alert .ha-title{color:#ff4444;font-weight:bold;margin-bottom:3px;font-size:11px}
+#hormuz-alert .ha-body{color:#ffaaaa;line-height:1.4}
+#hormuz-close{float:right;background:none;border:none;color:#ff4444;cursor:pointer;font-size:14px;line-height:1;margin-left:8px;padding:0}
+
+/* Leaflet popups */
+.leaflet-popup-content-wrapper{background:#1a1a1a;color:#e0e0e0;border:1px solid #444;border-radius:4px;font-family:'Courier New',monospace;font-size:12px;max-width:min(300px,85vw)}
+.leaflet-popup-tip{background:#1a1a1a}
+.popup-title{color:#00ff88;font-weight:bold;margin-bottom:6px;font-size:13px}
+.popup-row{margin-bottom:4px;line-height:1.4;word-break:break-word}
+.popup-label{color:#888}
+
+@keyframes pulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+.pulse-marker{animation:pulse 1.5s infinite}
+
+/* ── MOBILE LAYOUT (≤ 768px) ── */
+@media (max-width:768px){
+  body{overflow:hidden}
+
+  /* Sidebar becomes a slide-in drawer from the left */
+  #sidebar{
+    width:min(88vw, 320px);
+    transform:translateX(-100%);
+    top:0;bottom:0;
+    box-shadow:4px 0 20px rgba(0,0,0,.7);
+  }
+  #sidebar.open{transform:translateX(0)}
+
+  /* Overlay when sidebar open */
+  #overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999}
+  #overlay.show{display:block}
+
+  /* Map fills full screen */
+  #map{left:0;top:0;right:0;bottom:54px}
+
+  /* Timeline spans full width */
+  #timeline{left:0}
+
+  /* Hamburger visible */
+  #menu-toggle{display:block}
+
+  /* Header layout on mobile */
+  #sidebar-header{padding:12px 14px}
+  #sidebar-header h1{font-size:12px;letter-spacing:1.5px}
+
+  /* Stats slightly smaller */
+  .stat-val{font-size:16px}
+
+  /* Hormuz alert: smaller, full-width-ish */
+  #hormuz-alert{right:8px;left:8px;max-width:none;font-size:10px}
+
+  /* Bigger tap targets in events list */
+  .event-item{padding:11px 10px;margin-bottom:7px}
+
+  /* Popup larger text on mobile */
+  .leaflet-popup-content-wrapper{font-size:13px}
+
+  /* Layers wrap nicely */
+  #layers label{font-size:12px}
+}
+
+/* ── SMALL MOBILE (≤ 380px) ── */
+@media (max-width:380px){
+  #timeline{flex-wrap:wrap;height:auto;padding:6px 10px;gap:4px}
+  #timeline input[type=range]{width:100%;order:4;margin:0}
+  .date-display{order:5;min-width:auto;width:100%;text-align:center}
+  #map{bottom:80px}
+}
+
+/* Top bar shown on mobile to hold toggle + title */
+#topbar{display:none}
+@media(max-width:768px){
+  #topbar{
+    display:flex;align-items:center;gap:10px;
+    position:fixed;top:0;left:0;right:0;height:44px;
+    background:#0d0d0d;border-bottom:1px solid #333;
+    padding:0 12px;z-index:998;
+  }
+  #topbar-title{font-size:12px;letter-spacing:2px;color:#00ff88;flex:1}
+  #topbar-updated{font-size:9px;color:#666}
+  /* Push map and timeline down on mobile */
+  #map{top:44px;bottom:54px}
+  #timeline{bottom:0}
+  /* Hide sidebar header on mobile (duplicated in topbar) */
+  #sidebar-header .updated{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile top bar (hidden on desktop) -->
+<div id="topbar">
+  <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+  <div id="topbar-title">IRAN CONFLICT MONITOR</div>
+  <div id="topbar-updated"></div>
+</div>
+
+<!-- Overlay (mobile only) -->
+<div id="overlay" onclick="closeSidebar()"></div>
+
+<div id="sidebar">
+<div id="sidebar-header">
+  <button id="menu-toggle-close" style="display:none;background:none;border:none;color:#888;font-size:20px;cursor:pointer;padding:0 4px" onclick="closeSidebar()">&#10005;</button>
+  <h1>IRAN CONFLICT MONITOR</h1>
+  <div class="updated">Updated: <span id="update-time"></span></div>
+</div>
+<div id="stats">
+<div class="stat"><div class="stat-val" id="stat-events">0</div><div class="stat-label">EVENTS</div></div>
+<div class="stat"><div class="stat-val red" id="stat-critical">0</div><div class="stat-label">CRITICAL</div></div>
+<div class="stat"><div class="stat-val amber" id="stat-atrisk">0</div><div class="stat-label">AT RISK</div></div>
+<div class="stat"><div class="stat-val" id="stat-rumors" style="color:#ff00ff">0</div><div class="stat-label">RUMORS</div></div>
+</div>
+<div id="legend">
+<h3>LEGEND</h3>
+<div class="legend-item"><div class="legend-dot" style="background:#ff4444"></div>Airstrike</div>
+<div class="legend-item"><div class="legend-dot" style="background:#ffaa00"></div>Missile Attack</div>
+<div class="legend-item"><div class="legend-dot" style="background:#cc8800"></div>Oil Infrastructure</div>
+<div class="legend-item"><div class="legend-dot" style="background:#4488ff"></div>LNG / Gas</div>
+<div class="legend-item"><div class="legend-dot" style="background:#aa44ff"></div>Nuclear</div>
+<div class="legend-item"><div class="legend-dot" style="background:#ffff00"></div>Chokepoint</div>
+<div class="legend-item"><div class="legend-dot" style="background:#44ff44"></div>Pipeline</div>
+<div class="legend-item"><div class="legend-dot" style="border:2px dashed #ff00ff;background:transparent"></div>Unconfirmed / Rumor</div>
+<div class="legend-item"><div class="legend-dot" style="border:2px dashed #666;background:transparent"></div>Missile Range</div>
+</div>
+<div id="layers">
+<h3>LAYERS</h3>
+<label><input type="checkbox" id="layer-events" checked> Conflict Events</label>
+<label><input type="checkbox" id="layer-infra" checked> Energy Infrastructure</label>
+<label><input type="checkbox" id="layer-range" checked> Missile Ranges</label>
+<label><input type="checkbox" id="layer-hormuz" checked> Hormuz Shipping Lane</label>
+<label><input type="checkbox" id="layer-rumors" checked> Unconfirmed / Rumors</label>
+</div>
+<div id="events-list">
+<h3>RECENT EVENTS</h3>
+<div id="events-container"></div>
+</div>
+</div>
+<div id="map"></div>
+<div id="timeline">
+<button id="play-btn" class="tl-btn" style="color:#00ff88;border-color:#00ff88">PLAY</button>
+<button id="stop-btn" class="tl-btn" style="color:#ff4444;border-color:#ff4444;display:none">STOP</button>
+<button id="reset-btn" class="tl-btn" style="color:#888">RESET</button>
+<label>DAY</label>
+<input type="range" id="date-slider" min="0" max="100" value="100">
+<div class="date-display" id="date-display">ALL</div>
+</div>
+<div id="hormuz-alert">
+<button id="hormuz-close" onclick="this.parentElement.style.display='none'" title="Dismiss">&#10005;</button>
+<div class="ha-title">STRAIT OF HORMUZ -- DE FACTO CLOSED</div>
+<div class="ha-body">Tanker traffic -70%. 21 attacks on merchant vessels. IRGC vetting system announced. 150+ ships anchored outside strait.</div>
+</div>
+<script>
+var events = [
+  {id:"ev001",sourceUrl:"https://www.aljazeera.com/news/2026/3/1/us-israel-attacks-on-iran",date:"2026-03-01",type:"airstrike",source:"US/Israel",target:"Tehran military complex",lat:35.6892,lng:51.3890,description:"Initial US-Israeli strikes on Tehran military installations marking the start of operations",energyRelevance:"low"},
+  {id:"ev002",sourceUrl:"https://www.reuters.com/world/middle-east/us-israel-strikes-isfahan-2026-03-05/",date:"2026-03-05",type:"airstrike",source:"US/Israel",target:"Isfahan nuclear facilities",lat:32.6546,lng:51.6680,description:"Strikes targeting nuclear-related facilities near Isfahan",energyRelevance:"medium"},
+  {id:"ev003",sourceUrl:"https://en.wikipedia.org/wiki/2026_Iranian_strikes_on_the_United_Arab_Emirates",date:"2026-03-10",type:"missile",source:"Iran/IRGC",target:"UAE military base",lat:24.4539,lng:54.3773,description:"Iranian retaliatory missile strikes on UAE targets",energyRelevance:"medium"},
+  {id:"ev004",sourceUrl:"https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis",date:"2026-03-12",type:"missile",source:"Iran/IRGC",target:"Merchant vessels in Hormuz",lat:26.5667,lng:56.2500,description:"First confirmed attacks on merchant shipping. 21 attacks total since this date.",energyRelevance:"critical"},
+  {id:"ev005",sourceUrl:"https://understandingwar.org/research/middle-east/iran-update-special-report-march-15-2026/",date:"2026-03-15",type:"airstrike",source:"US/Israel",target:"Bushehr area",lat:28.9234,lng:50.8203,description:"Strikes near Bushehr province, close to nuclear power plant",energyRelevance:"high"},
+  {id:"ev006",sourceUrl:"https://www.cbsnews.com/live-updates/iran-war-israel-strike-south-pars-gas-field-trump-threat-oil-gas-prices/",date:"2026-03-17",type:"airstrike",source:"Israel",target:"South Pars gas field",lat:27.5,lng:52.0,description:"Israeli strike on Iran's main natural gas field. Triggered retaliatory wave against Gulf neighbors.",energyRelevance:"critical"},
+  {id:"ev007",sourceUrl:"https://www.reuters.com/business/energy/iran-attack-damage-wipes-out-17-qatars-lng-capacity-three-five-years-qatarenergy-2026-03-19/",date:"2026-03-18",type:"missile",source:"Iran/IRGC",target:"Ras Laffan LNG (Qatar)",lat:25.9167,lng:51.5333,description:"Iranian missiles hit Ras Laffan. 17% of Qatar LNG capacity destroyed for 3-5 years. Helium output -14%.",energyRelevance:"critical"},
+  {id:"ev008",sourceUrl:"https://understandingwar.org/research/middle-east/iran-update-special-report-march-18-2026/",date:"2026-03-18",type:"airstrike",source:"Israel",target:"Iranian Navy - Caspian Sea",lat:37.5,lng:50.5,description:"Israel struck 5 Iranian Navy missile boats in the Caspian Sea. First strikes on Caspian.",energyRelevance:"low"},
+  {id:"ev009",sourceUrl:"https://x.com/CENTCOM",date:"2026-03-18",type:"airstrike",source:"US",target:"Iranian naval targets in Hormuz",lat:26.6,lng:56.3,description:"CENTCOM: US forces destroying Iranian naval targets threatening international shipping in Strait of Hormuz.",energyRelevance:"critical"},
+  {id:"ev010",sourceUrl:"https://www.aljazeera.com/news/2026/3/19/israel-says-oil-refinery-hit-in-iranian-missile-attack-no-major-damage",date:"2026-03-19",type:"missile",source:"Iran/IRGC",target:"Israel refinery",lat:32.7940,lng:35.0420,description:"Iran strikes Israeli refinery in retaliatory attacks",energyRelevance:"high"},
+  {id:"ev011",sourceUrl:"https://understandingwar.org/research/middle-east/iran-update-special-report-march-19-2026/",date:"2026-03-19",type:"airstrike",source:"US",target:"Tehran",lat:35.7219,lng:51.3347,description:"US F-35 combat mission over Tehran. Aircraft damaged by Iranian anti-aircraft fire, emergency landing.",energyRelevance:"low"},
+  {id:"ev012",sourceUrl:"https://www.reuters.com/world/middle-east/qatarenergy-reports-extensive-damage-after-missile-attacks-ras-laffan-industrial-2026-03-18/",date:"2026-03-19",type:"missile",source:"Iran/IRGC",target:"Kuwait - Mina al-Ahmadi refinery",lat:29.0775,lng:48.1450,description:"Drones strike Kuwait's largest refinery. Day 1 of attacks on Kuwaiti energy infrastructure.",energyRelevance:"critical"},
+  {id:"ev013",sourceUrl:"https://www.theguardian.com/world/ng-interactive/2026/mar/19/visual-guide-oil-and-gas-site-attacks-middle-east",date:"2026-03-19",type:"missile",source:"Iran/IRGC",target:"Saudi Arabia - Samref refinery",lat:24.0,lng:38.2,description:"Drone attack on Samref refinery. Ballistic missile intercepted targeting Yanbu export terminal.",energyRelevance:"critical"},
+  {id:"ev014",sourceUrl:"https://www.reuters.com/business/energy/trump-tells-israel-not-repeat-strikes-iranian-energy-crisis-deepens-2026-03-19/",date:"2026-03-20",type:"missile",source:"Iran/IRGC",target:"Kuwait - Mina al-Ahmadi (Day 2)",lat:29.0833,lng:48.1333,description:"Second consecutive day of drone strikes on Kuwait refineries. Fires at Mina al-Ahmadi and Mina Abdullah.",energyRelevance:"critical"},
+  {id:"ev015",sourceUrl:"https://www.aljazeera.com/news/2026/3/20/irgc-spokesman-naini-killed",date:"2026-03-20",type:"airstrike",source:"US/Israel",target:"Tehran - IRGC targets",lat:35.6995,lng:51.4100,description:"IRGC spokesman Ali Mohammad Naini killed in US-Israeli strike.",energyRelevance:"low"}
+];
+
+var infrastructure = [
+  {id:"inf001",name:"Kharg Island",type:"oil_export",lat:29.2333,lng:50.3167,country:"Iran",description:"Handles ~90% of Iran's oil exports. Single most critical Iranian energy chokepoint.",capacity:"~5 mb/d export",status:"degraded",riskLevel:"extreme"},
+  {id:"inf002",name:"Ras Laffan Industrial City",type:"lng_helium",lat:25.9167,lng:51.5333,country:"Qatar",description:"World's largest LNG facility. STRUCK Mar 18. 17% capacity lost 3-5 yrs. Helium -14%.",capacity:"77 mtpa LNG",status:"damaged",riskLevel:"critical"},
+  {id:"inf003",name:"Abqaiq Processing",type:"oil_processing",lat:25.9386,lng:49.6711,country:"Saudi Arabia",description:"World's largest oil processing facility. Hit by drones in 2019. Processes majority of Saudi crude.",capacity:"~7 mb/d",status:"operational",riskLevel:"high"},
+  {id:"inf004",name:"Strait of Hormuz",type:"chokepoint",lat:26.5667,lng:56.25,country:"International",description:"DE FACTO CLOSED. 70% traffic drop. 21 attacks on merchant ships. ~20% of global oil transit.",capacity:"~21 mb/d transit",status:"closed",riskLevel:"critical"},
+  {id:"inf005",name:"Fujairah Terminal",type:"oil_storage",lat:25.1164,lng:56.3414,country:"UAE",description:"Major oil storage and bunkering hub. Bypass route for Hormuz via ADCOP pipeline from Abu Dhabi.",capacity:"storage + pipeline bypass",status:"operational",riskLevel:"medium"},
+  {id:"inf006",name:"Bushehr Nuclear Plant",type:"nuclear",lat:28.83,lng:50.89,country:"Iran",description:"Iran's only operational nuclear power plant. Strikes nearby raise contamination risk.",capacity:"1 GW",status:"at_risk",riskLevel:"extreme"},
+  {id:"inf007",name:"Bandar Abbas Refinery",type:"refinery",lat:27.1865,lng:56.2808,country:"Iran",description:"Major Iranian refinery near Strait of Hormuz. Strategic military and energy target.",capacity:"320,000 b/d",status:"operational",riskLevel:"high"},
+  {id:"inf008",name:"Mina al-Ahmadi Refinery",type:"refinery",lat:29.0775,lng:48.145,country:"Kuwait",description:"Kuwait's largest refinery. UNDER ACTIVE ATTACK. Day 2 of Iranian drone strikes. Fires reported.",capacity:"466,000 b/d",status:"damaged",riskLevel:"critical"},
+  {id:"inf009",name:"Ras Tanura Terminal",type:"oil_export",lat:26.64,lng:50.16,country:"Saudi Arabia",description:"World's largest offshore oil loading facility. Forced to halt after Iranian drone debris caused fire.",capacity:"~6.5 mb/d",status:"damaged",riskLevel:"critical"},
+  {id:"inf010",name:"Yanbu Export Terminal",type:"oil_export",lat:24.0889,lng:38.0628,country:"Saudi Arabia",description:"CRITICAL: Only Saudi export route bypassing Hormuz via East-West pipeline. Missile intercepted.",capacity:"~5 mb/d pipeline",status:"at_risk",riskLevel:"critical"},
+  {id:"inf011",name:"South Pars Gas Field",type:"lng_helium",lat:27.5,lng:52.0,country:"Iran",description:"World's largest gas field (shared with Qatar's North Dome). STRUCK by Israel Mar 17.",capacity:"major gas",status:"damaged",riskLevel:"critical"},
+  {id:"inf012",name:"Samref Refinery (Yanbu)",type:"refinery",lat:24.05,lng:38.22,country:"Saudi Arabia",description:"Drone strike confirmed by Saudi defense ministry Mar 19.",capacity:"400,000 b/d",status:"damaged",riskLevel:"critical"},
+  {id:"inf013",name:"Ghawar Oil Field",type:"oil_field",lat:25.4,lng:49.5,country:"Saudi Arabia",description:"World's largest oil field. ~3.8 mb/d production. Core of Saudi output.",capacity:"~3.8 mb/d",status:"operational",riskLevel:"high"},
+  {id:"inf014",name:"Rumaila Oil Field",type:"oil_field",lat:30.55,lng:47.35,country:"Iraq",description:"Iraq's largest oilfield (BP operated). Operations HALTED as security precaution due to proximity to conflict zone.",capacity:"~1.4 mb/d",status:"halted",riskLevel:"high"},
+  {id:"inf015",name:"Basra Oil Terminal",type:"oil_export",lat:29.68,lng:48.82,country:"Iraq",description:"Iraq's main oil export terminal. Handles ~85% of Iraqi crude exports.",capacity:"~3.4 mb/d",status:"operational",riskLevel:"high"},
+  {id:"inf016",name:"Mina Abdullah Refinery",type:"refinery",lat:29.0,lng:48.16,country:"Kuwait",description:"Kuwait's second major refinery. Struck by Iranian drones alongside Mina al-Ahmadi.",capacity:"270,000 b/d",status:"damaged",riskLevel:"critical"},
+  {id:"inf017",name:"Ruwais Refinery",type:"refinery",lat:24.11,lng:52.73,country:"UAE",description:"One of world's largest refineries. ADNOC operated. Key UAE processing hub.",capacity:"837,000 b/d",status:"operational",riskLevel:"medium"},
+  {id:"inf018",name:"Jebel Ali Port",type:"oil_storage",lat:25.02,lng:55.06,country:"UAE",description:"World's largest man-made port. Major oil and LNG transshipment hub for the Gulf.",capacity:"major logistics",status:"operational",riskLevel:"medium"},
+  {id:"inf019",name:"Das Island",type:"oil_export",lat:25.15,lng:52.87,country:"UAE",description:"ADNOC offshore oil and LNG export terminal. Key UAE crude loading point.",capacity:"crude + LNG",status:"operational",riskLevel:"medium"},
+  {id:"inf020",name:"Isfahan Refinery",type:"refinery",lat:32.6,lng:51.72,country:"Iran",description:"Iran's largest refinery. Near nuclear facilities struck by US/Israel.",capacity:"375,000 b/d",status:"at_risk",riskLevel:"high"},
+  {id:"inf021",name:"Abadan Refinery",type:"refinery",lat:30.35,lng:48.28,country:"Iran",description:"Historic Iranian refinery near Iraqi border. Once world's largest.",capacity:"400,000 b/d",status:"operational",riskLevel:"high"},
+  {id:"inf022",name:"North Dome Gas Field",type:"lng_helium",lat:26.5,lng:52.0,country:"Qatar",description:"Qatar's portion of the world's largest gas field. Feeds Ras Laffan LNG operations.",capacity:"major gas",status:"at_risk",riskLevel:"high"},
+  {id:"inf023",name:"Habshan Gas Processing",type:"lng_helium",lat:23.83,lng:53.73,country:"UAE",description:"ADNOC major gas processing complex. Key UAE domestic gas supply.",capacity:"major gas",status:"operational",riskLevel:"low"},
+  {id:"inf024",name:"Jubail Industrial City",type:"refinery",lat:27.01,lng:49.66,country:"Saudi Arabia",description:"Massive petrochemical and refining complex. Saudi Aramco and SABIC operations.",capacity:"multiple facilities",status:"operational",riskLevel:"high"},
+  {id:"inf025",name:"Bab Oilfield",type:"oil_field",lat:23.7,lng:54.2,country:"UAE",description:"ADNOC's largest onshore oil field. Key UAE production asset.",capacity:"~0.5 mb/d",status:"operational",riskLevel:"low"},
+  {id:"inf026",name:"East-West Pipeline (Petroline)",type:"pipeline",lat:26.0,lng:44.0,country:"Saudi Arabia",description:"5 mb/d pipeline from Abqaiq to Yanbu. ONLY bypass route around Hormuz. If cut, Saudi exports collapse.",capacity:"5 mb/d",status:"operational",riskLevel:"critical"},
+  {id:"inf027",name:"ADCOP Pipeline (Abu Dhabi)",type:"pipeline",lat:24.5,lng:55.5,country:"UAE",description:"1.5 mb/d pipeline from Habshan to Fujairah. UAE's Hormuz bypass route.",capacity:"1.5 mb/d",status:"operational",riskLevel:"high"},
+  {id:"inf028",name:"Khurais Oil Field",type:"oil_field",lat:25.07,lng:48.17,country:"Saudi Arabia",description:"Saudi Arabia's second-largest oil field. Hit by drones in 2019 alongside Abqaiq.",capacity:"~1.5 mb/d",status:"operational",riskLevel:"high"},
+  {id:"inf029",name:"Lavan Island Terminal",type:"oil_export",lat:26.8,lng:53.36,country:"Iran",description:"Iranian offshore oil export terminal in the Persian Gulf.",capacity:"~0.2 mb/d",status:"operational",riskLevel:"high"},
+  {id:"inf030",name:"Assaluyeh (South Pars Complex)",type:"lng_helium",lat:27.48,lng:52.6,country:"Iran",description:"Major onshore processing hub for South Pars gas. Iran's primary gas processing center.",capacity:"major gas processing",status:"at_risk",riskLevel:"high"}
+];
+
+var rumors = [
+  {
+    "id": "xrum000",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@TankerTrackers (X) -- 834 likes, 213 RTs",
+    "lat": 25.328429607112653,
+    "lng": 50.83714254192816,
+    "target": "Sorry, but that's a very empty NAVARZ (9079078), belonging to the National Irani",
+    "description": "Sorry, but that's a very empty NAVARZ (9079078), belonging to the National Iranian Tanker Company (NITC); and not in the Strait of Hormuz, but south of Hormuz Island in the Hormuzgan Province of Iran. She's been in that very spot since 2025-03-13. Congrats. https://t.co/X08pSnr2Cz -- https://x.com/TankerTrackers/status/2035696144810942482",
+    "energyRelevance": "critical",
+    "status": "MONITORING",
+    "confidence": "medium"
+  },
+  {
+    "id": "xrum001",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@JavierBlas (X) -- 677 likes, 194 RTs",
+    "lat": 27.71420215960712,
+    "lng": 51.051022917655324,
+    "target": "Iran responds to Trump’s 48-hour ultimatum: \n\n“… the critical infrastructure, en",
+    "description": "Iran responds to Trump’s 48-hour ultimatum:   “… the critical infrastructure, energy infrastructure, and oil facilities throughout the region will be considered legitimate targets and will be destroyed…” https://t.co/0huVcAkmVF -- https://x.com/JavierBlas/status/2035667897696084360",
+    "energyRelevance": "high",
+    "status": "MONITORING",
+    "confidence": "medium"
+  },
+  {
+    "id": "xrum002",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@JavierBlas (X) -- 703 likes, 166 RTs",
+    "lat": 26.596184739808248,
+    "lng": 54.18913665357214,
+    "target": "Aside the relaxation of US sanctions on Iranian oil, for Tehran the big win is t",
+    "description": "Aside the relaxation of US sanctions on Iranian oil, for Tehran the big win is the fact that &gt;20 days into the war, it’s still exporting oil via Hormuz. At ~1.5m b/d (and assuming $85 a barrel) that’s a ~$2.5 billion windfall since the war started. And the $$ keeps going up.   I -- https://x.com/JavierBlas/status/2035624268063547429",
+    "energyRelevance": "critical",
+    "status": "MONITORING",
+    "confidence": "medium"
+  },
+  {
+    "id": "xrum003",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@sentdefender (X) -- 211 likes, 41 RTs",
+    "lat": 28.238794255030236,
+    "lng": 52.7495907536646,
+    "target": "The United Arab Emirates (UAE) Ministry of Defense has announced that just today",
+    "description": "The United Arab Emirates (UAE) Ministry of Defense has announced that just today it has 25 one way attack drones and 4 ballistic missiles have been sent by Iran towards the UAE today. Totals since the outbreak of hostilities are: 15 Cruise Missiles 345 Ballistic Missiles 1773 One https://t.co/3JrDfc -- https://x.com/sentdefender/status/2035702005654597649",
+    "energyRelevance": "medium",
+    "status": "CONFIRMED",
+    "confidence": "high"
+  },
+  {
+    "id": "xrum004",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@JavierBlas (X) -- 155 likes, 43 RTs",
+    "lat": 29.47217319732271,
+    "lng": 53.75677381844602,
+    "target": "COLUMN: Donald Trump has been talking about taking Kharg Island for nearly 40 ye",
+    "description": "COLUMN: Donald Trump has been talking about taking Kharg Island for nearly 40 years. But he's underestimating the Iran regime's alternatives to export some oil — and its willingness to weather periods of very low petrodollar income.   @Opinion   https://t.co/bjLvZgxCnM -- https://x.com/JavierBlas/status/2035695229202804983",
+    "energyRelevance": "critical",
+    "status": "MONITORING",
+    "confidence": "medium"
+  },
+  {
+    "id": "xrum005",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@TankerTrackers (X) -- 69 likes, 23 RTs",
+    "lat": 29.053944238880092,
+    "lng": 50.131661999130294,
+    "target": "It’s Day 23 of the Iran War and a new VLCC, this time a non-Iranian one at that,",
+    "description": "It’s Day 23 of the Iran War and a new VLCC, this time a non-Iranian one at that, is loading 2 million barrels right now at Kharg Island. That’s another &gt;$200M for Tehran. https://t.co/Ri7XOPvJUk -- https://x.com/TankerTrackers/status/2035705738408993190",
+    "energyRelevance": "critical",
+    "status": "MONITORING",
+    "confidence": "low"
+  },
+  {
+    "id": "xrum006",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@BabakTaghvaee1 (X) -- 75 likes, 9 RTs",
+    "lat": 26.362229324954146,
+    "lng": 48.48372694048166,
+    "target": "BREAKING: The Iranian air defense force came close to shooting down another USAF",
+    "description": "BREAKING: The Iranian air defense force came close to shooting down another USAF fighter jet. This time, an F-15E Strike Eagle flying over Hormuz Island in the Persian Gulf was targeted using a Majid (AD-08) short-range air defense system. However, the aircraft was flying above https://t.co/p4qwuh1E -- https://x.com/BabakTaghvaee1/status/2035668576019898806",
+    "energyRelevance": "critical",
+    "status": "MONITORING",
+    "confidence": "low"
+  },
+  {
+    "id": "xrum007",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@BabakTaghvaee1 (X) -- 54 likes, 14 RTs",
+    "lat": 30.611053220478027,
+    "lng": 53.65654806475563,
+    "target": "BREAKING: The IRGC Aerospace Force has once again used intermediate-range ballis",
+    "description": "BREAKING: The IRGC Aerospace Force has once again used intermediate-range ballistic missiles to strike Tel Aviv, the largest city in Israel. These missiles were again equipped with internationally banned cluster munitions. Due to their characteristics, these ballistic missiles https://t.co/wkkGtrXEA -- https://x.com/BabakTaghvaee1/status/2035662142842511378",
+    "energyRelevance": "medium",
+    "status": "MONITORING",
+    "confidence": "low"
+  },
+  {
+    "id": "xrum008",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@BabakTaghvaee1 (X) -- 24 likes, 1 RTs",
+    "lat": 32.62083617679366,
+    "lng": 55.60784473788571,
+    "target": "BREAKING: The Islamic regime of Iran has issued a statement in response to Trump",
+    "description": "BREAKING: The Islamic regime of Iran has issued a statement in response to Trump’s ultimatum threatening to target Iran’s power plants if the Strait of Hormuz is not reopened. According to the regime, any such attack will trigger immediate retaliation, with the IRGC targeting https://t.co/7e4MOYI0Ri -- https://x.com/BabakTaghvaee1/status/2035660781258146249",
+    "energyRelevance": "critical",
+    "status": "CONFIRMED",
+    "confidence": "low"
+  },
+  {
+    "id": "xrum009",
+    "date": "2026-03-22",
+    "type": "rumor",
+    "source": "@BabakTaghvaee1 (X) -- 0 likes, 1 RTs",
+    "lat": 28.001607237565718,
+    "lng": 54.163417391475924,
+    "target": "@MKalyani46682 No, suppression of the security forces of the Islamic regime of I",
+    "description": "@MKalyani46682 No, suppression of the security forces of the Islamic regime of Iran is just a morale booster and a gift of Netanyahu to the people of Iran. This can not cause a miracle. -- https://x.com/BabakTaghvaee1/status/2035626931194839226",
+    "energyRelevance": "low",
+    "status": "MONITORING",
+    "confidence": "low"
+  }
+];
+
+document.getElementById('update-time', '').textContent = new Date().toLocaleString('en-US',{timeZone:'America/New_York'}) + ' ET';
+
+var map = L.map('map',{zoomControl:false}).setView([28,52],5);
+L.control.zoom({position:'topright'}).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+  attribution:'OpenStreetMap',subdomains:'abcd',maxZoom:19
+}).addTo(map);
+
+var typeColors={oil_export:'#cc8800',oil_processing:'#cc8800',oil_storage:'#cc8800',oil_field:'#cc8800',refinery:'#cc8800',lng_helium:'#4488ff',nuclear:'#aa44ff',chokepoint:'#ffff00',pipeline:'#44ff44'};
+var relSizes={critical:14,high:10,medium:7,low:5};
+
+var eventLayer=L.layerGroup().addTo(map);
+var infraLayer=L.layerGroup().addTo(map);
+var rangeLayer=L.layerGroup().addTo(map);
+var hormuzLayer=L.layerGroup().addTo(map);
+
+// Missile ranges from Tehran
+var tehran=[35.69,51.39];
+[300,500,1000,2000].forEach(function(r){
+  L.circle(tehran,{radius:r*1000,color:'#444',weight:1,dashArray:'6,4',fill:false,interactive:false}).addTo(rangeLayer);
+  var bearing=45*Math.PI/180;
+  var lat2=tehran[0]+((r*1000)/(111320))*Math.cos(bearing);
+  var lng2=tehran[1]+((r*1000)/(111320*Math.cos(tehran[0]*Math.PI/180)))*Math.sin(bearing);
+  L.marker([lat2,lng2],{icon:L.divIcon({className:'',html:'<span style="color:#666;font-size:10px;font-family:monospace">'+r+'km</span>'})}).addTo(rangeLayer);
+});
+
+// Hormuz shipping lane
+var hormuzLine=L.polyline([[26.0,56.0],[26.3,56.2],[26.6,56.4],[26.9,56.5]],{color:'#ff4444',weight:3,dashArray:'8,6',opacity:0.7}).addTo(hormuzLayer);
+
+// Render infrastructure
+infrastructure.forEach(function(inf){
+  var col=typeColors[inf.type]||'#888';
+  var rad=inf.riskLevel==='critical'||inf.riskLevel==='extreme'?14:10;
+  var opts={radius:rad,fillColor:col,fillOpacity:0.85,color:inf.riskLevel==='critical'||inf.riskLevel==='extreme'?'#ff4444':'#666',weight:inf.riskLevel==='critical'||inf.riskLevel==='extreme'?3:1};
+  opts.zIndexOffset=1000;var m=L.circleMarker([inf.lat,inf.lng],opts).addTo(infraLayer);
+  if(inf.riskLevel==='critical'||inf.riskLevel==='extreme'){
+    var pulse=L.circleMarker([inf.lat,inf.lng],{radius:rad+6,fillColor:'transparent',fillOpacity:0,color:'#ff4444',weight:2,className:'pulse-marker'}).addTo(infraLayer);
+  }
+  var statusCol=inf.status==='damaged'||inf.status==='closed'?'#ff4444':inf.status==='at_risk'?'#ffaa00':'#00ff88';
+  m.bindPopup('<div class="popup-title">'+inf.name+'</div>'+
+    '<div class="popup-row"><span class="popup-label">Type: </span>'+inf.type+'</div>'+
+    '<div class="popup-row"><span class="popup-label">Country: </span>'+inf.country+'</div>'+
+    '<div class="popup-row"><span class="popup-label">Capacity: </span>'+inf.capacity+'</div>'+
+    '<div class="popup-row"><span class="popup-label">Status: </span><span style="color:'+statusCol+'">'+inf.status.toUpperCase()+'</span></div>'+
+    '<div class="popup-row"><span class="popup-label">Risk: </span><span style="color:'+(inf.riskLevel==='critical'||inf.riskLevel==='extreme'?'#ff4444':'#ffaa00')+'">'+inf.riskLevel.toUpperCase()+'</span></div>'+
+    '<div class="popup-row" style="margin-top:6px">'+inf.description+'</div>'+(inf.sourceUrl?'<div class="popup-row" style="margin-top:6px"><a href="'+inf.sourceUrl+'" target="_blank" rel="noopener" style="color:#4488ff">View Source</a></div>':''));
+});
+
+// Date range for slider
+var dates=events.map(function(e){return new Date(e.date).getTime()});
+var minDate=Math.min.apply(null,dates);
+var maxDate=Math.max.apply(null,dates);
+
+function renderEvents(cutoff){
+  eventLayer.clearLayers();
+  var filtered;
+  if(cutoff===null){filtered=events;}
+  else{filtered=events.filter(function(e){return new Date(e.date).getTime()<=cutoff});}
+  filtered.forEach(function(ev){
+    var col=ev.type==='airstrike'?'#ff4444':'#ffaa00';
+    var rad=relSizes[ev.energyRelevance]||7;
+    var m=L.circleMarker([ev.lat,ev.lng],{radius:rad,fillColor:col,fillOpacity:0.8,color:col,weight:1}).addTo(eventLayer);
+    var srcLink=ev.sourceUrl?'<div class="popup-row" style="margin-top:6px"><a href="'+ev.sourceUrl+'" target="_blank" rel="noopener" style="color:#4488ff">View Source</a></div>':'';
+    m.bindPopup('<div class="popup-title">'+ev.target+'</div>'+
+      '<div class="popup-row"><span class="popup-label">Date: </span>'+ev.date+'</div>'+
+      '<div class="popup-row"><span class="popup-label">Type: </span>'+ev.type+'</div>'+
+      '<div class="popup-row"><span class="popup-label">Source: </span>'+ev.source+'</div>'+
+      '<div class="popup-row"><span class="popup-label">Energy: </span><span class="ev-relevance '+ev.energyRelevance+'">'+ev.energyRelevance.toUpperCase()+'</span></div>'+
+      '<div class="popup-row" style="margin-top:6px">'+ev.description+'</div>'+srcLink);
+  });
+  document.getElementById('stat-events').textContent=filtered.length;
+}
+renderEvents(null);
+
+
+// Rumors layer
+var rumorsLayer = L.layerGroup();
+
+function renderRumors() {
+  rumorsLayer.clearLayers();
+  rumors.forEach(function(r) {
+    var confColor = r.confidence === 'high' ? '#ffaa00' : r.confidence === 'medium' ? '#ff6600' : '#ff00ff';
+    var m = L.circleMarker([r.lat, r.lng], {
+      radius: 12,
+      fillColor: 'transparent',
+      fillOpacity: 0,
+      color: confColor,
+      weight: 2,
+      dashArray: '4,4',
+      className: 'pulse-marker'
+    }).addTo(rumorsLayer);
+    
+    // Add a question mark label
+    L.marker([r.lat, r.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: '<span style="color:' + confColor + ';font-size:16px;font-weight:bold;font-family:monospace;text-shadow:0 0 4px rgba(0,0,0,0.8)">?</span>',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8]
+      })
+    }).addTo(rumorsLayer);
+    
+    var statusCol = r.status === 'CONFIRMED MILITARY - ENERGY ADJACENT' ? '#ffaa00' : r.confidence === 'high' ? '#ffaa00' : '#ff00ff';
+    m.bindPopup(
+      '<div class="popup-title" style="color:#ff00ff">UNCONFIRMED / RUMOR</div>' +
+      '<div class="popup-row"><span class="popup-label">Target: </span>' + r.target + '</div>' +
+      '<div class="popup-row"><span class="popup-label">Date: </span>' + r.date + '</div>' +
+      '<div class="popup-row"><span class="popup-label">Source: </span>' + r.source + '</div>' +
+      '<div class="popup-row"><span class="popup-label">Status: </span><span style="color:' + statusCol + '">' + r.status + '</span></div>' +
+      '<div class="popup-row"><span class="popup-label">Confidence: </span><span style="color:' + confColor + '">' + r.confidence.toUpperCase() + '</span></div>' +
+      '<div class="popup-row"><span class="popup-label">Energy: </span><span class="ev-relevance ' + r.energyRelevance + '">' + r.energyRelevance.toUpperCase() + '</span></div>' +
+      '<div class="popup-row" style="margin-top:6px">' + r.description + '</div>'
+    );
+  });
+}
+renderRumors();
+
+// Bring infrastructure to front
+infraLayer.eachLayer(function(l){if(l.bringToFront)l.bringToFront();});
+
+// Stats
+document.getElementById('stat-critical').textContent=infrastructure.filter(function(i){return i.riskLevel==='critical'||i.riskLevel==='extreme'}).length;
+document.getElementById('stat-rumors').textContent=rumors.length;
+document.getElementById('stat-atrisk').textContent=infrastructure.filter(function(i){return i.status==='damaged'||i.status==='at_risk'||i.status==='closed'}).length;
+
+// Events list
+var container=document.getElementById('events-container');
+events.sort(function(a,b){return new Date(b.date)-new Date(a.date)}).forEach(function(ev){
+  var div=document.createElement('div');
+  div.className='event-item'+(ev.type==='missile'?' missile':'');
+  var sourceLink = ev.sourceUrl ? '<a href="'+ev.sourceUrl+'" target="_blank" rel="noopener" style="color:#4488ff;text-decoration:none;font-size:10px;display:block;margin-top:3px">SOURCE</a>' : '';
+  div.innerHTML='<div class="ev-date">'+ev.date+' | '+ev.source+'</div><div class="ev-title" style="cursor:pointer">'+ev.target+'</div><div class="ev-relevance '+ev.energyRelevance+'">'+ev.energyRelevance.toUpperCase()+'</div>'+sourceLink;
+  div.querySelector('.ev-title').onclick=function(){map.setView([ev.lat,ev.lng],7)};
+  container.appendChild(div);
+});
+
+
+// Add rumors to event list
+var rumorHeader = document.createElement('h3');
+rumorHeader.style.color = '#ff00ff';
+rumorHeader.style.marginTop = '12px';
+rumorHeader.textContent = 'UNCONFIRMED / MONITORING';
+container.appendChild(rumorHeader);
+
+rumors.forEach(function(r) {
+  var div = document.createElement('div');
+  div.className = 'event-item';
+  div.style.borderLeftColor = '#ff00ff';
+  div.style.borderLeftStyle = 'dashed';
+  var rSrcLink=r.description.match(/https:\/\/[^\s"]+/);
+  var rLink=rSrcLink?'<a href="'+rSrcLink[0]+'" target="_blank" rel="noopener" style="color:#4488ff;text-decoration:none;font-size:10px;display:block;margin-top:3px">SOURCE</a>':'';
+  div.innerHTML = '<div class="ev-date">' + r.date + ' | ' + r.source + '</div><div class="ev-title" style="cursor:pointer">? ' + r.target + '</div><div class="ev-relevance" style="color:#ff00ff">' + r.status + '</div>'+rLink;
+  div.onclick = function(){map.setView([r.lat, r.lng], 7)};
+  container.appendChild(div);
+});
+
+// Timeline with play functionality
+var slider=document.getElementById('date-slider');
+var dateDisplay=document.getElementById('date-display');
+var playBtn=document.getElementById('play-btn');
+var stopBtn=document.getElementById('stop-btn');
+var resetBtn=document.getElementById('reset-btn');
+var playInterval=null;
+var dayDates=[...new Set(events.map(function(e){return e.date}))].sort();
+var totalDays=Math.round((maxDate-minDate)/(86400000))+1;
+
+slider.setAttribute('max',String(totalDays));
+slider.value=String(totalDays);
+
+function setDay(dayIndex){
+  if(dayIndex>=totalDays){
+    dateDisplay.textContent='ALL (Day '+totalDays+')';
+    renderEvents(null);
+    slider.value=String(totalDays);
+    return;
+  }
+  if(dayIndex<0){
+    dateDisplay.textContent='PRE-CONFLICT';
+    renderEvents(minDate-86400000);
+    slider.value='0';
+    return;
+  }
+  var cutoff=minDate+dayIndex*86400000;
+  var d=new Date(cutoff);
+  var dayNum=dayIndex+1;
+  dateDisplay.textContent='Day '+dayNum+' -- '+d.toISOString().slice(0,10);
+  renderEvents(cutoff+86400000);
+  slider.value=String(dayIndex);
+}
+
+slider.addEventListener('input',function(){
+  var val=parseInt(this.value);
+  setDay(val);
+});
+
+playBtn.addEventListener('click',function(){
+  if(playInterval) return;
+  playBtn.style.display='none';
+  stopBtn.style.display='inline-block';
+  var currentDay=-1;
+  setDay(-1);
+  playInterval=setInterval(function(){
+    currentDay++;
+    if(currentDay>totalDays){
+      clearInterval(playInterval);
+      playInterval=null;
+      playBtn.style.display='inline-block';
+      stopBtn.style.display='none';
+      setDay(totalDays);
+      return;
+    }
+    setDay(currentDay);
+  },1200);
+});
+
+stopBtn.addEventListener('click',function(){
+  if(playInterval){clearInterval(playInterval);playInterval=null;}
+  playBtn.style.display='inline-block';
+  stopBtn.style.display='none';
+});
+
+resetBtn.addEventListener('click',function(){
+  if(playInterval){clearInterval(playInterval);playInterval=null;}
+  playBtn.style.display='inline-block';
+  stopBtn.style.display='none';
+  setDay(totalDays);
+});
+
+// Layer toggles
+document.getElementById('layer-events').addEventListener('change',function(){this.checked?map.addLayer(eventLayer):map.removeLayer(eventLayer)});
+document.getElementById('layer-infra').addEventListener('change',function(){this.checked?map.addLayer(infraLayer):map.removeLayer(infraLayer)});
+document.getElementById('layer-range').addEventListener('change',function(){this.checked?map.addLayer(rangeLayer):map.removeLayer(rangeLayer)});
+document.getElementById('layer-rumors').addEventListener('change',function(){this.checked?map.addLayer(rumorsLayer):map.removeLayer(rumorsLayer)});
+document.getElementById('layer-hormuz').addEventListener('change',function(){this.checked?map.addLayer(hormuzLayer):map.removeLayer(hormuzLayer)});
+
+// ── MOBILE SIDEBAR ──
+function toggleSidebar(){
+  var sb=document.getElementById('sidebar');
+  var ov=document.getElementById('overlay');
+  var cl=document.getElementById('menu-toggle-close');
+  if(sb.classList.contains('open')){closeSidebar();}
+  else{
+    sb.classList.add('open');
+    ov.classList.add('show');
+    if(cl)cl.style.display='inline-block';
+    map.invalidateSize();
+  }
+}
+function closeSidebar(){
+  var sb=document.getElementById('sidebar');
+  var ov=document.getElementById('overlay');
+  var cl=document.getElementById('menu-toggle-close');
+  sb.classList.remove('open');
+  ov.classList.remove('show');
+  if(cl)cl.style.display='none';
+  map.invalidateSize();
+}
+
+// Show/hide close button in sidebar on mobile
+function updateMobileUI(){
+  var isMobile=window.innerWidth<=768;
+  var cl=document.getElementById('menu-toggle-close');
+  if(cl){cl.style.display=isMobile?'inline-block':'none';}
+  map.invalidateSize();
+}
+window.addEventListener('resize',updateMobileUI);
+updateMobileUI();
+
+// Topbar updated time
+var topUpdated=document.getElementById('topbar-updated');
+if(topUpdated) topUpdated.textContent=new Date().toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})+ ' ET';
+
+</script>
+</body>
+</html>
