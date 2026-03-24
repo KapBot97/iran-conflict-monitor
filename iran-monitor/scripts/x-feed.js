@@ -91,15 +91,18 @@ function classifyPost(post) {
   const isRumor = rumorSignals.some(s => text.includes(s));
   const isConfirmed = confirmedSignals.some(s => text.includes(s));
   
-  // High engagement from credible accounts = higher confidence
-  const highEngagement = (post.likes > 200 || post.retweets > 50);
-  const credibleAccount = ['sentdefender', 'JavierBlas', 'CENTCOM', 'RALee85', 'ELINTNews']
-    .includes(post.handle);
+  // All accounts we actively query are credible — treat them all equally
+  const credibleAccount = [
+    'sentdefender','JavierBlas','CENTCOM','RALee85','ELINTNews',
+    'BabakTaghvaee1','TankerTrackers','aurora_intel','IntelCrab',
+    'OSINTdefender','ABORASHEED_EN','IntelCrab'
+  ].includes(post.handle);
 
   let confidence = 'low';
   if (isConfirmed && credibleAccount) confidence = 'high';
-  else if (credibleAccount && highEngagement) confidence = 'medium';
-  else if (credibleAccount || highEngagement) confidence = 'medium';
+  else if (credibleAccount && highEngagement) confidence = 'high';
+  else if (credibleAccount) confidence = 'medium';
+  else if (highEngagement) confidence = 'medium';
 
   let status = 'MONITORING';
   if (isConfirmed) status = 'CONFIRMED';
