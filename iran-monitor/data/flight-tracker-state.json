@@ -3,10 +3,29 @@
     "a6a739:LSGG": 1774311673547,
     "738073:LLBG": 1774311673547,
     "738286:LLBG": 1774311673547,
-    "896474:OMDB": 1774317099577
+    "896474:OMDB": 1774317099577,
+    "39c994:LSGG": 1774365698911
   },
-  "lastRun": 1774362101112,
+  "lastRun": 1774365698911,
   "alerts": [
+    {
+      "ts": 1774365698911,
+      "flights": [
+        {
+          "icao24": "39c994",
+          "callsign": "SAMU69",
+          "registration": "F-HSMU",
+          "originCountry": "Unknown",
+          "type": "EC45",
+          "onGround": false,
+          "altitude": 2100,
+          "airport": "LSGG",
+          "airportName": "Geneva",
+          "country": "Switzerland",
+          "context": "Neutral ground — previous US-Iran talks venue"
+        }
+      ]
+    },
     {
       "ts": 1774317099577,
       "flights": [
