@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diplomatic Flight Tracker — Iran Monitor</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Courier New',monospace;background:#0a0a0a;color:#e0e0e0;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+
+/* Header */
+#header{background:#0d0d0d;border-bottom:1px solid #333;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;flex-wrap:wrap}
+#header h1{font-size:13px;letter-spacing:2px;color:#00ff88;flex:1;white-space:nowrap}
+#last-updated{font-size:10px;color:#666}
+#refresh-btn{background:#1a1a1a;border:1px solid #444;color:#00ff88;padding:4px 10px;font-size:10px;cursor:pointer;letter-spacing:1px;border-radius:2px}
+#refresh-btn:hover{background:#222}
+
+/* Airport toggles */
+#airport-bar{background:#111;border-bottom:1px solid #333;padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;align-items:center}
+#airport-bar .label{font-size:10px;color:#666;letter-spacing:1px;margin-right:4px;white-space:nowrap}
+.ap-toggle{padding:4px 10px;font-size:10px;font-family:'Courier New',monospace;border-radius:3px;border:1px solid #444;background:#1a1a1a;color:#aaa;cursor:pointer;transition:all .15s;white-space:nowrap;letter-spacing:.5px}
+.ap-toggle.active{color:#0a0a0a;font-weight:bold}
+.ap-toggle:hover{filter:brightness(1.2)}
+#toggle-all{background:#1a1a1a;border:1px solid #555;color:#888;padding:4px 8px;font-size:10px;font-family:'Courier New',monospace;cursor:pointer;border-radius:3px;letter-spacing:.5px}
+#toggle-all:hover{color:#ccc}
+
+/* Main layout */
+#main{display:flex;flex:1;overflow:hidden}
+
+/* Sidebar */
+#sidebar{width:300px;background:#111;border-right:1px solid #333;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+#sidebar-header{padding:10px 14px;border-bottom:1px solid #333;font-size:10px;color:#666;letter-spacing:1px}
+#alert-feed{flex:1;overflow-y:auto;padding:8px}
+#alert-feed::-webkit-scrollbar{width:4px}
+#alert-feed::-webkit-scrollbar-thumb{background:#333}
+.alert-card{background:#0d0d0d;border:1px solid #333;border-radius:3px;padding:10px;margin-bottom:8px;font-size:11px}
+.alert-card.gov{border-left:3px solid #00ff88}
+.alert-card .ac-airport{color:#00ff88;font-weight:bold;margin-bottom:4px;font-size:12px}
+.alert-card .ac-callsign{color:#fff;font-size:13px;font-weight:bold}
+.alert-card .ac-meta{color:#888;margin-top:3px;line-height:1.5}
+.alert-card .ac-context{color:#666;font-size:10px;margin-top:5px;font-style:italic;border-top:1px solid #222;padding-top:5px}
+.alert-card .ac-time{color:#555;font-size:10px;margin-top:4px}
+.no-alerts{color:#555;font-size:11px;padding:16px;text-align:center;line-height:1.7}
+
+/* Map */
+#map-wrap{flex:1;position:relative}
+#map{width:100%;height:100%;background:#0a0f0a}
+
+/* Airport popup on map */
+.ap-popup{font-family:'Courier New',monospace;font-size:11px;min-width:180px}
+.ap-popup h4{color:#00ff88;margin-bottom:6px;font-size:12px}
+.ap-popup .popup-context{color:#999;font-size:10px;margin-bottom:6px}
+.ap-popup .popup-flights{color:#fff}
+.ap-popup .popup-no-flights{color:#555;font-size:10px}
+
+/* Map dark tiles override */
+.leaflet-tile{filter:brightness(0.4) saturate(0.5) hue-rotate(180deg)}
+.leaflet-container{background:#0a0a0a}
+
+/* Airport marker */
+.ap-marker{display:flex;align-items:center;justify-content:center;border-radius:50%;border:2px solid;font-size:10px;font-weight:bold;font-family:'Courier New',monospace;cursor:pointer;transition:all .2s}
+.ap-marker.active-gov{background:#00ff8822;border-color:#00ff88;color:#00ff88;box-shadow:0 0 10px #00ff8866}
+.ap-marker.active{background:#ffaa0022;border-color:#ffaa00;color:#ffaa00}
+.ap-marker.inactive{background:#33333322;border-color:#444;color:#555}
+
+/* Plane marker */
+.plane-marker{font-size:18px;filter:drop-shadow(0 0 4px #00ff88)}
+
+/* Status bar */
+#status-bar{background:#0d0d0d;border-top:1px solid #222;padding:5px 14px;font-size:10px;color:#555;display:flex;gap:16px;flex-shrink:0}
+#status-bar span{white-space:nowrap}
+#status-bar .ok{color:#00ff88}
+#status-bar .warn{color:#ffaa00}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>✈ DIPLOMATIC FLIGHT TRACKER</h1>
+  <span id="last-updated">Loading...</span>
+  <button id="refresh-btn" onclick="loadData()">REFRESH</button>
+</div>
+
+<div id="airport-bar">
+  <span class="label">AIRPORTS:</span>
+  <button id="toggle-all" onclick="toggleAll()">ALL</button>
+</div>
+
+<div id="main">
+  <div id="sidebar">
+    <div id="sidebar-header">RECENT DIPLOMATIC ACTIVITY</div>
+    <div id="alert-feed"><div class="no-alerts">Loading flight data...</div></div>
+  </div>
+  <div id="map-wrap">
+    <div id="map"></div>
+  </div>
+</div>
+
+<div id="status-bar">
+  <span>Source: OpenSky Network ADS-B</span>
+  <span id="gov-count">Gov/Diplomatic: —</span>
+  <span id="total-count">Total tracked: —</span>
+  <span id="api-status">API: —</span>
+</div>
+
+<script>
+const AIRPORTS = {
+  OPKC: { name:'Islamabad',  country:'Pakistan',    lat:33.617, lon:73.099, context:'Pakistan back-channel / ISI diplomacy hub' },
+  OOMS: { name:'Muscat',     country:'Oman',        lat:23.593, lon:58.284, context:'Primary US-Iran mediation hub (Omani FM)' },
+  OIII: { name:'Tehran',     country:'Iran',        lat:35.689, lon:51.314, context:'Iranian capital — inbound = foreign delegation' },
+  LSGG: { name:'Geneva',     country:'Switzerland', lat:46.238, lon:6.109,  context:'Neutral ground — US-Iran talks venue' },
+  LIRF: { name:'Rome',       country:'Italy',       lat:41.800, lon:12.239, context:'Earlier talks venue (Feb 2026)' },
+  OTBH: { name:'Doha',       country:'Qatar',       lat:25.273, lon:51.608, context:'Qatar mediator; US CENTCOM base' },
+  LLBG: { name:'Tel Aviv',   country:'Israel',      lat:32.011, lon:34.887, context:'Senior arrivals = ceasefire talks' },
+  OMDB: { name:'Dubai',      country:'UAE',         lat:25.252, lon:55.364, context:'UAE back-channel; regional financial hub' },
+};
+
+const AIRPORT_COLORS = {
+  OPKC:'#4fc3f7', OOMS:'#00ff88', OIII:'#ff4444',
+  LSGG:'#e040fb', LIRF:'#ffcc02', OTBH:'#ff9800',
+  LLBG:'#69f0ae', OMDB:'#40c4ff'
+};
+
+const BBOX = {
+  OPKC:[33.55,72.75,33.70,73.15], OOMS:[23.55,58.20,23.65,58.35],
+  OIII:[35.65,51.30,35.75,51.45], LSGG:[46.22,6.08,46.25,6.13],
+  LIRF:[41.78,12.22,41.82,12.28], OTBH:[25.26,51.56,25.32,51.62],
+  LLBG:[32.00,34.87,32.02,34.91], OMDB:[25.24,55.35,25.26,55.39],
+};
+
+const DIPLOMATIC_CALLSIGNS = ['SAM','VENUS','EXEC','IRON','GAF','FAF','QAF','PAF','IRAF','SHB','UAE','RFO','CCA','CSH','SVR','RSD','TCG','IFC','OAF'];
+
+let map, activeAirports = new Set(Object.keys(AIRPORTS));
+let markersByAirport = {};
+let planeMarkers = [];
+let allFlightData = {};
+
+// Init map centered on Middle East
+map = L.map('map', { zoomControl:true }).setView([30, 45], 4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution:'OpenStreetMap',
+  maxZoom:18
+}).addTo(map);
+
+// Build airport toggle buttons & markers
+const bar = document.getElementById('airport-bar');
+for (const [code, ap] of Object.entries(AIRPORTS)) {
+  // Toggle button
+  const btn = document.createElement('button');
+  btn.className = 'ap-toggle active';
+  btn.id = `toggle-${code}`;
+  btn.textContent = `${code} ${ap.name}`;
+  btn.style.borderColor = AIRPORT_COLORS[code];
+  btn.style.backgroundColor = AIRPORT_COLORS[code] + '22';
+  btn.style.color = AIRPORT_COLORS[code];
+  btn.onclick = () => toggleAirport(code);
+  bar.appendChild(btn);
+
+  // Airport marker on map
+  const icon = L.divIcon({
+    className:'',
+    html:`<div class="ap-marker inactive" style="width:36px;height:36px;border-color:${AIRPORT_COLORS[code]};color:${AIRPORT_COLORS[code]}">${code.slice(0,2)}</div>`,
+    iconSize:[36,36],
+    iconAnchor:[18,18]
+  });
+  const marker = L.marker([ap.lat, ap.lon], {icon})
+    .addTo(map)
+    .bindPopup(buildPopup(code, []));
+  markersByAirport[code] = marker;
+}
+
+function buildPopup(code, flights) {
+  const ap = AIRPORTS[code];
+  const govFlights = flights.filter(f => isDiplomatic(f[1]));
+  let flightHtml = '';
+  if (govFlights.length) {
+    flightHtml = govFlights.map(f => {
+      const cs = (f[1]||'?').trim();
+      const status = f[8] ? 'on ground' : `alt ${Math.round(f[7]||0)}m`;
+      return `<div>✈ <b>${cs}</b> — ${f[2]||'?'} — ${status}</div>`;
+    }).join('');
+  } else {
+    flightHtml = '<div class="popup-no-flights">No diplomatic aircraft detected</div>';
+  }
+  return `<div class="ap-popup">
+    <h4>${ap.name} (${code})</h4>
+    <div class="popup-context">${ap.context}</div>
+    <div class="popup-flights">${flightHtml}</div>
+  </div>`;
+}
+
+function isDiplomatic(callsign) {
+  if (!callsign) return false;
+  const cs = callsign.trim().toUpperCase();
+  return DIPLOMATIC_CALLSIGNS.some(p => cs.startsWith(p));
+}
+
+function toggleAirport(code) {
+  if (activeAirports.has(code)) {
+    activeAirports.delete(code);
+    document.getElementById(`toggle-${code}`).classList.remove('active');
+    document.getElementById(`toggle-${code}`).style.color = '#555';
+    document.getElementById(`toggle-${code}`).style.backgroundColor = '#1a1a1a';
+  } else {
+    activeAirports.add(code);
+    document.getElementById(`toggle-${code}`).classList.add('active');
+    document.getElementById(`toggle-${code}`).style.color = AIRPORT_COLORS[code];
+    document.getElementById(`toggle-${code}`).style.backgroundColor = AIRPORT_COLORS[code] + '22';
+  }
+  renderSidebar();
+  updateMapMarkers();
+}
+
+let allActive = true;
+function toggleAll() {
+  allActive = !allActive;
+  for (const code of Object.keys(AIRPORTS)) {
+    const btn = document.getElementById(`toggle-${code}`);
+    if (allActive) {
+      activeAirports.add(code);
+      btn.classList.add('active');
+      btn.style.color = AIRPORT_COLORS[code];
+      btn.style.backgroundColor = AIRPORT_COLORS[code] + '22';
+    } else {
+      activeAirports.delete(code);
+      btn.classList.remove('active');
+      btn.style.color = '#555';
+      btn.style.backgroundColor = '#1a1a1a';
+    }
+  }
+  renderSidebar();
+  updateMapMarkers();
+}
+
+async function fetchAirport(code) {
+  const b = BBOX[code];
+  const url = `https://opensky-network.org/api/states/all?lamin=${b[0]}&lomin=${b[1]}&lamax=${b[2]}&lomax=${b[3]}`;
+  try {
+    const r = await fetch(url);
+    if (!r.ok) return [];
+    const data = await r.json();
+    return data.states || [];
+  } catch { return []; }
+}
+
+async function loadData() {
+  document.getElementById('last-updated').textContent = 'Refreshing...';
+  document.getElementById('api-status').textContent = 'API: Fetching...';
+  document.getElementById('api-status').className = 'warn';
+
+  allFlightData = {};
+  let totalGov = 0, totalAll = 0;
+
+  // Fetch all airports in parallel (browser handles rate limiting gracefully)
+  const results = await Promise.allSettled(
+    Object.keys(AIRPORTS).map(async code => {
+      const states = await fetchAirport(code);
+      allFlightData[code] = states;
+      return { code, states };
+    })
+  );
+
+  for (const r of results) {
+    if (r.status === 'fulfilled') {
+      const { code, states } = r.value;
+      const gov = states.filter(s => isDiplomatic(s[1]));
+      totalGov += gov.length;
+      totalAll += states.length;
+    }
+  }
+
+  document.getElementById('gov-count').textContent = `Gov/Diplomatic: ${totalGov}`;
+  document.getElementById('total-count').textContent = `Total tracked: ${totalAll}`;
+  document.getElementById('api-status').textContent = 'API: OK';
+  document.getElementById('api-status').className = 'ok';
+  document.getElementById('last-updated').textContent = `Updated: ${new Date().toUTCString()}`;
+
+  renderSidebar();
+  updateMapMarkers();
+}
+
+function renderSidebar() {
+  const feed = document.getElementById('alert-feed');
+  const cards = [];
+
+  for (const code of Object.keys(AIRPORTS)) {
+    if (!activeAirports.has(code)) continue;
+    const states = allFlightData[code] || [];
+    const govFlights = states.filter(s => s[8] !== false || !s[7] || s[7] < 2000).filter(s => isDiplomatic(s[1]));
+
+    for (const f of govFlights) {
+      const cs = (f[1]||'?').trim();
+      const origin = f[2] || 'Unknown';
+      const status = f[8] ? 'On ground' : `Alt ${Math.round(f[7]||0)}m`;
+      const ap = AIRPORTS[code];
+      cards.push(`<div class="alert-card gov">
+        <div class="ac-airport" style="color:${AIRPORT_COLORS[code]}">${ap.name} (${code}) — ${ap.country}</div>
+        <div class="ac-callsign">${cs}</div>
+        <div class="ac-meta">Origin: ${origin}<br>Status: ${status}</div>
+        <div class="ac-context">${ap.context}</div>
+      </div>`);
+    }
+  }
+
+  if (cards.length === 0) {
+    feed.innerHTML = '<div class="no-alerts">No diplomatic aircraft<br>currently detected<br><br><span style="color:#444">Monitoring all active airports</span></div>';
+  } else {
+    feed.innerHTML = cards.join('');
+  }
+}
+
+function updateMapMarkers() {
+  // Clear old plane markers
+  for (const m of planeMarkers) map.removeLayer(m);
+  planeMarkers = [];
+
+  for (const [code, ap] of Object.entries(AIRPORTS)) {
+    const states = allFlightData[code] || [];
+    const govFlights = states.filter(s => isDiplomatic(s[1]));
+    const isActive = activeAirports.has(code);
+    const color = AIRPORT_COLORS[code];
+
+    // Update airport marker style
+    const markerClass = govFlights.length > 0 ? 'ap-marker active-gov' : (isActive ? 'ap-marker active' : 'ap-marker inactive');
+    const markerColor = isActive ? color : '#444';
+    const icon = L.divIcon({
+      className:'',
+      html:`<div class="${markerClass}" style="width:36px;height:36px;border-color:${markerColor};color:${markerColor}">${code.slice(0,2)}</div>`,
+      iconSize:[36,36],
+      iconAnchor:[18,18]
+    });
+    markersByAirport[code].setIcon(icon);
+    markersByAirport[code].setPopupContent(buildPopup(code, states));
+
+    if (!isActive) continue;
+
+    // Add plane icons for gov flights on/near ground
+    for (const f of govFlights) {
+      const lat = f[6], lon = f[5];
+      if (!lat || !lon) continue;
+      const onGround = f[8];
+      const cs = (f[1]||'?').trim();
+      const origin = f[2] || '?';
+      const status = onGround ? 'On ground' : `Alt ${Math.round(f[7]||0)}m`;
+
+      const planeIcon = L.divIcon({
+        className:'',
+        html:`<div class="plane-marker" title="${cs}">✈</div>`,
+        iconSize:[24,24], iconAnchor:[12,12]
+      });
+      const pm = L.marker([lat, lon], {icon: planeIcon})
+        .addTo(map)
+        .bindPopup(`<div class="ap-popup"><h4>${cs}</h4><div>Origin: ${origin}</div><div>Status: ${status}</div><div>Airport: ${ap.name}</div></div>`);
+      planeMarkers.push(pm);
+    }
+  }
+}
+
+// Auto-refresh every 5 minutes
+loadData();
+setInterval(loadData, 5 * 60 * 1000);
+</script>
+</body>
+</html>
