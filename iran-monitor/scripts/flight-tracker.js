@@ -41,43 +41,62 @@ const AIRPORTS = {
   OMDB: { name: 'Dubai',      country: 'UAE',           lat: 25.252, lon: 55.364, context: 'UAE back-channel; regional financial hub',        bbox: [25.24, 55.35, 25.26, 55.39] },
 };
 
-// Callsign prefixes indicating government/military/diplomatic aircraft
-// IMPORTANT: must be specific enough to avoid commercial airline prefixes
-const DIPLOMATIC_CALLSIGNS = [
-  'SAM',   // US Special Air Mission (Air Force One family, SecState, VP)
-  'VENUS', // US State Dept charter
-  'EXEC',  // US executive fleet
-  'IRON',  // UK RAF VIP
-  'GAF',   // German Air Force
-  'FAF',   // French Air Force
-  'QAF',   // Qatar Air Force (not QTR = Qatar Airways commercial)
-  'PAF',   // Pakistan Air Force (not PIA = Pakistan Int'l Airlines)
-  'IRAF',  // Iranian Air Force
-  'SHB',   // Saudi gov
-  'RFO',   // Russian government
-  'CCA',   // Chinese CAAC state
-  'CSH',   // Chinese state
-  'SVR',   // Sovereign
-  'RSD',   // Russian state delegation
-  'TCG',   // Turkish government
-  'IFC',   // Iranian state
-  'OAF',   // Omani Air Force
-  'JJ',    // Iranian government (used in Jun 2025 Muscat flights JJ25/26/28)
-  'UAEG',  // UAE Government (NOT 'UAE' alone — that's Emirates Airlines commercial)
+// Callsign patterns for government/military/diplomatic aircraft.
+// Each entry: { prefix: string, minLen?: number, maxLen?: number, note: string }
+// minLen/maxLen constrain the digits/suffix after the prefix.
+// ALL matches also run against CALLSIGN_EXCLUSIONS before passing.
+const DIPLOMATIC_CALLSIGN_RULES = [
+  // US Special Air Mission: SAM + 1-4 digits (e.g. SAM001, SAM8640)
+  // NOT: SAMU (French air ambulance), SAMA, SAMOS, etc.
+  { prefix: 'SAM', suffixPattern: /^\d{1,4}$/, note: 'US Special Air Mission' },
+  // US State Dept / DoD charters
+  { prefix: 'VENUS', suffixPattern: /^\d+$/, note: 'US State Dept charter' },
+  { prefix: 'EXEC',  suffixPattern: /^\d+$/, note: 'US executive fleet' },
+  // Allied air forces
+  { prefix: 'IRON',  suffixPattern: /^\d+$/, note: 'UK RAF VIP' },
+  { prefix: 'GAF',   suffixPattern: /^\d+$/, note: 'German Air Force' },
+  { prefix: 'FAF',   suffixPattern: /^\d+$/, note: 'French Air Force' },
+  { prefix: 'QAF',   suffixPattern: /^\d+$/, note: 'Qatar Air Force' },
+  { prefix: 'PAF',   suffixPattern: /^\d+$/, note: 'Pakistan Air Force' },
+  { prefix: 'IRAF',  suffixPattern: /^\d+$/, note: 'Iranian Air Force' },
+  { prefix: 'OAF',   suffixPattern: /^\d+$/, note: 'Omani Air Force' },
+  // Government/diplomatic callsigns
+  { prefix: 'SHB',   suffixPattern: /^\d+$/, note: 'Saudi government' },
+  { prefix: 'RFO',   suffixPattern: /^\d+$/, note: 'Russian government' },
+  { prefix: 'CCA',   suffixPattern: /^\d+$/, note: 'Chinese state' },
+  { prefix: 'CSH',   suffixPattern: /^\d+$/, note: 'Chinese state' },
+  { prefix: 'SVR',   suffixPattern: /^\d+$/, note: 'Sovereign' },
+  { prefix: 'RSD',   suffixPattern: /^\d+$/, note: 'Russian state delegation' },
+  { prefix: 'TCG',   suffixPattern: /^\d+$/, note: 'Turkish government' },
+  { prefix: 'IFC',   suffixPattern: /^\d+$/, note: 'Iranian state' },
+  { prefix: 'UAEG',  suffixPattern: /^\d+$/, note: 'UAE Government' },
+  // Iranian government flights observed at Muscat (no strict suffix required)
+  { prefix: 'JJ',    suffixPattern: /^\d{2,3}$/, note: 'Iranian gov (Muscat pattern)' },
 ];
 
-// Commercial airline prefixes to explicitly exclude (avoid false positives)
-const COMMERCIAL_EXCLUSIONS = [
-  'UAE',   // Emirates Airlines commercial (e.g. UAE501) — NOT gov
-  'QTR',   // Qatar Airways commercial
-  'PIA',   // Pakistan International Airlines commercial
-  'IRA',   // Iran Air commercial
-  'FIN',   // Finnair
-  'THY',   // Turkish Airlines
-  'DLH',   // Lufthansa
-  'AFR',   // Air France
-  'BAW',   // British Airways
+// Callsigns that must never pass regardless of prefix match
+const CALLSIGN_EXCLUSIONS = [
+  /^SAMU\d/i,    // French air ambulance (SAMU = Service d'Aide Médicale Urgente)
+  /^SAMA\d/i,    // Saudi Arabian Medical Aircraft
+  /^UAE\d/i,     // Emirates Airlines commercial
+  /^QTR\d/i,     // Qatar Airways commercial
+  /^PIA\d/i,     // Pakistan International Airlines
+  /^IRA\d/i,     // Iran Air commercial
+  /^FIN\d/i,     // Finnair
+  /^THY\d/i,     // Turkish Airlines
+  /^DLH\d/i,     // Lufthansa
+  /^AFR\d/i,     // Air France
+  /^BAW\d/i,     // British Airways
 ];
+
+// Aircraft types that are never diplomatic (hard exclusions by ICAO type code)
+const EXCLUDED_AIRCRAFT_TYPES = [
+  'EC45', 'EC35', 'H145', 'H135', 'AS50', 'R44', 'R22', // helicopters (mostly EMS/police)
+  'B738', 'B737', 'A320', 'A319', 'A321', 'A20N', 'B77W', 'A332', 'A333', // narrowbody/widebody commercial
+];
+
+// Government registration prefixes by country (used as secondary signal)
+const GOV_REG_PREFIXES = ['EP-', 'A4O-', 'A7-', 'A6-', 'AP-'];
 
 // Government registration prefixes
 const GOV_REG_PREFIXES = ['EP-', 'A4O-', 'A7-', 'A6-', 'AP-'];
@@ -106,12 +125,28 @@ function saveState(state) {
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
 }
 
-function isDiplomatic(callsign) {
+function isDiplomatic(callsign, aircraftType) {
   if (!callsign) return false;
   const cs = callsign.trim().toUpperCase();
-  // Exclude known commercial airline prefixes first
-  if (COMMERCIAL_EXCLUSIONS.some(p => cs.startsWith(p))) return false;
-  return DIPLOMATIC_CALLSIGNS.some(p => cs.startsWith(p));
+
+  // Hard exclusion: known non-diplomatic callsign patterns
+  if (CALLSIGN_EXCLUSIONS.some(re => re.test(cs))) return false;
+
+  // Hard exclusion: known commercial/EMS aircraft types
+  if (aircraftType && EXCLUDED_AIRCRAFT_TYPES.includes(aircraftType.toUpperCase())) return false;
+
+  // Match against diplomatic callsign rules
+  for (const rule of DIPLOMATIC_CALLSIGN_RULES) {
+    if (!cs.startsWith(rule.prefix)) continue;
+    const suffix = cs.slice(rule.prefix.length);
+    // If a suffix pattern is required, it must match
+    if (rule.suffixPattern && !rule.suffixPattern.test(suffix)) continue;
+    // If no suffix at all after prefix, skip (bare prefix is too ambiguous)
+    if (suffix.length === 0) continue;
+    return true;
+  }
+
+  return false;
 }
 
 async function checkAirportADSBX(code, airport) {
@@ -136,7 +171,7 @@ async function checkAirportADSBX(code, airport) {
 
       // Only on ground or low altitude
       if (!onGround && alt > 3000) continue;
-      if (!isDiplomatic(callsign)) continue;
+      if (!isDiplomatic(callsign, ac.t)) continue;
 
       results.push({
         icao24: ac.hex || '',
@@ -171,7 +206,7 @@ async function checkAirportOpenSky(code, airport) {
     for (const s of body.states) {
       const [icao24, callsign, originCountry, , , , , alt, onGround] = s;
       if (!onGround && alt && alt > 2000) continue;
-      if (!isDiplomatic(callsign)) continue;
+      if (!isDiplomatic(callsign, null)) continue;
       results.push({
         icao24, callsign: (callsign || 'UNKNOWN').trim(),
         originCountry: originCountry || 'Unknown', onGround: !!onGround, altitude: alt,
