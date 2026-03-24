@@ -11,11 +11,42 @@ const BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAIyw8QEAAAAAUytBcKek%2F9JHgO07%2FL4P2d
 
 // Curated high-quality accounts
 const OSINT_QUERIES = [
-  '(from:sentdefender OR from:OSINTdefender OR from:ELINTNews) (Iran OR Hormuz OR oil OR strike OR Gulf OR refinery)',
-  '(from:JavierBlas OR from:TankerTrackers) (Iran OR oil OR Hormuz OR tanker OR crude OR Brent)',
-  '(from:CENTCOM OR from:RALee85 OR from:BabakTaghvaee1) (Iran OR strike OR attack OR military)',
-  '(from:aurora_intel OR from:IntelCrab) (Iran OR missile OR drone OR Gulf)'
+  // ── TOPIC-FIRST: catch all key developments regardless of source ──────
+  // Strait / energy / oil
+  '(Hormuz OR "Strait of Hormuz") (closed OR attack OR mine OR tanker OR oil OR reopen) -is:retweet lang:en min_faves:50',
+  '(Iran OR IRGC) (strike OR attack OR missile OR drone OR bomb) -is:retweet lang:en min_faves:100',
+  '("oil price" OR "crude oil" OR Brent OR WTI) (Iran OR Hormuz OR Gulf OR spike OR surge) -is:retweet lang:en min_faves:75',
+  '(tanker OR "oil tanker" OR LNG OR refinery) (attack OR seized OR fire OR explosion OR Gulf OR Iran) -is:retweet lang:en min_faves:50',
+  // Nuclear / escalation
+  '(Iran) (nuclear OR enrichment OR Natanz OR Fordow OR IAEA) -is:retweet lang:en min_faves:75',
+  '(Iran) (CENTCOM OR "US strike" OR "Israeli strike" OR IDF OR Mossad) -is:retweet lang:en min_faves:100',
+  // Diplomacy / ceasefire signals
+  '(Iran) (ceasefire OR negotiations OR talks OR deal OR Oman OR Witkoff) -is:retweet lang:en min_faves:75',
+  // Gulf states
+  '(Saudi OR UAE OR Qatar OR Kuwait OR Bahrain) (Iran OR attack OR missile OR drone OR Hormuz) -is:retweet lang:en min_faves:75',
+  // Semiconductor / helium / supply chain
+  '(helium OR semiconductor OR TSMC OR chipmaker) (Iran OR Qatar OR Hormuz OR shortage) -is:retweet lang:en min_faves:50',
+
+  // ── ACCOUNT-BASED: trusted OSINT accounts, lower engagement bar ───────
+  '(from:sentdefender OR from:BabakTaghvaee1 OR from:ELINTNews OR from:OSINTdefender) (Iran OR Hormuz OR oil OR strike OR Gulf OR refinery OR missile OR drone)',
+  '(from:JavierBlas OR from:TankerTrackers OR from:RALee85 OR from:aurora_intel) (Iran OR oil OR Hormuz OR tanker OR crude OR strike OR attack)',
+  '(from:CENTCOM OR from:IntelCrab OR from:ABORASHEED_EN OR from:MiddleEastEye OR from:AlArabiya_Eng) (Iran OR strike OR attack OR military OR Gulf)',
 ];
+
+// ── QUALITY FILTER ────────────────────────────────────────────────────────
+// Trusted OSINT accounts — lower engagement bar
+const TRUSTED_ACCOUNTS = new Set([
+  'sentdefender','BabakTaghvaee1','ELINTNews','OSINTdefender',
+  'JavierBlas','TankerTrackers','RALee85','aurora_intel',
+  'CENTCOM','IntelCrab','ABORASHEED_EN','MiddleEastEye',
+  'AlArabiya_Eng','Reuters','AP','BBCWorld','AlJazeera',
+]);
+
+function passesQualityBar(post) {
+  if (TRUSTED_ACCOUNTS.has(post.handle)) return true;      // trusted: no engagement bar
+  if (post.likes >= 200 || post.retweets >= 50) return true; // viral: high bar for unknowns
+  return false;
+}
 
 function xApiSearch(query) {
   return new Promise((resolve, reject) => {
@@ -66,10 +97,11 @@ async function collectPosts() {
     }
   }
 
-  // Deduplicate and sort by engagement
+  // Deduplicate, apply quality filter, sort by engagement
   const seen = new Set();
   const unique = allPosts
     .filter(p => { if (seen.has(p.id)) return false; seen.add(p.id); return true; })
+    .filter(p => passesQualityBar(p))
     .sort((a, b) => (b.likes + b.retweets * 3) - (a.likes + a.retweets * 3));
 
   return unique;
@@ -91,12 +123,8 @@ function classifyPost(post) {
   const isRumor = rumorSignals.some(s => text.includes(s));
   const isConfirmed = confirmedSignals.some(s => text.includes(s));
   
-  // All accounts we actively query are credible — treat them all equally
-  const credibleAccount = [
-    'sentdefender','JavierBlas','CENTCOM','RALee85','ELINTNews',
-    'BabakTaghvaee1','TankerTrackers','aurora_intel','IntelCrab',
-    'OSINTdefender','ABORASHEED_EN','IntelCrab'
-  ].includes(post.handle);
+  const highEngagement = (post.likes > 200 || post.retweets > 50);
+  const credibleAccount = TRUSTED_ACCOUNTS.has(post.handle);
 
   let confidence = 'low';
   if (isConfirmed && credibleAccount) confidence = 'high';
