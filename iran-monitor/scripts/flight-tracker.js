@@ -42,18 +42,18 @@ const AIRPORTS = {
 };
 
 // Callsign prefixes indicating government/military/diplomatic aircraft
+// IMPORTANT: must be specific enough to avoid commercial airline prefixes
 const DIPLOMATIC_CALLSIGNS = [
-  'SAM',   // US Special Air Mission (Air Force One family, SecState)
-  'VENUS', // US State Dept
+  'SAM',   // US Special Air Mission (Air Force One family, SecState, VP)
+  'VENUS', // US State Dept charter
   'EXEC',  // US executive fleet
   'IRON',  // UK RAF VIP
   'GAF',   // German Air Force
   'FAF',   // French Air Force
-  'QAF',   // Qatar Air Force
-  'PAF',   // Pakistan Air Force
+  'QAF',   // Qatar Air Force (not QTR = Qatar Airways commercial)
+  'PAF',   // Pakistan Air Force (not PIA = Pakistan Int'l Airlines)
   'IRAF',  // Iranian Air Force
   'SHB',   // Saudi gov
-  'UAE',   // UAE government
   'RFO',   // Russian government
   'CCA',   // Chinese CAAC state
   'CSH',   // Chinese state
@@ -62,6 +62,21 @@ const DIPLOMATIC_CALLSIGNS = [
   'TCG',   // Turkish government
   'IFC',   // Iranian state
   'OAF',   // Omani Air Force
+  'JJ',    // Iranian government (used in Jun 2025 Muscat flights JJ25/26/28)
+  'UAEG',  // UAE Government (NOT 'UAE' alone — that's Emirates Airlines commercial)
+];
+
+// Commercial airline prefixes to explicitly exclude (avoid false positives)
+const COMMERCIAL_EXCLUSIONS = [
+  'UAE',   // Emirates Airlines commercial (e.g. UAE501) — NOT gov
+  'QTR',   // Qatar Airways commercial
+  'PIA',   // Pakistan International Airlines commercial
+  'IRA',   // Iran Air commercial
+  'FIN',   // Finnair
+  'THY',   // Turkish Airlines
+  'DLH',   // Lufthansa
+  'AFR',   // Air France
+  'BAW',   // British Airways
 ];
 
 // Government registration prefixes
@@ -94,6 +109,8 @@ function saveState(state) {
 function isDiplomatic(callsign) {
   if (!callsign) return false;
   const cs = callsign.trim().toUpperCase();
+  // Exclude known commercial airline prefixes first
+  if (COMMERCIAL_EXCLUSIONS.some(p => cs.startsWith(p))) return false;
   return DIPLOMATIC_CALLSIGNS.some(p => cs.startsWith(p));
 }
 
@@ -273,18 +290,9 @@ async function main() {
   if (state.alerts.length > 100) state.alerts = state.alerts.slice(0, 100);
   saveState(state);
 
-  // Send email directly
-  try {
-    const subject = `Diplomatic Flight Alert — ${newAlerts.map(a => a.airportName).filter((v,i,arr) => arr.indexOf(v)===i).join(', ')}`;
-    await sendAlert({
-      subject,
-      text: formatAlertText(newAlerts),
-      html: formatAlertHtml(newAlerts),
-    });
-    process.stderr.write(`Email sent to recipients\n`);
-  } catch (e) {
-    process.stderr.write(`Email failed: ${e.message}\n`);
-  }
+  // Output alerts for cron agent to enrich with news context and send email
+  // The cron agent will add diplomatic context, implications, and what-to-watch before emailing
+  console.log('ENRICH_AND_EMAIL:true');
 
   // Print for cron agent to relay to Telegram
   console.log(`NEW_ACTIVITY_COUNT:${newAlerts.length}`);

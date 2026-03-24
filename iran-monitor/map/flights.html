@@ -128,7 +128,8 @@ const BBOX={
   LIRF:[41.78,12.22,41.82,12.28],OTBH:[25.26,51.56,25.32,51.62],
   LLBG:[32.00,34.87,32.02,34.91],OMDB:[25.24,55.35,25.26,55.39],
 };
-const GOV_CS=['SAM','VENUS','EXEC','IRON','GAF','FAF','QAF','PAF','IRAF','SHB','UAE','RFO','CCA','CSH','SVR','RSD','TCG','IFC','OAF','JJ'];
+const GOV_CS=['SAM','VENUS','EXEC','IRON','GAF','FAF','QAF','PAF','IRAF','SHB','UAEG','RFO','CCA','CSH','SVR','RSD','TCG','IFC','OAF','JJ'];
+const COMMERCIAL_EXCL=['UAE','QTR','PIA','IRA','FIN','THY','DLH','AFR','BAW'];
 
 // Historical data (sourced from open reporting)
 const HISTORY = [
@@ -212,6 +213,7 @@ for(const [code,ap] of Object.entries(AIRPORTS)){
 function isDiplomatic(cs){
   if(!cs)return false;
   const u=cs.trim().toUpperCase();
+  if(COMMERCIAL_EXCL.some(p=>u.startsWith(p)))return false;
   return GOV_CS.some(p=>u.startsWith(p));
 }
 
