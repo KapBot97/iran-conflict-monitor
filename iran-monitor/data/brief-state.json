@@ -1,11 +1,11 @@
 {
-  "last_brent_price": 103.07,
-  "last_wti_price": 92.00,
-  "last_brief_type": "morning",
-  "last_brief_timestamp": "2026-03-24T15:30:00.000Z",
+  "last_brent_price": 104.49,
+  "last_wti_price": 93.00,
+  "last_brief_type": "evening",
+  "last_brief_timestamp": "2026-03-24T21:00:00.000Z",
   "key_developments": [
-    "Iran appointed hardline IRGC veteran Mohammad Bagher Zolghadr as new security chief, replacing Ali Larijani killed in Israeli strike ~Mar 17 — signals consolidation under Revolutionary Guard ideology, not moderates",
-    "Trump announced 5-day postponement of Iran power plant strikes citing 'productive conversations'; Iran rejected this as fabricated; Pakistan emerging as go-between with in-person talks possibly within days in Islamabad",
-    "Sejjil-2 IRBM with 100kg cluster munitions struck Tel Aviv (4 casualties); Strait of Hormuz remains closed at ~3-4 vessels/day vs 130+ normal; Iraq crude output collapsed from 4.2 Mbpd to 1.35 Mbpd"
+    "Iran notified IMO that 'non-hostile vessels' may transit Strait of Hormuz if coordinated with Tehran — Trump called this a 'very big present' related to oil/gas/Hormuz; traffic still ~3-4 vs 130+ vessels/day pending operational verification",
+    "Iranian IRBM with cluster munition warhead struck Bnei Brak, central Israel — multiple residential structures partially collapsed, IDF SAR deployed; IRGC also announced Bushehr nuclear plant grounds struck (Iran/Russia allege US/Israeli origin, IAEA unconfirmed)",
+    "Trump declared 'regime change' and claimed Iran agreed 'never' to have nuclear weapon — zero Iranian confirmation; Pakistan/Egypt/Turkey mediating with Islamabad high-level talks targeted for Thursday, awaiting Tehran response from new Supreme Leader Mojtaba Khamenei"
   ]
 }
