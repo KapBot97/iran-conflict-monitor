@@ -2,7 +2,28 @@
   "seen": {
     "a6a739:LSGG": 1774311673547,
     "738073:LLBG": 1774311673547,
-    "738286:LLBG": 1774311673547
+    "738286:LLBG": 1774311673547,
+    "896474:OMDB": 1774317099577
   },
-  "lastRun": 1774315299121
+  "lastRun": 1774318899600,
+  "alerts": [
+    {
+      "ts": 1774317099577,
+      "flights": [
+        {
+          "icao24": "896474",
+          "callsign": "UAE501",
+          "registration": "A6-EUJ",
+          "originCountry": "Unknown",
+          "type": "A388",
+          "onGround": true,
+          "altitude": 0,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "country": "UAE",
+          "context": "UAE back-channel; regional financial hub"
+        }
+      ]
+    }
+  ]
 }
