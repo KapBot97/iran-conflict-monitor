@@ -22,15 +22,23 @@ const { sendAlert } = require('./email-alert');
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const STATE_FILE = path.join(DATA_DIR, 'flight-tracker-state.json');
 
+// ADS-B Exchange API (RapidAPI) — unfiltered, includes gov/military aircraft
+const CREDS_FILE = path.join(__dirname, '..', '.adsbx-credentials.json');
+let ADSBX_KEY = null;
+try {
+  const creds = JSON.parse(fs.readFileSync(CREDS_FILE, 'utf8'));
+  ADSBX_KEY = creds.rapidapi_key;
+} catch { /* fall back to OpenSky */ }
+
 const AIRPORTS = {
-  OPKC: { name: 'Islamabad',  country: 'Pakistan',     context: 'Pakistan back-channel / ISI diplomacy hub',      bbox: [33.55, 72.75, 33.70, 73.15] },
-  OOMS: { name: 'Muscat',     country: 'Oman',          context: 'Primary US-Iran mediation hub (Omani FM)',        bbox: [23.55, 58.20, 23.65, 58.35] },
-  OIII: { name: 'Tehran',     country: 'Iran',          context: 'Iranian capital — inbound = foreign delegation',  bbox: [35.65, 51.30, 35.75, 51.45] },
-  LSGG: { name: 'Geneva',     country: 'Switzerland',   context: 'Neutral ground — previous US-Iran talks venue',   bbox: [46.22, 6.08, 46.25, 6.13]  },
-  LIRF: { name: 'Rome',       country: 'Italy',         context: 'Earlier talks venue (Feb 2026)',                  bbox: [41.78, 12.22, 41.82, 12.28] },
-  OTBH: { name: 'Doha',       country: 'Qatar',         context: 'Qatar active mediator; also US CENTCOM base',     bbox: [25.26, 51.56, 25.32, 51.62] },
-  LLBG: { name: 'Tel Aviv',   country: 'Israel',        context: 'Israeli capital — senior arrivals = ceasefire talks', bbox: [32.00, 34.87, 32.02, 34.91] },
-  OMDB: { name: 'Dubai',      country: 'UAE',           context: 'UAE back-channel; regional financial hub',        bbox: [25.24, 55.35, 25.26, 55.39] },
+  OPKC: { name: 'Islamabad',  country: 'Pakistan',     lat: 33.617, lon: 73.099, context: 'Pakistan back-channel / ISI diplomacy hub',      bbox: [33.55, 72.75, 33.70, 73.15] },
+  OOMS: { name: 'Muscat',     country: 'Oman',          lat: 23.593, lon: 58.284, context: 'Primary US-Iran mediation hub (Omani FM)',        bbox: [23.55, 58.20, 23.65, 58.35] },
+  OIII: { name: 'Tehran',     country: 'Iran',          lat: 35.689, lon: 51.314, context: 'Iranian capital — inbound = foreign delegation',  bbox: [35.65, 51.30, 35.75, 51.45] },
+  LSGG: { name: 'Geneva',     country: 'Switzerland',   lat: 46.238, lon: 6.109,  context: 'Neutral ground — previous US-Iran talks venue',   bbox: [46.22, 6.08, 46.25, 6.13]  },
+  LIRF: { name: 'Rome',       country: 'Italy',         lat: 41.800, lon: 12.239, context: 'Earlier talks venue (Feb 2026)',                  bbox: [41.78, 12.22, 41.82, 12.28] },
+  OTBH: { name: 'Doha',       country: 'Qatar',         lat: 25.273, lon: 51.608, context: 'Qatar active mediator; also US CENTCOM base',     bbox: [25.26, 51.56, 25.32, 51.62] },
+  LLBG: { name: 'Tel Aviv',   country: 'Israel',        lat: 32.011, lon: 34.887, context: 'Israeli capital — senior arrivals = ceasefire talks', bbox: [32.00, 34.87, 32.02, 34.91] },
+  OMDB: { name: 'Dubai',      country: 'UAE',           lat: 25.252, lon: 55.364, context: 'UAE back-channel; regional financial hub',        bbox: [25.24, 55.35, 25.26, 55.39] },
 };
 
 // Callsign prefixes indicating government/military/diplomatic aircraft
@@ -59,9 +67,9 @@ const DIPLOMATIC_CALLSIGNS = [
 // Government registration prefixes
 const GOV_REG_PREFIXES = ['EP-', 'A4O-', 'A7-', 'A6-', 'AP-'];
 
-function httpsGet(url) {
+function httpsGet(url, options = {}) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { timeout: 10000 }, (res) => {
+    const req = https.get(url, { timeout: 10000, ...options }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
@@ -89,27 +97,37 @@ function isDiplomatic(callsign) {
   return DIPLOMATIC_CALLSIGNS.some(p => cs.startsWith(p));
 }
 
-async function checkAirport(code, airport) {
-  const { bbox } = airport;
-  const url = `https://opensky-network.org/api/states/all?lamin=${bbox[0]}&lomin=${bbox[1]}&lamax=${bbox[2]}&lomax=${bbox[3]}`;
-
+async function checkAirportADSBX(code, airport) {
+  // ADS-B Exchange API: query by lat/lon/radius (25nm)
+  const url = `https://adsbexchange-com1.p.rapidapi.com/v2/lat/${airport.lat}/lon/${airport.lon}/dist/25/`;
+  const options = {
+    headers: {
+      'x-rapidapi-key': ADSBX_KEY,
+      'x-rapidapi-host': 'adsbexchange-com1.p.rapidapi.com',
+    }
+  };
   try {
-    const { status, body } = await httpsGet(url);
+    const { status, body } = await httpsGet(url, options);
     if (status === 429) { process.stderr.write(`Rate limited on ${code}\n`); return []; }
-    if (!body || !body.states) return [];
+    if (!body || !body.ac) return [];
 
     const results = [];
-    for (const s of body.states) {
-      const [icao24, callsign, originCountry, , , , , alt, onGround] = s;
-      // Only on-ground or very low altitude (arriving/departing)
-      if (!onGround && alt && alt > 2000) continue;
+    for (const ac of body.ac) {
+      const callsign = (ac.flight || ac.r || '').trim();
+      const onGround = ac.gnd === true || ac.alt_baro === 'ground' || (typeof ac.alt_baro === 'number' && ac.alt_baro < 500);
+      const alt = typeof ac.alt_baro === 'number' ? ac.alt_baro : 0;
+
+      // Only on ground or low altitude
+      if (!onGround && alt > 3000) continue;
       if (!isDiplomatic(callsign)) continue;
 
       results.push({
-        icao24,
-        callsign: (callsign || 'UNKNOWN').trim(),
-        originCountry: originCountry || 'Unknown',
-        onGround: !!onGround,
+        icao24: ac.hex || '',
+        callsign: callsign || 'UNKNOWN',
+        registration: ac.r || '',
+        originCountry: ac.cou || ac.ownop || 'Unknown',
+        type: ac.t || '',
+        onGround,
         altitude: alt,
         airport: code,
         airportName: airport.name,
@@ -119,9 +137,40 @@ async function checkAirport(code, airport) {
     }
     return results;
   } catch (e) {
-    process.stderr.write(`Error checking ${code}: ${e.message}\n`);
+    process.stderr.write(`ADSBx error on ${code}: ${e.message}\n`);
     return [];
   }
+}
+
+async function checkAirportOpenSky(code, airport) {
+  // Fallback: OpenSky free API
+  const { bbox } = airport;
+  const url = `https://opensky-network.org/api/states/all?lamin=${bbox[0]}&lomin=${bbox[1]}&lamax=${bbox[2]}&lomax=${bbox[3]}`;
+  try {
+    const { status, body } = await httpsGet(url);
+    if (status === 429) { process.stderr.write(`Rate limited on ${code}\n`); return []; }
+    if (!body || !body.states) return [];
+    const results = [];
+    for (const s of body.states) {
+      const [icao24, callsign, originCountry, , , , , alt, onGround] = s;
+      if (!onGround && alt && alt > 2000) continue;
+      if (!isDiplomatic(callsign)) continue;
+      results.push({
+        icao24, callsign: (callsign || 'UNKNOWN').trim(),
+        originCountry: originCountry || 'Unknown', onGround: !!onGround, altitude: alt,
+        airport: code, airportName: airport.name, country: airport.country, context: airport.context,
+      });
+    }
+    return results;
+  } catch (e) {
+    process.stderr.write(`OpenSky error on ${code}: ${e.message}\n`);
+    return [];
+  }
+}
+
+async function checkAirport(code, airport) {
+  if (ADSBX_KEY) return checkAirportADSBX(code, airport);
+  return checkAirportOpenSky(code, airport);
 }
 
 function formatAlertText(alerts) {
