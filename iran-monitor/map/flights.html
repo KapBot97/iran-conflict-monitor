@@ -9,70 +9,70 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Courier New',monospace;background:#0a0a0a;color:#e0e0e0;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
-
-/* Header */
 #header{background:#0d0d0d;border-bottom:1px solid #333;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;flex-wrap:wrap}
 #header h1{font-size:13px;letter-spacing:2px;color:#00ff88;flex:1;white-space:nowrap}
 #last-updated{font-size:10px;color:#666}
 #refresh-btn{background:#1a1a1a;border:1px solid #444;color:#00ff88;padding:4px 10px;font-size:10px;cursor:pointer;letter-spacing:1px;border-radius:2px}
 #refresh-btn:hover{background:#222}
-
+/* Tabs */
+#tabs{background:#111;border-bottom:1px solid #333;display:flex;padding:0 12px;gap:0;flex-shrink:0}
+.tab{padding:8px 16px;font-size:11px;letter-spacing:1px;cursor:pointer;border-bottom:2px solid transparent;color:#666;transition:all .15s}
+.tab.active{color:#00ff88;border-bottom-color:#00ff88}
+.tab:hover{color:#aaa}
 /* Airport toggles */
 #airport-bar{background:#111;border-bottom:1px solid #333;padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;align-items:center}
 #airport-bar .label{font-size:10px;color:#666;letter-spacing:1px;margin-right:4px;white-space:nowrap}
 .ap-toggle{padding:4px 10px;font-size:10px;font-family:'Courier New',monospace;border-radius:3px;border:1px solid #444;background:#1a1a1a;color:#aaa;cursor:pointer;transition:all .15s;white-space:nowrap;letter-spacing:.5px}
-.ap-toggle.active{color:#0a0a0a;font-weight:bold}
-.ap-toggle:hover{filter:brightness(1.2)}
-#toggle-all{background:#1a1a1a;border:1px solid #555;color:#888;padding:4px 8px;font-size:10px;font-family:'Courier New',monospace;cursor:pointer;border-radius:3px;letter-spacing:.5px}
+.ap-toggle.active{font-weight:bold}
+.ap-toggle:hover{filter:brightness(1.3)}
+#toggle-all{background:#1a1a1a;border:1px solid #555;color:#888;padding:4px 8px;font-size:10px;font-family:'Courier New',monospace;cursor:pointer;border-radius:3px}
 #toggle-all:hover{color:#ccc}
-
 /* Main layout */
 #main{display:flex;flex:1;overflow:hidden}
-
 /* Sidebar */
-#sidebar{width:300px;background:#111;border-right:1px solid #333;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-#sidebar-header{padding:10px 14px;border-bottom:1px solid #333;font-size:10px;color:#666;letter-spacing:1px}
+#sidebar{width:320px;background:#111;border-right:1px solid #333;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+#sidebar-header{padding:8px 14px;border-bottom:1px solid #333;font-size:10px;color:#666;letter-spacing:1px;display:flex;justify-content:space-between;align-items:center}
+#feed-count{color:#00ff88}
 #alert-feed{flex:1;overflow-y:auto;padding:8px}
 #alert-feed::-webkit-scrollbar{width:4px}
 #alert-feed::-webkit-scrollbar-thumb{background:#333}
-.alert-card{background:#0d0d0d;border:1px solid #333;border-radius:3px;padding:10px;margin-bottom:8px;font-size:11px}
-.alert-card.gov{border-left:3px solid #00ff88}
-.alert-card .ac-airport{color:#00ff88;font-weight:bold;margin-bottom:4px;font-size:12px}
-.alert-card .ac-callsign{color:#fff;font-size:13px;font-weight:bold}
-.alert-card .ac-meta{color:#888;margin-top:3px;line-height:1.5}
-.alert-card .ac-context{color:#666;font-size:10px;margin-top:5px;font-style:italic;border-top:1px solid #222;padding-top:5px}
-.alert-card .ac-time{color:#555;font-size:10px;margin-top:4px}
-.no-alerts{color:#555;font-size:11px;padding:16px;text-align:center;line-height:1.7}
-
+.alert-card{background:#0d0d0d;border:1px solid #2a2a2a;border-radius:3px;padding:10px;margin-bottom:8px;font-size:11px;cursor:pointer;transition:border-color .15s}
+.alert-card:hover{border-color:#555}
+.alert-card.sig-critical{border-left:3px solid #ff4444}
+.alert-card.sig-high{border-left:3px solid #ffaa00}
+.alert-card.sig-live{border-left:3px solid #00ff88;animation:pulse-border 2s infinite}
+@keyframes pulse-border{0%,100%{border-left-color:#00ff88}50%{border-left-color:#006633}}
+.ac-date{font-size:10px;color:#555;margin-bottom:4px}
+.ac-airport{font-weight:bold;margin-bottom:3px;font-size:12px}
+.ac-flights{color:#ccc;margin:4px 0;line-height:1.6}
+.ac-flight-row{display:flex;gap:6px;align-items:baseline}
+.ac-callsign{color:#fff;font-weight:bold;min-width:70px}
+.ac-origin{color:#888;font-size:10px}
+.ac-context{color:#666;font-size:10px;margin-top:6px;font-style:italic;border-top:1px solid #1a1a1a;padding-top:5px;line-height:1.5}
+.sig-badge{display:inline-block;padding:1px 5px;border-radius:2px;font-size:9px;letter-spacing:1px;font-weight:bold;margin-left:6px}
+.sig-badge.CRITICAL{background:#ff444433;color:#ff4444}
+.sig-badge.HIGH{background:#ffaa0033;color:#ffaa00}
+.sig-badge.LIVE{background:#00ff8833;color:#00ff88}
+.no-alerts{color:#555;font-size:11px;padding:20px;text-align:center;line-height:1.8}
 /* Map */
 #map-wrap{flex:1;position:relative}
-#map{width:100%;height:100%;background:#0a0f0a}
-
-/* Airport popup on map */
-.ap-popup{font-family:'Courier New',monospace;font-size:11px;min-width:180px}
-.ap-popup h4{color:#00ff88;margin-bottom:6px;font-size:12px}
-.ap-popup .popup-context{color:#999;font-size:10px;margin-bottom:6px}
-.ap-popup .popup-flights{color:#fff}
-.ap-popup .popup-no-flights{color:#555;font-size:10px}
-
-/* Map dark tiles override */
-.leaflet-tile{filter:brightness(0.4) saturate(0.5) hue-rotate(180deg)}
+#map{width:100%;height:100%}
+.leaflet-tile{filter:brightness(0.35) saturate(0.4) hue-rotate(180deg)}
 .leaflet-container{background:#0a0a0a}
-
-/* Airport marker */
-.ap-marker{display:flex;align-items:center;justify-content:center;border-radius:50%;border:2px solid;font-size:10px;font-weight:bold;font-family:'Courier New',monospace;cursor:pointer;transition:all .2s}
-.ap-marker.active-gov{background:#00ff8822;border-color:#00ff88;color:#00ff88;box-shadow:0 0 10px #00ff8866}
-.ap-marker.active{background:#ffaa0022;border-color:#ffaa00;color:#ffaa00}
-.ap-marker.inactive{background:#33333322;border-color:#444;color:#555}
-
-/* Plane marker */
-.plane-marker{font-size:18px;filter:drop-shadow(0 0 4px #00ff88)}
-
+/* Markers */
+.ap-marker{display:flex;align-items:center;justify-content:center;border-radius:50%;border:2px solid;font-size:10px;font-weight:bold;cursor:pointer;transition:all .2s;font-family:'Courier New',monospace}
+.ap-marker.has-live{box-shadow:0 0 12px currentColor}
+.hist-pin{font-size:16px;cursor:pointer}
+/* Popup */
+.ap-popup{font-family:'Courier New',monospace;font-size:11px;min-width:200px;max-width:280px}
+.ap-popup h4{font-size:13px;margin-bottom:5px}
+.ap-popup .pctx{color:#888;font-size:10px;margin-bottom:8px}
+.ap-popup .pflight{padding:4px 0;border-bottom:1px solid #eee;line-height:1.5}
+.ap-popup .pflight:last-child{border:none}
+.ap-popup .pdate{color:#888;font-size:10px}
 /* Status bar */
-#status-bar{background:#0d0d0d;border-top:1px solid #222;padding:5px 14px;font-size:10px;color:#555;display:flex;gap:16px;flex-shrink:0}
-#status-bar span{white-space:nowrap}
-#status-bar .ok{color:#00ff88}
-#status-bar .warn{color:#ffaa00}
+#status-bar{background:#0d0d0d;border-top:1px solid #222;padding:5px 14px;font-size:10px;color:#555;display:flex;gap:16px;flex-shrink:0;flex-wrap:wrap}
+.ok{color:#00ff88}.warn{color:#ffaa00}.red{color:#ff4444}
 </style>
 </head>
 <body>
@@ -80,287 +80,328 @@ body{font-family:'Courier New',monospace;background:#0a0a0a;color:#e0e0e0;height
 <div id="header">
   <h1>✈ DIPLOMATIC FLIGHT TRACKER</h1>
   <span id="last-updated">Loading...</span>
-  <button id="refresh-btn" onclick="loadData()">REFRESH</button>
+  <button id="refresh-btn" onclick="loadLive()">REFRESH LIVE</button>
+</div>
+
+<div id="tabs">
+  <div class="tab active" onclick="switchTab('live')" id="tab-live">LIVE (30min)</div>
+  <div class="tab" onclick="switchTab('history')" id="tab-history">HISTORICAL RECORD</div>
 </div>
 
 <div id="airport-bar">
   <span class="label">AIRPORTS:</span>
-  <button id="toggle-all" onclick="toggleAll()">ALL</button>
+  <button id="toggle-all" onclick="toggleAll()">ALL ON</button>
 </div>
 
 <div id="main">
   <div id="sidebar">
-    <div id="sidebar-header">RECENT DIPLOMATIC ACTIVITY</div>
-    <div id="alert-feed"><div class="no-alerts">Loading flight data...</div></div>
+    <div id="sidebar-header">
+      <span id="sidebar-label">LIVE DIPLOMATIC ACTIVITY</span>
+      <span id="feed-count"></span>
+    </div>
+    <div id="alert-feed"><div class="no-alerts">Loading...</div></div>
   </div>
-  <div id="map-wrap">
-    <div id="map"></div>
-  </div>
+  <div id="map-wrap"><div id="map"></div></div>
 </div>
 
 <div id="status-bar">
-  <span>Source: OpenSky Network ADS-B</span>
+  <span>Source: OpenSky Network (live) + OSINT (history)</span>
   <span id="gov-count">Gov/Diplomatic: —</span>
-  <span id="total-count">Total tracked: —</span>
   <span id="api-status">API: —</span>
 </div>
 
 <script>
 const AIRPORTS = {
-  OPKC: { name:'Islamabad',  country:'Pakistan',    lat:33.617, lon:73.099, context:'Pakistan back-channel / ISI diplomacy hub' },
-  OOMS: { name:'Muscat',     country:'Oman',        lat:23.593, lon:58.284, context:'Primary US-Iran mediation hub (Omani FM)' },
-  OIII: { name:'Tehran',     country:'Iran',        lat:35.689, lon:51.314, context:'Iranian capital — inbound = foreign delegation' },
-  LSGG: { name:'Geneva',     country:'Switzerland', lat:46.238, lon:6.109,  context:'Neutral ground — US-Iran talks venue' },
-  LIRF: { name:'Rome',       country:'Italy',       lat:41.800, lon:12.239, context:'Earlier talks venue (Feb 2026)' },
-  OTBH: { name:'Doha',       country:'Qatar',       lat:25.273, lon:51.608, context:'Qatar mediator; US CENTCOM base' },
-  LLBG: { name:'Tel Aviv',   country:'Israel',      lat:32.011, lon:34.887, context:'Senior arrivals = ceasefire talks' },
-  OMDB: { name:'Dubai',      country:'UAE',         lat:25.252, lon:55.364, context:'UAE back-channel; regional financial hub' },
+  OPKC:{name:'Islamabad', country:'Pakistan',   lat:33.617,lon:73.099, context:'Pakistan back-channel / ISI diplomacy hub — emerging venue for direct US-Iran talks'},
+  OOMS:{name:'Muscat',    country:'Oman',        lat:23.593,lon:58.284, context:'Primary US-Iran mediation hub — Omani FM Badr Al Busaidi key broker'},
+  OIII:{name:'Tehran',    country:'Iran',        lat:35.689,lon:51.314, context:'Iranian capital — inbound foreign delegation = significant signal'},
+  LSGG:{name:'Geneva',    country:'Switzerland', lat:46.238,lon:6.109,  context:'Neutral ground — hosted US-Iran indirect talks Feb 2026'},
+  LIRF:{name:'Rome',      country:'Italy',       lat:41.800,lon:12.239, context:'Earlier talks venue (Feb 2026 round 2)'},
+  OTBH:{name:'Doha',      country:'Qatar',       lat:25.273,lon:51.608, context:'Qatar active mediator + US CENTCOM forward base'},
+  LLBG:{name:'Tel Aviv',  country:'Israel',      lat:32.011,lon:34.887, context:'Senior US arrivals here = ceasefire coordination'},
+  OMDB:{name:'Dubai',     country:'UAE',         lat:25.252,lon:55.364, context:'UAE back-channel; regional financial + diplomatic hub'},
 };
-
-const AIRPORT_COLORS = {
-  OPKC:'#4fc3f7', OOMS:'#00ff88', OIII:'#ff4444',
-  LSGG:'#e040fb', LIRF:'#ffcc02', OTBH:'#ff9800',
-  LLBG:'#69f0ae', OMDB:'#40c4ff'
+const COLORS={OPKC:'#4fc3f7',OOMS:'#00ff88',OIII:'#ff4444',LSGG:'#e040fb',LIRF:'#ffcc02',OTBH:'#ff9800',LLBG:'#69f0ae',OMDB:'#40c4ff'};
+const BBOX={
+  OPKC:[33.55,72.75,33.70,73.15],OOMS:[23.55,58.20,23.65,58.35],
+  OIII:[35.65,51.30,35.75,51.45],LSGG:[46.22,6.08,46.25,6.13],
+  LIRF:[41.78,12.22,41.82,12.28],OTBH:[25.26,51.56,25.32,51.62],
+  LLBG:[32.00,34.87,32.02,34.91],OMDB:[25.24,55.35,25.26,55.39],
 };
+const GOV_CS=['SAM','VENUS','EXEC','IRON','GAF','FAF','QAF','PAF','IRAF','SHB','UAE','RFO','CCA','CSH','SVR','RSD','TCG','IFC','OAF','JJ'];
 
-const BBOX = {
-  OPKC:[33.55,72.75,33.70,73.15], OOMS:[23.55,58.20,23.65,58.35],
-  OIII:[35.65,51.30,35.75,51.45], LSGG:[46.22,6.08,46.25,6.13],
-  LIRF:[41.78,12.22,41.82,12.28], OTBH:[25.26,51.56,25.32,51.62],
-  LLBG:[32.00,34.87,32.02,34.91], OMDB:[25.24,55.35,25.26,55.39],
-};
+// Historical data (sourced from open reporting)
+const HISTORY = [
+  {
+    date:'2025-06-18', airport:'OOMS', significance:'CRITICAL',
+    flights:[
+      {callsign:'JJ25',origin:'Iran',desc:'Iranian presidential A340 (EP-IGA) — used by President Pezeshkian'},
+      {callsign:'JJ26',origin:'Iran',desc:'Iranian gov A321 — part of 3-plane delegation'},
+      {callsign:'JJ28',origin:'Iran',desc:'Iranian gov A321 — 4th aircraft also reported by ATC'},
+    ],
+    context:'Iran flew 3 government aircraft to Muscat days before US directly entered the war. Widely seen as Tehran seeking a negotiated off-ramp via Oman. Largest Iranian diplomatic aircraft movement of the conflict.',
+    source:'The War Zone'
+  },
+  {
+    date:'2026-02-06', airport:'OOMS', significance:'HIGH',
+    flights:[
+      {callsign:'SAM (est.)',origin:'United States',desc:'US envoy Steve Witkoff + negotiating team'},
+      {callsign:'IFC (est.)',origin:'Iran',desc:'FM Araghchi + Iranian delegation — indirect talks via Oman'},
+    ],
+    context:'Round 1 of indirect US-Iran nuclear talks. Araghchi called it "a very good start" but "over for now." USS Abraham Lincoln carrier group in Arabian Sea during talks.',
+    source:'The Guardian, Al Jazeera'
+  },
+  {
+    date:'2026-02-18', airport:'LSGG', significance:'HIGH',
+    flights:[
+      {callsign:'SAM (est.)',origin:'United States',desc:'US delegation — 2nd round at Oman ambassador\'s Geneva residence'},
+      {callsign:'IFC (est.)',origin:'Iran',desc:'Iranian delegation — Araghchi reported "good progress" on guiding principles'},
+    ],
+    context:'Round 2 of indirect talks, Geneva. Core demands irreconcilable: US demanded zero Iranian enrichment; Iran categorically refused.',
+    source:'MEF, Wikipedia'
+  },
+  {
+    date:'2026-02-26', airport:'LSGG', significance:'HIGH',
+    flights:[
+      {callsign:'SAM (est.)',origin:'United States',desc:'US delegation — talks paused mid-session for US-Ukraine meeting'},
+      {callsign:'IFC (est.)',origin:'Iran',desc:'FM Araghchi said historic deal was "within reach"'},
+    ],
+    context:'Round 3 — last diplomatic round before military operations began. Talks held morning and evening. Final window before Feb 28 strikes.',
+    source:'Wikipedia US-Iran negotiations'
+  },
+  {
+    date:'2026-02-28', airport:'LLBG', significance:'CRITICAL',
+    flights:[
+      {callsign:'SAM (CANCELLED)',origin:'United States',desc:'Rubio\'s scheduled Israel meeting — cancelled. Operation began instead.'},
+    ],
+    context:'SecState Rubio\'s Netanyahu meeting never happened. US-Israel launched major combat operations against Iran on Feb 28. Diplomatic track expired entirely.',
+    source:'Middle East Forum'
+  },
+  {
+    date:'2026-03-23', airport:'OPKC', significance:'HIGH',
+    flights:[
+      {callsign:'PAF (est.)',origin:'Pakistan',desc:'Pakistan Army Chief Asim Munir + PM Sharif phone diplomacy with Iran — in-person meeting being organized'},
+    ],
+    context:'Islamabad emerging as venue for possible direct US-Iran talks within Trump\'s 5-day pause. Israeli official confirmed "contacts underway." JD Vance floated as US rep. No confirmed flight yet.',
+    source:'India Today, CBS News'
+  },
+];
 
-const DIPLOMATIC_CALLSIGNS = ['SAM','VENUS','EXEC','IRON','GAF','FAF','QAF','PAF','IRAF','SHB','UAE','RFO','CCA','CSH','SVR','RSD','TCG','IFC','OAF'];
+let map, activeAirports=new Set(Object.keys(AIRPORTS));
+let apMarkers={}, histMarkers=[], planeMarkers=[];
+let liveData={}, currentTab='live';
 
-let map, activeAirports = new Set(Object.keys(AIRPORTS));
-let markersByAirport = {};
-let planeMarkers = [];
-let allFlightData = {};
+// Init map
+map=L.map('map',{zoomControl:true}).setView([32,45],4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'OSM',maxZoom:18}).addTo(map);
 
-// Init map centered on Middle East
-map = L.map('map', { zoomControl:true }).setView([30, 45], 4);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution:'OpenStreetMap',
-  maxZoom:18
-}).addTo(map);
-
-// Build airport toggle buttons & markers
-const bar = document.getElementById('airport-bar');
-for (const [code, ap] of Object.entries(AIRPORTS)) {
-  // Toggle button
-  const btn = document.createElement('button');
-  btn.className = 'ap-toggle active';
-  btn.id = `toggle-${code}`;
-  btn.textContent = `${code} ${ap.name}`;
-  btn.style.borderColor = AIRPORT_COLORS[code];
-  btn.style.backgroundColor = AIRPORT_COLORS[code] + '22';
-  btn.style.color = AIRPORT_COLORS[code];
-  btn.onclick = () => toggleAirport(code);
+// Build airport toggles
+const bar=document.getElementById('airport-bar');
+for(const [code,ap] of Object.entries(AIRPORTS)){
+  const btn=document.createElement('button');
+  btn.className='ap-toggle active'; btn.id=`tog-${code}`;
+  btn.textContent=`${code} ${ap.name}`;
+  btn.style.cssText=`border-color:${COLORS[code]};background:${COLORS[code]}22;color:${COLORS[code]}`;
+  btn.onclick=()=>toggleAirport(code);
   bar.appendChild(btn);
 
-  // Airport marker on map
-  const icon = L.divIcon({
-    className:'',
-    html:`<div class="ap-marker inactive" style="width:36px;height:36px;border-color:${AIRPORT_COLORS[code]};color:${AIRPORT_COLORS[code]}">${code.slice(0,2)}</div>`,
-    iconSize:[36,36],
-    iconAnchor:[18,18]
-  });
-  const marker = L.marker([ap.lat, ap.lon], {icon})
-    .addTo(map)
-    .bindPopup(buildPopup(code, []));
-  markersByAirport[code] = marker;
+  const icon=L.divIcon({className:'',html:`<div class="ap-marker" style="width:34px;height:34px;border-color:${COLORS[code]};color:${COLORS[code]}">${code.slice(0,2)}</div>`,iconSize:[34,34],iconAnchor:[17,17]});
+  apMarkers[code]=L.marker([ap.lat,ap.lon],{icon}).addTo(map).bindPopup('');
 }
 
-function buildPopup(code, flights) {
-  const ap = AIRPORTS[code];
-  const govFlights = flights.filter(f => isDiplomatic(f[1]));
-  let flightHtml = '';
-  if (govFlights.length) {
-    flightHtml = govFlights.map(f => {
-      const cs = (f[1]||'?').trim();
-      const status = f[8] ? 'on ground' : `alt ${Math.round(f[7]||0)}m`;
-      return `<div>✈ <b>${cs}</b> — ${f[2]||'?'} — ${status}</div>`;
-    }).join('');
-  } else {
-    flightHtml = '<div class="popup-no-flights">No diplomatic aircraft detected</div>';
-  }
-  return `<div class="ap-popup">
-    <h4>${ap.name} (${code})</h4>
-    <div class="popup-context">${ap.context}</div>
-    <div class="popup-flights">${flightHtml}</div>
-  </div>`;
+function isDiplomatic(cs){
+  if(!cs)return false;
+  const u=cs.trim().toUpperCase();
+  return GOV_CS.some(p=>u.startsWith(p));
 }
 
-function isDiplomatic(callsign) {
-  if (!callsign) return false;
-  const cs = callsign.trim().toUpperCase();
-  return DIPLOMATIC_CALLSIGNS.some(p => cs.startsWith(p));
-}
-
-function toggleAirport(code) {
-  if (activeAirports.has(code)) {
+function toggleAirport(code){
+  const btn=document.getElementById(`tog-${code}`);
+  if(activeAirports.has(code)){
     activeAirports.delete(code);
-    document.getElementById(`toggle-${code}`).classList.remove('active');
-    document.getElementById(`toggle-${code}`).style.color = '#555';
-    document.getElementById(`toggle-${code}`).style.backgroundColor = '#1a1a1a';
-  } else {
+    btn.style.cssText='border-color:#444;background:#1a1a1a;color:#555';
+  }else{
     activeAirports.add(code);
-    document.getElementById(`toggle-${code}`).classList.add('active');
-    document.getElementById(`toggle-${code}`).style.color = AIRPORT_COLORS[code];
-    document.getElementById(`toggle-${code}`).style.backgroundColor = AIRPORT_COLORS[code] + '22';
+    btn.style.cssText=`border-color:${COLORS[code]};background:${COLORS[code]}22;color:${COLORS[code]}`;
   }
-  renderSidebar();
-  updateMapMarkers();
+  render();
 }
 
-let allActive = true;
-function toggleAll() {
-  allActive = !allActive;
-  for (const code of Object.keys(AIRPORTS)) {
-    const btn = document.getElementById(`toggle-${code}`);
-    if (allActive) {
-      activeAirports.add(code);
-      btn.classList.add('active');
-      btn.style.color = AIRPORT_COLORS[code];
-      btn.style.backgroundColor = AIRPORT_COLORS[code] + '22';
-    } else {
-      activeAirports.delete(code);
-      btn.classList.remove('active');
-      btn.style.color = '#555';
-      btn.style.backgroundColor = '#1a1a1a';
-    }
+let allOn=true;
+function toggleAll(){
+  allOn=!allOn;
+  for(const code of Object.keys(AIRPORTS)){
+    const btn=document.getElementById(`tog-${code}`);
+    if(allOn){activeAirports.add(code);btn.style.cssText=`border-color:${COLORS[code]};background:${COLORS[code]}22;color:${COLORS[code]}`;}
+    else{activeAirports.delete(code);btn.style.cssText='border-color:#444;background:#1a1a1a;color:#555';}
   }
-  renderSidebar();
-  updateMapMarkers();
+  document.getElementById('toggle-all').textContent=allOn?'ALL ON':'ALL OFF';
+  render();
 }
 
-async function fetchAirport(code) {
-  const b = BBOX[code];
-  const url = `https://opensky-network.org/api/states/all?lamin=${b[0]}&lomin=${b[1]}&lamax=${b[2]}&lomax=${b[3]}`;
-  try {
-    const r = await fetch(url);
-    if (!r.ok) return [];
-    const data = await r.json();
-    return data.states || [];
-  } catch { return []; }
+function switchTab(tab){
+  currentTab=tab;
+  document.getElementById('tab-live').classList.toggle('active',tab==='live');
+  document.getElementById('tab-history').classList.toggle('active',tab==='history');
+  document.getElementById('sidebar-label').textContent=tab==='live'?'LIVE DIPLOMATIC ACTIVITY':'HISTORICAL FLIGHT RECORD';
+  render();
 }
 
-async function loadData() {
-  document.getElementById('last-updated').textContent = 'Refreshing...';
-  document.getElementById('api-status').textContent = 'API: Fetching...';
-  document.getElementById('api-status').className = 'warn';
-
-  allFlightData = {};
-  let totalGov = 0, totalAll = 0;
-
-  // Fetch all airports in parallel (browser handles rate limiting gracefully)
-  const results = await Promise.allSettled(
-    Object.keys(AIRPORTS).map(async code => {
-      const states = await fetchAirport(code);
-      allFlightData[code] = states;
-      return { code, states };
-    })
-  );
-
-  for (const r of results) {
-    if (r.status === 'fulfilled') {
-      const { code, states } = r.value;
-      const gov = states.filter(s => isDiplomatic(s[1]));
-      totalGov += gov.length;
-      totalAll += states.length;
-    }
-  }
-
-  document.getElementById('gov-count').textContent = `Gov/Diplomatic: ${totalGov}`;
-  document.getElementById('total-count').textContent = `Total tracked: ${totalAll}`;
-  document.getElementById('api-status').textContent = 'API: OK';
-  document.getElementById('api-status').className = 'ok';
-  document.getElementById('last-updated').textContent = `Updated: ${new Date().toUTCString()}`;
-
-  renderSidebar();
-  updateMapMarkers();
+async function fetchAirport(code){
+  const b=BBOX[code];
+  try{
+    const r=await fetch(`https://opensky-network.org/api/states/all?lamin=${b[0]}&lomin=${b[1]}&lamax=${b[2]}&lomax=${b[3]}`);
+    if(!r.ok)return[];
+    const d=await r.json();
+    return d.states||[];
+  }catch{return[];}
 }
 
-function renderSidebar() {
-  const feed = document.getElementById('alert-feed');
-  const cards = [];
-
-  for (const code of Object.keys(AIRPORTS)) {
-    if (!activeAirports.has(code)) continue;
-    const states = allFlightData[code] || [];
-    const govFlights = states.filter(s => s[8] !== false || !s[7] || s[7] < 2000).filter(s => isDiplomatic(s[1]));
-
-    for (const f of govFlights) {
-      const cs = (f[1]||'?').trim();
-      const origin = f[2] || 'Unknown';
-      const status = f[8] ? 'On ground' : `Alt ${Math.round(f[7]||0)}m`;
-      const ap = AIRPORTS[code];
-      cards.push(`<div class="alert-card gov">
-        <div class="ac-airport" style="color:${AIRPORT_COLORS[code]}">${ap.name} (${code}) — ${ap.country}</div>
-        <div class="ac-callsign">${cs}</div>
-        <div class="ac-meta">Origin: ${origin}<br>Status: ${status}</div>
-        <div class="ac-context">${ap.context}</div>
-      </div>`);
-    }
-  }
-
-  if (cards.length === 0) {
-    feed.innerHTML = '<div class="no-alerts">No diplomatic aircraft<br>currently detected<br><br><span style="color:#444">Monitoring all active airports</span></div>';
-  } else {
-    feed.innerHTML = cards.join('');
-  }
+async function loadLive(){
+  document.getElementById('last-updated').textContent='Refreshing live data...';
+  document.getElementById('api-status').textContent='API: Fetching...';
+  document.getElementById('api-status').className='warn';
+  liveData={};
+  let govCount=0;
+  const results=await Promise.allSettled(Object.keys(AIRPORTS).map(async code=>{
+    const states=await fetchAirport(code);
+    liveData[code]=states;
+    govCount+=states.filter(s=>isDiplomatic(s[1])&&(s[8]||!s[7]||s[7]<2000)).length;
+    return code;
+  }));
+  document.getElementById('gov-count').textContent=`Gov/Diplomatic: ${govCount}`;
+  document.getElementById('api-status').textContent='API: OK';
+  document.getElementById('api-status').className='ok';
+  document.getElementById('last-updated').textContent=`Live: ${new Date().toUTCString()}`;
+  render();
 }
 
-function updateMapMarkers() {
-  // Clear old plane markers
-  for (const m of planeMarkers) map.removeLayer(m);
-  planeMarkers = [];
+function render(){
+  // Clear plane/hist markers
+  for(const m of planeMarkers)map.removeLayer(m);
+  planeMarkers=[];
+  for(const m of histMarkers)map.removeLayer(m);
+  histMarkers=[];
 
-  for (const [code, ap] of Object.entries(AIRPORTS)) {
-    const states = allFlightData[code] || [];
-    const govFlights = states.filter(s => isDiplomatic(s[1]));
-    const isActive = activeAirports.has(code);
-    const color = AIRPORT_COLORS[code];
+  if(currentTab==='live') renderLive();
+  else renderHistory();
+}
 
-    // Update airport marker style
-    const markerClass = govFlights.length > 0 ? 'ap-marker active-gov' : (isActive ? 'ap-marker active' : 'ap-marker inactive');
-    const markerColor = isActive ? color : '#444';
-    const icon = L.divIcon({
-      className:'',
-      html:`<div class="${markerClass}" style="width:36px;height:36px;border-color:${markerColor};color:${markerColor}">${code.slice(0,2)}</div>`,
-      iconSize:[36,36],
-      iconAnchor:[18,18]
-    });
-    markersByAirport[code].setIcon(icon);
-    markersByAirport[code].setPopupContent(buildPopup(code, states));
+function renderLive(){
+  const feed=document.getElementById('alert-feed');
+  const cards=[];
+  let totalGov=0;
 
-    if (!isActive) continue;
+  for(const [code,ap] of Object.entries(AIRPORTS)){
+    const states=liveData[code]||[];
+    const gov=states.filter(s=>isDiplomatic(s[1])&&(s[8]||!s[7]||s[7]<2000));
+    const active=activeAirports.has(code);
 
-    // Add plane icons for gov flights on/near ground
-    for (const f of govFlights) {
-      const lat = f[6], lon = f[5];
-      if (!lat || !lon) continue;
-      const onGround = f[8];
-      const cs = (f[1]||'?').trim();
-      const origin = f[2] || '?';
-      const status = onGround ? 'On ground' : `Alt ${Math.round(f[7]||0)}m`;
+    // Update airport marker
+    const hasLive=gov.length>0;
+    const markerHtml=`<div class="ap-marker ${hasLive?'has-live':''}" style="width:34px;height:34px;border-color:${active?COLORS[code]:'#333'};color:${active?COLORS[code]:'#444'}">${code.slice(0,2)}</div>`;
+    apMarkers[code].setIcon(L.divIcon({className:'',html:markerHtml,iconSize:[34,34],iconAnchor:[17,17]}));
 
-      const planeIcon = L.divIcon({
-        className:'',
-        html:`<div class="plane-marker" title="${cs}">✈</div>`,
-        iconSize:[24,24], iconAnchor:[12,12]
+    // Build popup
+    let popHtml=`<div class="ap-popup"><h4 style="color:${COLORS[code]}">${ap.name} (${code})</h4><div class="pctx">${ap.context}</div>`;
+    if(gov.length){
+      gov.forEach(f=>{
+        const cs=(f[1]||'?').trim(), status=f[8]?'on ground':`alt ${Math.round(f[7]||0)}m`;
+        popHtml+=`<div class="pflight"><b>${cs}</b> — ${f[2]||'?'}<br><span class="pdate">${status}</span></div>`;
       });
-      const pm = L.marker([lat, lon], {icon: planeIcon})
+    }else{
+      popHtml+=`<div style="color:#555;font-size:10px;margin-top:4px">No diplomatic aircraft currently</div>`;
+    }
+    popHtml+='</div>';
+    apMarkers[code].setPopupContent(popHtml);
+
+    if(!active) continue;
+
+    // Plane icons on map
+    for(const f of gov){
+      const lat=f[6],lon=f[5];
+      if(!lat||!lon) continue;
+      const pm=L.marker([lat,lon],{icon:L.divIcon({className:'',html:`<div class="hist-pin" title="${(f[1]||'').trim()}">✈</div>`,iconSize:[22,22],iconAnchor:[11,11]})})
         .addTo(map)
-        .bindPopup(`<div class="ap-popup"><h4>${cs}</h4><div>Origin: ${origin}</div><div>Status: ${status}</div><div>Airport: ${ap.name}</div></div>`);
+        .bindPopup(`<div class="ap-popup"><h4>${(f[1]||'?').trim()}</h4><div>Origin: ${f[2]||'?'}</div><div>${f[8]?'On ground':`Alt ${Math.round(f[7]||0)}m`}</div></div>`);
       planeMarkers.push(pm);
     }
+
+    if(gov.length){
+      totalGov+=gov.length;
+      gov.forEach(f=>{
+        const cs=(f[1]||'?').trim();
+        cards.push(`<div class="alert-card sig-live" onclick="map.setView([${ap.lat},${ap.lon}],10)">
+          <div class="ac-date">LIVE — ${new Date().toUTCString().slice(0,16)}<span class="sig-badge LIVE">LIVE</span></div>
+          <div class="ac-airport" style="color:${COLORS[code]}">${ap.name} (${code}) — ${ap.country}</div>
+          <div class="ac-flights"><div class="ac-flight-row"><span class="ac-callsign">${cs}</span><span class="ac-origin">Origin: ${f[2]||'?'} — ${f[8]?'on ground':`alt ${Math.round(f[7]||0)}m`}</span></div></div>
+          <div class="ac-context">${ap.context}</div>
+        </div>`);
+      });
+    }
+  }
+
+  document.getElementById('feed-count').textContent=totalGov?`${totalGov} detected`:'';
+  feed.innerHTML=cards.length
+    ? cards.join('')
+    : `<div class="no-alerts">No diplomatic aircraft currently detected<br><br><span style="color:#444">All 8 airports monitored<br>Auto-refreshes every 5 min</span></div>`;
+}
+
+function renderHistory(){
+  const feed=document.getElementById('alert-feed');
+  // Hide airport markers (keep visible but no glow)
+  for(const [code,ap] of Object.entries(AIRPORTS)){
+    const active=activeAirports.has(code);
+    apMarkers[code].setIcon(L.divIcon({className:'',html:`<div class="ap-marker" style="width:34px;height:34px;border-color:${active?COLORS[code]:'#333'};color:${active?COLORS[code]:'#444'};opacity:0.5">${code.slice(0,2)}</div>`,iconSize:[34,34],iconAnchor:[17,17]}));
+    apMarkers[code].setPopupContent('');
+  }
+
+  const visible=HISTORY.filter(e=>activeAirports.has(e.airport));
+  document.getElementById('feed-count').textContent=`${visible.length} events`;
+
+  const cards=visible.map(e=>{
+    const ap=AIRPORTS[e.airport];
+    const color=COLORS[e.airport];
+    const sigClass=e.significance==='CRITICAL'?'sig-critical':'sig-high';
+    const flightRows=e.flights.map(f=>`<div class="ac-flight-row"><span class="ac-callsign">${f.callsign}</span><span class="ac-origin">${f.origin} — ${f.desc}</span></div>`).join('');
+    return `<div class="alert-card ${sigClass}" onclick="map.setView([${ap.lat},${ap.lon}],8)">
+      <div class="ac-date">${e.date}<span class="sig-badge ${e.significance}">${e.significance}</span></div>
+      <div class="ac-airport" style="color:${color}">${ap.name} (${e.airport}) — ${ap.country}</div>
+      <div class="ac-flights">${flightRows}</div>
+      <div class="ac-context">${e.context}<br><span style="color:#444">Source: ${e.source}</span></div>
+    </div>`;
+  });
+
+  feed.innerHTML=cards.length
+    ? cards.join('')
+    : `<div class="no-alerts">No historical events for<br>selected airports</div>`;
+
+  // Add history pins to map
+  for(const e of visible){
+    const ap=AIRPORTS[e.airport];
+    const color=e.significance==='CRITICAL'?'#ff4444':'#ffaa00';
+    // Offset slightly so multiple events at same airport stack
+    const offset=(HISTORY.filter(x=>x.airport===e.airport).indexOf(e))*0.04;
+    const pm=L.marker([ap.lat+offset,ap.lon],{
+      icon:L.divIcon({
+        className:'',
+        html:`<div style="font-size:18px;cursor:pointer;filter:drop-shadow(0 0 3px ${color})" title="${e.date}: ${e.flights[0].callsign}">📍</div>`,
+        iconSize:[22,22],iconAnchor:[11,22]
+      })
+    }).addTo(map).bindPopup(`<div class="ap-popup">
+      <h4 style="color:${color}">${e.date} — ${ap.name}</h4>
+      <div class="pctx">${e.significance} significance</div>
+      ${e.flights.map(f=>`<div class="pflight"><b>${f.callsign}</b> (${f.origin})<br><span class="pdate">${f.desc}</span></div>`).join('')}
+      <div style="margin-top:6px;font-size:10px;color:#666;font-style:italic">${e.context}</div>
+      <div style="margin-top:4px;font-size:10px;color:#444">Source: ${e.source}</div>
+    </div>`);
+    histMarkers.push(pm);
   }
 }
 
-// Auto-refresh every 5 minutes
-loadData();
-setInterval(loadData, 5 * 60 * 1000);
+// Auto-refresh live every 5 min
+loadLive();
+setInterval(()=>{ if(currentTab==='live') loadLive(); }, 5*60*1000);
 </script>
 </body>
 </html>

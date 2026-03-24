@@ -1,0 +1,83 @@
+{
+  "generated": "2026-03-24T00:35:00Z",
+  "note": "Curated from open-source reporting: The War Zone, Wikipedia, Reuters, Guardian, Al Jazeera, CBS News",
+  "events": [
+    {
+      "date": "2025-06-18",
+      "airport": "OOMS",
+      "airportName": "Muscat",
+      "country": "Oman",
+      "flights": [
+        { "callsign": "JJ25", "registration": "EP-IGA", "type": "Airbus A340", "origin": "Iran", "description": "Iranian presidential aircraft (A340, reg EP-IGA) — used by President Pezeshkian. Flew to Muscat amid Israeli escalation and US entry speculation." },
+        { "callsign": "JJ26", "registration": "EP-IBB", "type": "Airbus A321", "origin": "Iran", "description": "Iranian government A321. Part of 3-plane delegation to Muscat." },
+        { "callsign": "JJ28", "registration": "EP-IBC", "type": "Airbus A321", "origin": "Iran", "description": "Iranian government A321. Part of 3-plane delegation to Muscat. Possible 4th aircraft also reported by ATC." }
+      ],
+      "significance": "CRITICAL",
+      "context": "Iran's largest diplomatic aircraft movement of the conflict. 3 government planes to Muscat came days before US directly entered the war. Widely interpreted as Iran seeking a negotiated off-ramp via Oman.",
+      "source": "The War Zone, June 18 2025"
+    },
+    {
+      "date": "2026-02-06",
+      "airport": "OOMS",
+      "airportName": "Muscat",
+      "country": "Oman",
+      "flights": [
+        { "callsign": "SAM (est.)", "registration": null, "type": "US Government", "origin": "United States", "description": "US negotiating team including envoy Steve Witkoff flew to Muscat for first round of indirect US-Iran nuclear talks." },
+        { "callsign": "IFC (est.)", "registration": null, "type": "Iranian Government", "origin": "Iran", "description": "Iranian delegation including FM Araghchi flew to Muscat. Indirect talks mediated by Omani FM Badr Al Busaidi." }
+      ],
+      "significance": "HIGH",
+      "context": "Round 1 of indirect US-Iran nuclear talks. Iran FM Araghchi said talks were 'a very good start' but 'over for now'. US carrier strike group USS Abraham Lincoln in Arabian Sea during talks.",
+      "source": "The Guardian, Al Jazeera, Feb 6 2026"
+    },
+    {
+      "date": "2026-02-18",
+      "airport": "LSGG",
+      "airportName": "Geneva",
+      "country": "Switzerland",
+      "flights": [
+        { "callsign": "SAM (est.)", "registration": null, "type": "US Government", "origin": "United States", "description": "US delegation flew to Geneva for 2nd round of indirect nuclear talks at Oman ambassador's residence." },
+        { "callsign": "IFC (est.)", "registration": null, "type": "Iranian Government", "origin": "Iran", "description": "Iranian delegation to Geneva for 2nd round. FM Araghchi reported 'good progress' on guiding principles." }
+      ],
+      "significance": "HIGH",
+      "context": "Round 2 of indirect talks, Geneva. FM Araghchi reported 'good progress' on guiding principles but core demands irreconcilable — US demanded zero enrichment on Iranian soil, Iran refused categorically.",
+      "source": "MEF, Wikipedia, Feb 18 2026"
+    },
+    {
+      "date": "2026-02-26",
+      "airport": "LSGG",
+      "airportName": "Geneva",
+      "country": "Switzerland",
+      "flights": [
+        { "callsign": "SAM (est.)", "registration": null, "type": "US Government", "origin": "United States", "description": "US delegation to Geneva. Talks paused mid-session as American negotiators met a Ukrainian delegation." },
+        { "callsign": "IFC (est.)", "registration": null, "type": "Iranian Government", "origin": "Iran", "description": "Iranian delegation. FM Araghchi stated a 'historic' agreement was 'within reach' — talks held morning and evening." }
+      ],
+      "significance": "HIGH",
+      "context": "Round 3 of indirect talks at Oman's UN Geneva residence. FM Araghchi said historic deal 'within reach'. Talks paused for US-Ukraine meeting. Last diplomatic round before military preparations overtook the process.",
+      "source": "Wikipedia 2025-2026 Iran-US negotiations"
+    },
+    {
+      "date": "2026-02-28",
+      "airport": "LLBG",
+      "airportName": "Tel Aviv",
+      "country": "Israel",
+      "flights": [
+        { "callsign": "SAM (cancelled)", "registration": null, "type": "US Government", "origin": "United States", "description": "SecState Rubio's scheduled flight to Israel for Netanyahu meeting — CANCELLED. Operation began instead." }
+      ],
+      "significance": "CRITICAL",
+      "context": "Rubio's Israel meeting never happened — US-Israel launched major combat operations against Iran on Feb 28 instead. Diplomatic track expired entirely.",
+      "source": "Middle East Forum"
+    },
+    {
+      "date": "2026-03-23",
+      "airport": "OPKC",
+      "airportName": "Islamabad",
+      "country": "Pakistan",
+      "flights": [
+        { "callsign": "PAF (est.)", "registration": null, "type": "Pakistani Government", "origin": "Pakistan", "description": "Pakistan Army Chief Field Marshal Asim Munir and PM Shehbaz Sharif conducting phone diplomacy with Iran's Pezeshkian. In-person Islamabad meeting being organized." }
+      ],
+      "significance": "HIGH",
+      "context": "Islamabad emerging as venue for possible direct US-Iran talks within Trump's 5-day pause window. Israeli official confirmed 'contacts are underway'. JD Vance floated as US representative. No confirmed flight yet — tracker watching.",
+      "source": "India Today, CBS News, ABC7, Mar 23 2026"
+    }
+  ]
+}
