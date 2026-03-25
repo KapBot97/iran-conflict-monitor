@@ -1,11 +1,11 @@
 {
-  "last_brent_price": 104.49,
-  "last_wti_price": 93.00,
-  "last_brief_type": "evening",
-  "last_brief_timestamp": "2026-03-24T21:00:00.000Z",
+  "last_brent_price": 100.54,
+  "last_wti_price": 87.00,
+  "last_brief_type": "morning",
+  "last_brief_timestamp": "2026-03-25T15:30:00.000Z",
   "key_developments": [
-    "Iran notified IMO that 'non-hostile vessels' may transit Strait of Hormuz if coordinated with Tehran — Trump called this a 'very big present' related to oil/gas/Hormuz; traffic still ~3-4 vs 130+ vessels/day pending operational verification",
-    "Iranian IRBM with cluster munition warhead struck Bnei Brak, central Israel — multiple residential structures partially collapsed, IDF SAR deployed; IRGC also announced Bushehr nuclear plant grounds struck (Iran/Russia allege US/Israeli origin, IAEA unconfirmed)",
-    "Trump declared 'regime change' and claimed Iran agreed 'never' to have nuclear weapon — zero Iranian confirmation; Pakistan/Egypt/Turkey mediating with Islamabad high-level talks targeted for Thursday, awaiting Tehran response from new Supreme Leader Mojtaba Khamenei"
+    "Iran formally rejected Trump's 15-point ceasefire proposal as 'excessive' and counter-proposed US war reparations plus international recognition of Iranian sovereignty over the Strait of Hormuz — diplomatic window from 5-day power-plant strike pause effectively closed",
+    "Rosatom evacuated additional 163 staff from Bushehr nuclear plant (300 remain), chief warns of 'worst-case scenario' after reported strike on plant grounds — IAEA nuclear escalation risk elevated",
+    "UAE intercepted 9 Iranian one-way attack drones on March 25 — first Iranian strike on UAE in nearly 4 weeks; Brent dropped to $100.54 (-3.8% from last brief) on jawboning optimism despite near-zero Hormuz traffic (~2-3% normal throughput)"
   ]
 }
