@@ -1,11 +1,11 @@
 {
-  "last_brent_price": 100.54,
-  "last_wti_price": 87.00,
+  "last_brent_price": 112.57,
+  "last_wti_price": 99.64,
   "last_brief_type": "morning",
-  "last_brief_timestamp": "2026-03-25T15:30:00.000Z",
+  "last_brief_timestamp": "2026-03-29T15:31:00.000Z",
   "key_developments": [
-    "Iran formally rejected Trump's 15-point ceasefire proposal as 'excessive' and counter-proposed US war reparations plus international recognition of Iranian sovereignty over the Strait of Hormuz — diplomatic window from 5-day power-plant strike pause effectively closed",
-    "Rosatom evacuated additional 163 staff from Bushehr nuclear plant (300 remain), chief warns of 'worst-case scenario' after reported strike on plant grounds — IAEA nuclear escalation risk elevated",
-    "UAE intercepted 9 Iranian one-way attack drones on March 25 — first Iranian strike on UAE in nearly 4 weeks; Brent dropped to $100.54 (-3.8% from last brief) on jawboning optimism despite near-zero Hormuz traffic (~2-3% normal throughput)"
+    "Pentagon confirmed preparations for 'weeks of ground operations' in Iran as Iran parliament speaker Ghalibaf declared forces 'waiting for US ground troops to set them on fire' — 5-day power-plant pause lapsed with zero diplomatic progress; Islamabad summit underway (Saudi/Egypt/Turkey/Pakistan FMs) but no US or Iran principals present, ceasefire probability before April 6 deadline below 15%",
+    "Brent surged to $112.57 (+11.9% from $100.54 at last brief, +51.3% vs pre-war) and WTI crossed $100 intraday for first time since 2022 — Goldman estimates $14-18/bbl geopolitical premium; Kharg Island loading 5 tankers (7.73 mb), Iran-China corridor intact; Hormuz ~52% throughput via bypasses; Trump extended Hormuz reopening deadline to April 6",
+    "DELTA escalations: Houthis entered conflict firing missiles at Israel (new front, Red Sea threat); Kuwait first confirmed military casualties (10 injured in Iranian missile strike); US E-3G AWACS destroyed at Prince Sultan Air Base March 27; hazmat emergency at Neot Hovav chemical facility in southern Israel after Iranian ballistic missile strike"
   ]
 }
