@@ -1,0 +1,87 @@
+IRAN CONFLICT INTELLIGENCE BRIEF
+MORNING | MARCH 30, 2026 | DAY 31
+
+EXECUTIVE SUMMARY
+The conflict entered Day 31 with Trump issuing his most expansive threat yet — publicly threatening to destroy Iran's oil wells, Kharg Island, all power plants, and "possibly" desalination infrastructure if a deal is not reached "shortly," a marked escalation from prior power-plant ultimatums. Brent crude moved to $115.35 (+$2.78 vs last evening brief at $112.57) on the rhetoric, with the Kharg Island threat adding a new destruction-of-supply dimension the market had not fully priced. Overnight strikes hit Tehran power infrastructure (blackout since restored), Karaj, Tabriz petrochemical (fire contained), Shiraz, Qom, and Abadan. The diplomatic window via Pakistan remains open but structurally thin — Israel publicly confirmed it will not pause strikes ahead of any US-Iran talks, and Iran's parliament speaker accused Washington of planning a ground invasion while publicly "negotiating."
+
+SITUATION BY THEATER
+- IRAN MAINLAND: Overnight IDF strikes hit Tehran power infrastructure causing multi-hour blackout (since restored per Iranian authorities); explosions confirmed in Ray (Greater Tehran metro), Karaj, Shiraz, Qom, Abadan, and Tabriz — Tabriz petrochemical plant caught fire, contained per Fars. IDF separately struck an IRGC-affiliated university in Tehran on Monday, claiming it was used for advanced weapons research. IRGC retaliatory deadline for US/Israeli universities in region was 12:00 noon Tehran time Monday (passed without confirmed strike). Two MEK-linked individuals executed. Iran internet blackout now 30 consecutive days. Trump told FT he wants to "take the oil in Iran" and could seize Kharg Island; claimed Iran has already undergone "regime change" with Khamenei's death. DELTA: Trump's desalination/oil-wells/Kharg threat is new — prior scope was limited to power plants. BLU-91/B Gator anti-tank mines reportedly found near Shiraz villages, assessed by analysts as IAF-dispersed (single-source, see confidence).
+
+- ISRAEL/NORTHERN FRONT: IDF continued Beirut southern suburb strikes, ordering civilian evacuations, claiming Hezbollah military targets. Iraq Baghdad airport area: blasts reported from capital. Iran-backed Houthis have entered the conflict firing missiles at Israel. ADAMA (Syngenta subsidiary) Makhteshim plant in southern Israel hit by Iranian missile or debris — no casualties. Israel vowing to seize additional Lebanon territory. Cumulative death toll: 2,000+ across the region; Iran alone 1,200+ killed per Iranian Red Crescent.
+
+- GULF STATES: UAE cumulative: 414 ballistic missiles, 15 cruise missiles, 1,914 UAVs engaged since Feb 28 — Sunday alone saw 16 ballistic missiles + 42 drones intercepted. Two UAE military, one Moroccan contractor, eight civilians killed total; 178 injured. UAE Minister called for full Arab League solidarity or "paralysis." Saudi Arabia: 5 ballistic missiles headed toward Eastern Province intercepted March 30. Saudi FM joined emergency GCC-Russia-Jordan video conference on Iranian attacks. Kuwait: power/desalination plant struck in what Kuwait called "sinful Iranian aggression" — one Indian worker killed. Bahrain: third siren activation in four hours. Emirati minister calling for Iran accountability and material damages. DELTA: Kuwait infrastructure confirmed hit; Saudi intercept count rising; GCC-Russia consultative meeting is new.
+
+- STRAIT OF HORMUZ: Traffic remains severely depressed — tanker transits running approximately 2 per day (TankerTrackers), roughly 70% below pre-conflict norms. Half of transiting vessels carry Iranian oil/refined products — Iran is effectively running a selective "toll booth" on Hormuz, charging some vessels millions to transit. 150+ ships anchoring outside strait. A slight uptick in transits late last week did not hold. Iran has made 21+ confirmed attacks on merchant ships as of mid-March. "Tehran toll booth" dynamic means even nominal transits carry seizure/extortion risk. DELTA: No material improvement in traffic; Iran's selective passage policy entrenches asymmetry.
+
+- IRAQ/PROXY THEATER: Baghdad airport area reported blasts Monday. Russia providing satellite imagery of US-UK Diego Garcia base, Incirlik (Turkey), Al Udeid (Qatar), and Shaybah oil field (Saudi Arabia) to Iran per ISW/WaPo reporting — suggesting Russia actively enabling Iranian targeting. PMF and Iraqi proxy activity ongoing. US has now struck 4 key Iranian ballistic missile production facilities and 29 missile launch bases cumulatively.
+
+DIPLOMATIC TRACK
+Status: Active but low-credibility. Pakistan hosted Gulf+Turkey/Egypt FM summit Sunday and is preparing to host "meaningful US-Iran talks in coming days" in Islamabad. Pakistani FM Ishaq Dar confirmed talks covered ceasefire pathways. Iran has submitted a five-point counter-proposal to the US plan; Iranian FM described US ceasefire terms as "one-sided and unfair." Tehran simultaneously accuses Washington of planning a ground invasion. Israel publicly confirmed via unnamed official to Reuters that it will NOT scale back strikes ahead of any potential Washington-Tehran dialogue. Trump said Sunday "We'll make a deal, I'm pretty sure" while hours later threatening to obliterate Kharg Island. Spain banning US military aircraft from Rota/Moron bases and closing airspace to Operation Epic Fury planes — forcing relocation of 15 US aircraft, creating minor NATO friction. EU extended human rights sanctions on Iran. ASSESSMENT: Talks remain structurally blocked. No mechanism, no agreed mediator, no Iranian principal willing to negotiate. Pakistan channel is the only live wire; probability of a ceasefire framework before April 6 remains below 10%.
+
+ENERGY INFRASTRUCTURE
+- Brent: $115.35 (vs $112.57 at last evening brief, +$2.78 / +2.5%; est. +70%+ since pre-war ~$67-68)
+- WTI: $102.85 (vs $99.64 at last evening brief, +$3.21 / +3.2%)
+- Hormuz: ~2 tankers/day transiting (~30% of pre-conflict volume); 150+ ships anchored in Gulf of Oman; Iran running toll-booth selective passage; no normalization in sight
+- Qatar LNG: Al Udeid airbase targeted per Russian satellite tasking for Iran; Qatar LNG export infrastructure not directly struck but regional risk premium elevated; Qatar participating in GCC solidarity statement
+- Primorsk/Russian exports: Ust-Luga Baltic terminal struck by Ukrainian drone (Mar 29, fire contained); ~500k b/d Russian export risk adds upside tail. Spain denying US bases for Operation Epic Fury creates B-52 and tanker routing complications. Tabriz petrochemical plant fire (contained) adds marginal Iranian supply disruption.
+- Kharg Island: Trump explicitly threatened destruction of Kharg in FT interview and Truth Social post — Kharg handles 90%+ of Iran's crude exports; market has not yet fully priced a Kharg destruction scenario (+$15-25/bbl range at full destruction).
+
+MARKET IMPLICATIONS
+- Brent upside scenario: Trump's Kharg Island + oil wells threat, if executed, would remove 1.5-2.0 mb/d of Iranian exports permanently and push Brent toward $130-140; current $115 reflects partial pricing of that tail — watch for any Trump operational order or IDF asset repositioning toward Kharg as the trigger.
+- Demand destruction emerging: JavierBlas/Bloomberg analysis flags demand destruction beginning to bite at $115 Brent — industrial demand slowdown in Asia, IEA emergency reserve releases ongoing; ceiling may be $125-130 before demand-side cap limits further upside absent Hormuz full closure or Kharg destruction.
+- Rate/equities: Stagflationary impulse intensifying — energy-driven CPI spike plus slowing global trade (Hormuz chokehold, Spain-US NATO friction) complicates Fed path; defense/energy overweight vs consumer discretionary/airlines remains the positioning call; sovereign credit stress in energy-import-dependent EMs (India, Pakistan, Bangladesh) widening.
+
+SEMICONDUCTOR / SUPPLY CHAIN
+- Helium: Qatar is the world's second-largest helium producer; Al Udeid base targeting (Russian satellite imagery) and ongoing regional instability elevates supply disruption risk for semiconductor fabs reliant on Qatari helium — no confirmed Qatar LNG/helium infrastructure strike yet but the targeting intelligence is live.
+- Qatar LNG: Major chipmakers (TSMC, Samsung, SK Hynix) rely on stable LNG supply chains through Qatar; any Qatar infrastructure strike would ripple into Asian power costs within 60-90 days.
+- Global shipping: Hormuz disruption has already extended Asian manufacturing input lead times; Apple, automotive, and specialty chemical supply chains absorbing 3-6 week delays on Gulf-routed components.
+- Spain/US basing friction: Rota/Moron denial forces B-52 and ISR rerouting through UK/Diego Garcia, adding operational complexity but not degrading strike capability materially.
+
+CONFIDENCE ASSESSMENT
+HIGH CONFIDENCE: Trump threatened Kharg Island/oil wells/desalination publicly (Truth Social + FT interview); Brent at $115.35, WTI $102.85; NATO intercepted 4th Iranian ballistic missile in Turkish airspace today (Reuters/Bloomberg confirmed); UAE cumulative 414 BMs/1,914 UAVs engaged; Israel struck IRGC university in Tehran; Kuwait power/desalination plant hit, one Indian worker killed; Spain closed Rota/Moron to Operation Epic Fury aircraft; Tabriz petrochemical fire (contained); Pakistan pursuing Islamabad talks.
+MEDIUM CONFIDENCE: Trump intends Kharg Island seizure as a military objective (FT interview context suggests serious planning, not just rhetoric); Russia providing Iran with satellite targeting data for US/GCC bases (ISW sourcing, corroborated by Zelensky statement); Brent repricing toward $120+ if Kharg threat is operationalized within 72 hours; IDF will not pause strikes ahead of Pakistan-mediated talks (unnamed Israeli official to Reuters).
+LOW CONFIDENCE: BLU-91/B anti-tank mines near Shiraz dispersed by IAF (BabakTaghvaee single-source, unverified by second outlet); Trump claim that Iran has already undergone "regime change" (self-serving framing, no corroboration of leadership succession); IRGC retaliation against US/Israeli universities in region (deadline passed without confirmed strike as of brief time).
+
+WHAT TO WATCH (NEXT 12H)
+1. IRGC UNIVERSITY RETALIATION WINDOW: IRGC's noon-Tehran deadline for US/Israeli university strikes passed — any confirmed strike on AUB, AUC, or similar regional campus would be a major escalation signal triggering immediate equity and oil reaction; monitor OSINT/CENTCOM force protection advisories.
+2. KHARG ISLAND ASSET POSITIONING: Watch for satellite imagery of IDF F-15I/F-35I repositioning, B-52 sorties from Diego Garcia/Fairford, or USS Abraham Lincoln carrier strike group moving toward southern Gulf — any of these signals Kharg strike within 24-48h and is a +$15 Brent event.
+3. PAKISTAN TALKS MECHANISM: Whether Islamabad can produce a named US AND Iranian principal to a table by Tuesday — without both sides confirming principals, this is logistics theater; a confirmed meeting date with named envoys would be the first credible de-escalation signal in 31 days.
+4. KUWAIT ESCALATION LADDER: Kuwait's infrastructure strike is the first confirmed Gulf state energy-facility hit — watch for Kuwait invoking collective self-defense or requesting additional US PATRIOT batteries; Kuwait hosts critical US logistics nodes at Camp Arifjan and Ali Al Salem Air Base.
+5. OIL MARKET MONDAY CLOSE / ASIA TUESDAY OPEN: Whether Brent closes above $116 or reverses below $113 will signal whether Kharg threat is being priced as credible or dismissed as jawboning; a close above $116 with elevated volume is the bull signal for $120+ near-term.
+
+SOURCES
+https://x.com/JavierBlas/status/2038542582918037918
+https://x.com/JavierBlas/status/2038582152774787442
+https://x.com/JavierBlas/status/2038515896520511724
+https://x.com/JavierBlas/status/2038597682696945737
+https://x.com/sentdefender/status/2038608413890916661
+https://x.com/sentdefender/status/2038605215113326612
+https://x.com/sentdefender/status/2038614097923637463
+https://x.com/sentdefender/status/2038595035801751957
+https://x.com/sentdefender/status/2038631273757868484
+https://x.com/sentdefender/status/2038602947576176924
+https://x.com/TankerTrackers/status/2038600279566795188
+https://x.com/BabakTaghvaee1/status/2038586799388270971
+https://x.com/BabakTaghvaee1/status/2038606759057600840
+https://x.com/AlArabiya_Eng/status/2038631731650007290
+https://x.com/AlArabiya_Eng/status/2038626836515635467
+https://x.com/AlArabiya_Eng/status/2038635088393486811
+https://x.com/AlArabiya_Eng/status/2038638797118648694
+https://x.com/AlArabiya_Eng/status/2038611654666068174
+https://www.aljazeera.com/economy/2026/3/30/us-israel-war-on-iran-whats-happening-on-day-31-of-attacks
+https://www.cnbc.com/2026/03/30/trump-iran-war-obliterate-kharg-island-strait-of-hormuz-peace-deal.html
+https://www.cnn.com/2026/03/30/world/live-news/iran-war-us-israel-trump
+https://www.theguardian.com/world/live/2026/mar/30/iran-war-live-updates-trump-oil-kharg-island-houthis-israel-lebanon-middle-east
+https://www.nytimes.com/live/2026/03/30/world/iran-war-trump-oil-news
+https://www.reuters.com/world/middle-east/turkey-says-nato-defences-downed-fourth-inbound-iranian-missile-2026-03-30/
+https://www.bloomberg.com/news/articles/2026-03-30/nato-intercepts-fourth-iranian-missile-targeting-turkey
+https://www.theguardian.com/world/2026/mar/30/spain-closes-airspace-to-us-military-over-iran-war-widening-rift-with-us
+https://english.elpais.com/international/2026-03-30/spain-closes-airspace-to-aircraft-involved-in-iran-war-but-us-bases-are-being-used-in-other-ways.html
+https://www.aljazeera.com/news/2026/3/30/spain-closes-airspace-to-us-planes-involved-in-war-on-iran
+https://www.thenationalnews.com/news/uae/2026/03/29/uae-iran-missile-strikes/
+https://www.nbcnews.com/world/iran/irans-tehran-toll-booth-forces-tankers-pay-millions-leave-strait-hormu-rcna265258
+https://www.theguardian.com/world/2026/mar/26/strait-of-hormuz-visual-guide-trickle-of-ships-iran
+https://understandingwar.org/research/middle-east/iran-update-special-report-march-29-2026/
+https://www.bbc.com/news/live/cje4x38q8xqt
+https://www.aljazeera.com/news/2026/3/29/iran-accuses-us-of-plotting-ground-attack-as-israel-steps-up-bombardment
+https://www.theguardian.com/world/2026/mar/25/iran-gives-negative-response-to-us-ceasefire-plan-amid-push-for-talks

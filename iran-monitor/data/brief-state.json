@@ -1,11 +1,11 @@
 {
-  "last_brent_price": 112.57,
-  "last_wti_price": 99.64,
-  "last_brief_type": "evening",
-  "last_brief_timestamp": "2026-03-29T21:00:00.000Z",
+  "last_brent_price": 115.35,
+  "last_wti_price": 102.85,
+  "last_brief_type": "morning",
+  "last_brief_timestamp": "2026-03-30T15:30:00.000Z",
   "key_developments": [
-    "Israel resumed strikes on Tehran power and energy infrastructure tonight (~21:07-21:20 local / 17:37 UTC) after 5-day pause expired with zero diplomatic progress — Iranian Ministry of Energy confirmed widespread outages in Tehran Province and northern Iran; separate strikes on Bandar Deylam (USS Abraham Lincoln) and Bushehr Airport earlier in day; ceasefire probability before April 6 revised down to below 10%",
-    "US troop presence in Middle East crossed 50,000 (arrival of 2,500 Marines + 2,500 sailors) with 82nd Airborne paratroopers positioned within striking distance of Iran — CENTCOM chief Cooper in Tel Aviv for IDF coordination; Pentagon preparing 10,000 additional 82nd Airborne; i24NEWS: ground forces sufficient for Iran operation by early next week; Kharg Island seizure identified as potential mission target (NYT)",
-    "Islamabad summit (Pakistan/Saudi Arabia/Turkey/Egypt FMs) concluded with Pakistan offering to host US-Iran talks 'in coming days' but no mechanism, no US or Iranian principals, and Israeli strikes mid-session — Brent flat at $112.57 vs morning brief but Monday Asia open likely to reprice $115-120 as power-plant pause floor is removed; Ust-Luga Baltic port struck by Ukrainian drone (fire contained), adding ~500k b/d Russian export risk"
+    "Trump escalated to broadest threat yet — publicly threatened to destroy Kharg Island (90%+ of Iran crude exports), all oil wells, power plants, and 'possibly' desalination infrastructure via Truth Social + FT interview; Kharg destruction scenario not yet fully priced (+$15-25/bbl tail) but Brent moved to $115.35 (+$2.78 vs prior brief)",
+    "Kuwait power/desalination plant struck — first confirmed Gulf state energy-facility hit; one Indian worker killed; Saudi Arabia intercepted 5 ballistic missiles toward Eastern Province Monday; UAE cumulative engagement now 414 BMs / 1,914 UAVs; NATO intercepted 4th Iranian ballistic missile in Turkish airspace (Reuters/Bloomberg confirmed)",
+    "Spain closed Rota/Moron air bases + national airspace to Operation Epic Fury (15 US aircraft relocated) creating minor NATO friction; Russia confirmed sharing satellite imagery of Diego Garcia, Incirlik, Al Udeid, and Shaybah oil field with Iran for targeting (ISW/WaPo); Pakistan Islamabad talks track open but structurally blocked — Israel confirmed no pause in strikes ahead of any US-Iran dialogue"
   ]
 }
