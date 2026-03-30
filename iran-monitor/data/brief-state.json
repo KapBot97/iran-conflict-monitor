@@ -1,11 +1,11 @@
 {
   "last_brent_price": 115.35,
-  "last_wti_price": 102.85,
-  "last_brief_type": "morning",
-  "last_brief_timestamp": "2026-03-30T15:30:00.000Z",
+  "last_wti_price": 102.88,
+  "last_brief_type": "evening",
+  "last_brief_timestamp": "2026-03-30T21:00:00.000Z",
   "key_developments": [
-    "Trump escalated to broadest threat yet — publicly threatened to destroy Kharg Island (90%+ of Iran crude exports), all oil wells, power plants, and 'possibly' desalination infrastructure via Truth Social + FT interview; Kharg destruction scenario not yet fully priced (+$15-25/bbl tail) but Brent moved to $115.35 (+$2.78 vs prior brief)",
-    "Kuwait power/desalination plant struck — first confirmed Gulf state energy-facility hit; one Indian worker killed; Saudi Arabia intercepted 5 ballistic missiles toward Eastern Province Monday; UAE cumulative engagement now 414 BMs / 1,914 UAVs; NATO intercepted 4th Iranian ballistic missile in Turkish airspace (Reuters/Bloomberg confirmed)",
-    "Spain closed Rota/Moron air bases + national airspace to Operation Epic Fury (15 US aircraft relocated) creating minor NATO friction; Russia confirmed sharing satellite imagery of Diego Garcia, Incirlik, Al Udeid, and Shaybah oil field with Iran for targeting (ISW/WaPo); Pakistan Islamabad talks track open but structurally blocked — Israel confirmed no pause in strikes ahead of any US-Iran dialogue"
+    "Iranian drone struck Thuraya Telecom administrative building in Sharjah, UAE — first confirmed Iranian strike on UAE commercial infrastructure; crosses significant Gulf state escalation threshold; no injuries but UAE MoD + Arab League solidarity call hardening",
+    "WTI settled $102.88 — first triple-digit close since July 2022; +53% in March (best monthly gain since May 2020); Brent flat at $115.35 with intraday spike to $119.45; IDF confirmed 'wide-scale wave' of Tehran infrastructure strikes causing multi-hour blackouts across Tehran and Karaj",
+    "Iran acknowledged indirect US talks via Pakistan for first time (FM confirmed) but rejected US demands as 'excessive and illogical'; White House claims Iran privately signaling flexibility; 82nd Airborne troops confirmed arriving in theater; Zelensky confirmed Russia providing Iran targeting intelligence on US bases"
   ]
 }
