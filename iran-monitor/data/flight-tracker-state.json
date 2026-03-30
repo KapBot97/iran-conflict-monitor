@@ -1,9 +1,27 @@
 {
   "seen": {
-    "781b5c:LSGG": 1774783300629
+    "781fb4:LSGG": 1774869701348
   },
-  "lastRun": 1774866101910,
+  "lastRun": 1774869701348,
   "alerts": [
+    {
+      "ts": 1774869701348,
+      "flights": [
+        {
+          "icao24": "781fb4",
+          "callsign": "CCA862",
+          "registration": "B-32F1",
+          "originCountry": "Unknown",
+          "type": "A359",
+          "onGround": true,
+          "altitude": 0,
+          "airport": "LSGG",
+          "airportName": "Geneva",
+          "country": "Switzerland",
+          "context": "Neutral ground — previous US-Iran talks venue"
+        }
+      ]
+    },
     {
       "ts": 1774783300629,
       "flights": [
