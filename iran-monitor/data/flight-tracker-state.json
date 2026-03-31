@@ -21,10 +21,100 @@
     "hub:3905cb": 1774936301140,
     "acb223:LIRF": 1774938101135,
     "hub:ae08e3": 1774938101135,
-    "hub:14fa0a": 1774938101135
+    "hub:14fa0a": 1774938101135,
+    "8963e7:OMDB": 1774939910019,
+    "hub:896723": 1774939910019,
+    "hub:ae057d": 1774941701925,
+    "hub:14fa34": 1774941701925
   },
-  "lastRun": 1774938101135,
+  "lastRun": 1774941701925,
   "alerts": [
+    {
+      "ts": 1774941701925,
+      "flights": [
+        {
+          "icao24": "ae057d",
+          "callsign": "RCH2008",
+          "registration": "87-0032",
+          "type": "C5M",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 14850,
+          "lat": 39.380344,
+          "lon": -77.75177,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "14fa34",
+          "callsign": "TUP6456",
+          "registration": "RA-64052",
+          "type": "T204",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 5075,
+          "lat": 56.305771,
+          "lon": 37.431965,
+          "airport": "UUWW",
+          "airportName": "Moscow Vnukovo",
+          "airportCountry": "Russia",
+          "context": "Russian government — IL-96, Tu-214 state fleet → heading toward Iran/Gulf theater",
+          "detection": "Russian state aircraft (Russia) (outbound from Moscow Vnukovo)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1774939910019,
+      "flights": [
+        {
+          "icao24": "8963e7",
+          "callsign": "EKEGR",
+          "registration": "A6-EOJ",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 25.241903,
+          "lon": 55.383999,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "896723",
+          "callsign": "A6FAM",
+          "registration": "A6-FAM",
+          "type": "CL60",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 35000,
+          "lat": 51.159027,
+          "lon": 0.395953,
+          "airport": "EGLL",
+          "airportName": "London Heathrow",
+          "airportCountry": "UK",
+          "context": "UK government / FCO departures → heading toward Iran/Gulf theater",
+          "detection": "UAE government (UAE) (outbound from London Heathrow)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774938101135,
       "flights": [
