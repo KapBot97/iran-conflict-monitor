@@ -65,10 +65,55 @@
     "hub:adfdb6": 1774982527496,
     "hub:adfe85": 1774982527496,
     "hub:ae624f": 1774986245959,
-    "hub:ae010e": 1774986245959
+    "hub:ae010e": 1774986245959,
+    "3005e2:LIRF": 1774989965895,
+    "hub:ae649c": 1774989965895
   },
-  "lastRun": 1774986245959,
+  "lastRun": 1774989965895,
   "alerts": [
+    {
+      "ts": 1774989965895,
+      "flights": [
+        {
+          "icao24": "3005e2",
+          "callsign": "LSA901",
+          "registration": "I-SLNI",
+          "type": "F900",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 41.802898,
+          "lon": 12.590364,
+          "airport": "LIRF",
+          "airportName": "Rome",
+          "airportCountry": "Italy",
+          "context": "Earlier talks venue (Feb 2026)",
+          "detection": "Diplomatic aircraft type: F900",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        },
+        {
+          "icao24": "ae649c",
+          "callsign": "1921089",
+          "registration": "19-21089",
+          "type": "H60",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 950,
+          "lat": 40.360371,
+          "lon": -74.292297,
+          "airport": "KJFK",
+          "airportName": "New York JFK",
+          "airportCountry": "USA",
+          "context": "UN-related diplomatic flights → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from New York JFK)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774986245959,
       "flights": [

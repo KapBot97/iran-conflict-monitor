@@ -1,11 +1,11 @@
 {
-  "last_brent_price": 118.50,
-  "last_wti_price": 103.57,
-  "last_brief_type": "morning",
-  "last_brief_timestamp": "2026-03-31T15:30:00.000Z",
+  "last_brent_price": 103.97,
+  "last_wti_price": 101.38,
+  "last_brief_type": "evening",
+  "last_brief_timestamp": "2026-03-31T21:00:00.000Z",
   "key_developments": [
-    "Iran struck Kuwaiti VLCC AL SALMI (~2M barrels) anchored inside Dubai port — first Iranian kinetic action inside UAE territorial waters; fire confirmed via VIIRS satellite; interdiction range now extends beyond Hormuz into Gulf anchorages; Brent surged ~5% to $118.50",
-    "WSJ reports Trump willing to end US military operations even if Hormuz remains closed — fundamentally undermines Trump ultimatum architecture and hands Iran structural pricing leverage; IAF conducted 230+ strikes in 24h on Tehran/Isfahan including pharmaceutical company producing cancer/anaesthetic drugs",
-    "China-Pakistan joint call for immediate cessation of hostilities issued; Pakistan FM Dar in Beijing meeting Chinese FM Wang Yi amid rumours Beijing could serve as deal guarantor; 5-day diplomatic pause window expiring imminently with no signed framework"
+    "Trump told NBC News US military action against Iran is 'coming to an end'; Iranian President Pezeshkian stated Iran has 'necessary will' to end war but requires guarantees — dual-track de-escalation signal triggered S&P +2.91% to 6,528, Nasdaq +3.83%, June Brent -$3.42 to $103.97",
+    "IAF conducted 230+ strikes in 24h including destruction of all anti-aircraft cannons on Tehran government buildings via Delilah cruise missiles and strike on Tofigh Daru Pharmaceutical Company; US PrSM missiles launched from Kuwaiti territory toward Iran — ground-based forward strike systems now operational",
+    "Brent May contract expired at $118.35 (+63% for March, record since 1988); June Brent settled $103.97 reflecting de-escalation premium pricing out; ~1,000 vessels stranded in Hormuz; Qatar LNG/helium 14% annual cut now biting at major fab buffer stock limits"
   ]
 }
