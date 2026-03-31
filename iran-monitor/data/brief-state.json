@@ -1,11 +1,11 @@
 {
-  "last_brent_price": 115.35,
-  "last_wti_price": 102.88,
-  "last_brief_type": "evening",
-  "last_brief_timestamp": "2026-03-30T21:00:00.000Z",
+  "last_brent_price": 118.50,
+  "last_wti_price": 103.57,
+  "last_brief_type": "morning",
+  "last_brief_timestamp": "2026-03-31T15:30:00.000Z",
   "key_developments": [
-    "Iranian drone struck Thuraya Telecom administrative building in Sharjah, UAE — first confirmed Iranian strike on UAE commercial infrastructure; crosses significant Gulf state escalation threshold; no injuries but UAE MoD + Arab League solidarity call hardening",
-    "WTI settled $102.88 — first triple-digit close since July 2022; +53% in March (best monthly gain since May 2020); Brent flat at $115.35 with intraday spike to $119.45; IDF confirmed 'wide-scale wave' of Tehran infrastructure strikes causing multi-hour blackouts across Tehran and Karaj",
-    "Iran acknowledged indirect US talks via Pakistan for first time (FM confirmed) but rejected US demands as 'excessive and illogical'; White House claims Iran privately signaling flexibility; 82nd Airborne troops confirmed arriving in theater; Zelensky confirmed Russia providing Iran targeting intelligence on US bases"
+    "Iran struck Kuwaiti VLCC AL SALMI (~2M barrels) anchored inside Dubai port — first Iranian kinetic action inside UAE territorial waters; fire confirmed via VIIRS satellite; interdiction range now extends beyond Hormuz into Gulf anchorages; Brent surged ~5% to $118.50",
+    "WSJ reports Trump willing to end US military operations even if Hormuz remains closed — fundamentally undermines Trump ultimatum architecture and hands Iran structural pricing leverage; IAF conducted 230+ strikes in 24h on Tehran/Isfahan including pharmaceutical company producing cancer/anaesthetic drugs",
+    "China-Pakistan joint call for immediate cessation of hostilities issued; Pakistan FM Dar in Beijing meeting Chinese FM Wang Yi amid rumours Beijing could serve as deal guarantor; 5-day diplomatic pause window expiring imminently with no signed framework"
   ]
 }
