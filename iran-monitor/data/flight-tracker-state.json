@@ -36,10 +36,120 @@
     "hub:ab07be": 1774958381903,
     "4d21bc:LTFM": 1774962101132,
     "hub:ae4aea": 1774962101132,
-    "hub:a0840e": 1774962101132
+    "hub:a0840e": 1774962101132,
+    "hub:a1a505": 1774967621223,
+    "hub:491d8b": 1774967621223,
+    "hub:ae0377": 1774967621223,
+    "hub:3f6682": 1774967621223,
+    "hub:ae57d7": 1774969686159
   },
-  "lastRun": 1774965821505,
+  "lastRun": 1774969686159,
   "alerts": [
+    {
+      "ts": 1774969686159,
+      "flights": [
+        {
+          "icao24": "ae57d7",
+          "callsign": "WING18",
+          "registration": "10-00261",
+          "type": "BE20",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 6850,
+          "lat": 39.218723,
+          "lon": -76.483032,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1774967621223,
+      "flights": [
+        {
+          "icao24": "a1a505",
+          "callsign": "N205EL",
+          "registration": "N205EL",
+          "type": "GL5T",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 16925,
+          "lat": 40.436325,
+          "lon": -74.253662,
+          "airport": "KJFK",
+          "airportName": "New York JFK",
+          "airportCountry": "USA",
+          "context": "UN-related diplomatic flights → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GL5T (outbound from New York JFK)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        },
+        {
+          "icao24": "491d8b",
+          "callsign": "NJE794K",
+          "registration": "CS-GLK",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 33000,
+          "lat": 51.798164,
+          "lon": -0.725174,
+          "airport": "EGLL",
+          "airportName": "London Heathrow",
+          "airportCountry": "UK",
+          "context": "UK government / FCO departures → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from London Heathrow)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        },
+        {
+          "icao24": "ae0377",
+          "callsign": "62-3502",
+          "registration": "62-3502",
+          "type": "K35R",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 33000,
+          "lat": 48.163559,
+          "lon": 2.253661,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "3f6682",
+          "callsign": "GAF210",
+          "registration": "54+11",
+          "type": "A400",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 14725,
+          "lat": 52.332184,
+          "lon": 13.979874,
+          "airport": "EDDB",
+          "airportName": "Berlin Brandenburg",
+          "airportCountry": "Germany",
+          "context": "German government flights → heading toward Iran/Gulf theater",
+          "detection": "German Air Force (outbound from Berlin Brandenburg)",
+          "confidence": "HIGH",
+          "signal": "callsign",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774962101132,
       "flights": [
