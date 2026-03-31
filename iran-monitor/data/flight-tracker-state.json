@@ -14,10 +14,35 @@
     "50040a:OMDB": 1774929101215,
     "89673f:OMDB": 1774929101215,
     "896199:OMDB": 1774929101215,
-    "hub:ae10c0": 1774929101215
+    "hub:ae10c0": 1774929101215,
+    "hub:151d4f": 1774934500713
   },
-  "lastRun": 1774930900977,
+  "lastRun": 1774934500713,
   "alerts": [
+    {
+      "ts": 1774934500713,
+      "flights": [
+        {
+          "icao24": "151d4f",
+          "callsign": "UTA352",
+          "registration": "RA-73039",
+          "type": "B735",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 10275,
+          "lat": 55.492783,
+          "lon": 37.558136,
+          "airport": "UUWW",
+          "airportName": "Moscow Vnukovo",
+          "airportCountry": "Russia",
+          "context": "Russian government — IL-96, Tu-214 state fleet → heading toward Iran/Gulf theater",
+          "detection": "Russian state aircraft (Russia) (outbound from Moscow Vnukovo)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774929101215,
       "flights": [
