@@ -25,10 +25,35 @@
     "8963e7:OMDB": 1774939910019,
     "hub:896723": 1774939910019,
     "hub:ae057d": 1774941701925,
-    "hub:14fa34": 1774941701925
+    "hub:14fa34": 1774941701925,
+    "hub:4d20f9": 1774943500992
   },
-  "lastRun": 1774941701925,
+  "lastRun": 1774943500992,
   "alerts": [
+    {
+      "ts": 1774943500992,
+      "flights": [
+        {
+          "icao24": "4d20f9",
+          "callsign": "VJT809",
+          "registration": "9H-VJQ",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 45000,
+          "lat": 48.417446,
+          "lon": 2.01469,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774941701925,
       "flights": [
