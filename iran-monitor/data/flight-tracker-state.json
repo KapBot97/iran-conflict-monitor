@@ -28,10 +28,55 @@
     "hub:14fa34": 1774941701925,
     "hub:4d20f9": 1774943500992,
     "a7611c:LSGG": 1774947224839,
-    "hub:3fb284": 1774947224839
+    "hub:3fb284": 1774947224839,
+    "hub:ae018a": 1774950941241,
+    "hub:14fc0b": 1774950941241
   },
-  "lastRun": 1774947224839,
+  "lastRun": 1774950941241,
   "alerts": [
+    {
+      "ts": 1774950941241,
+      "flights": [
+        {
+          "icao24": "ae018a",
+          "callsign": "E10E3",
+          "registration": "84-0096",
+          "type": "LJ35",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 37000,
+          "lat": 51.99527,
+          "lon": 13.434525,
+          "airport": "EDDB",
+          "airportName": "Berlin Brandenburg",
+          "airportCountry": "Germany",
+          "context": "German government flights → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Berlin Brandenburg)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "14fc0b",
+          "callsign": "RSD977",
+          "registration": "RA-64523",
+          "type": "T204",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 4200,
+          "lat": 55.609535,
+          "lon": 37.416859,
+          "airport": "UUWW",
+          "airportName": "Moscow Vnukovo",
+          "airportCountry": "Russia",
+          "context": "Russian government — IL-96, Tu-214 state fleet → heading toward Iran/Gulf theater",
+          "detection": "Russian state delegation (outbound from Moscow Vnukovo)",
+          "confidence": "HIGH",
+          "signal": "callsign",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774947224839,
       "flights": [
