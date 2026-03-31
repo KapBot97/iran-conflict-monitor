@@ -3,10 +3,100 @@
     "781fb4:LSGG": 1774869701348,
     "hub:440bce": 1774922404269,
     "ae042d:LLBG": 1774923700830,
-    "hub:ae2fa5": 1774923700830
+    "hub:ae2fa5": 1774923700830,
+    "8964e0:OMDB": 1774925501019,
+    "8964ea:OMDB": 1774927300922,
+    "896529:OMDB": 1774927300922,
+    "hub:151d52": 1774927300922
   },
-  "lastRun": 1774923700830,
+  "lastRun": 1774927300922,
   "alerts": [
+    {
+      "ts": 1774927300922,
+      "flights": [
+        {
+          "icao24": "8964ea",
+          "callsign": "EFC13C",
+          "registration": "A6-CTD",
+          "type": "SR22",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 24.865883,
+          "lon": 55.156822,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "896529",
+          "callsign": "EFC34A",
+          "registration": "A6-CTT",
+          "type": "SR22",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 24.865688,
+          "lon": 55.158588,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "151d52",
+          "callsign": "UTA743",
+          "registration": "RA-73042",
+          "type": "B735",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 9625,
+          "lat": 55.476471,
+          "lon": 37.75618,
+          "airport": "UUWW",
+          "airportName": "Moscow Vnukovo",
+          "airportCountry": "Russia",
+          "context": "Russian government — IL-96, Tu-214 state fleet → heading toward Iran/Gulf theater",
+          "detection": "Russian state aircraft (Russia) (outbound from Moscow Vnukovo)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1774925501019,
+      "flights": [
+        {
+          "icao24": "8964e0",
+          "callsign": "EFC868M",
+          "registration": "A6-CTB",
+          "type": "SR22",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 24.865322,
+          "lon": 55.158413,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        }
+      ]
+    },
     {
       "ts": 1774923700830,
       "flights": [
