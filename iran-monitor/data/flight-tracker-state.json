@@ -30,10 +30,35 @@
     "a7611c:LSGG": 1774947224839,
     "hub:3fb284": 1774947224839,
     "hub:ae018a": 1774950941241,
-    "hub:14fc0b": 1774950941241
+    "hub:14fc0b": 1774950941241,
+    "hub:896462": 1774954664584
   },
-  "lastRun": 1774950941241,
+  "lastRun": 1774954664584,
   "alerts": [
+    {
+      "ts": 1774954664584,
+      "flights": [
+        {
+          "icao24": "896462",
+          "callsign": "ETD81C",
+          "registration": "A6-APG",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 35000,
+          "lat": 48.64325,
+          "lon": 2.203111,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "UAE government (UAE) (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774950941241,
       "flights": [
