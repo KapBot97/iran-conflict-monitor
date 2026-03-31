@@ -123,11 +123,11 @@ const HEX_WATCHLIST = {
 // ── LAYER 2C: DIPLOMATIC AIRCRAFT TYPES ──────────────────────────────────
 // These types at diplomatic airports = always flag (even without matching callsign/reg)
 const DIPLOMATIC_TYPES = [
-  'VC25', 'C32',  'C40',  'C17',  'C5',   'C130', 'E4',   'E3',
-  'RC135','KC135','B742', 'B752', 'B762', 'B772', // common gov/mil widebodies
-  'IL96', 'TU214','IL62', // Russian state
-  'A319', // common gov VIP config (Merkel's plane was A319)
-  'F900', 'GL5T', 'GLEX', 'G650', 'G550', 'G500', // bizjets used by foreign ministries
+  'VC25', 'C32',  'C40',  'C17',  'C5M',  'C130', 'E4',   'E3',
+  'RC135','KC135',                                          // US mil
+  'IL96', 'TU214','IL62', 'IL76',                          // Russian state
+  'F900', 'GL5T', 'GLEX', 'G650', 'G550', 'G500', 'GLF5', // bizjets (foreign min.)
+  // NOTE: B752/B762/B772/A319 removed — too common in cargo/commercial fleets
 ];
 
 // Commercial aircraft types — never flag these regardless of other signals
