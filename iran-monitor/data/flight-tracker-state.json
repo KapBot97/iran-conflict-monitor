@@ -1,9 +1,79 @@
 {
   "seen": {
-    "781fb4:LSGG": 1774869701348
+    "781fb4:LSGG": 1774869701348,
+    "hub:440bce": 1774922404269,
+    "ae042d:LLBG": 1774923700830,
+    "hub:ae2fa5": 1774923700830
   },
-  "lastRun": 1774920100809,
+  "lastRun": 1774923700830,
   "alerts": [
+    {
+      "ts": 1774923700830,
+      "flights": [
+        {
+          "icao24": "ae042d",
+          "callsign": "64-14834",
+          "registration": "64-14834",
+          "type": "K35R",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 975,
+          "lat": 32.055046,
+          "lon": 34.927967,
+          "airport": "LLBG",
+          "airportName": "Tel Aviv",
+          "airportCountry": "Israel",
+          "context": "Israeli capital — arrivals could signal ceasefire talks",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "ae2fa5",
+          "callsign": "RCH1894",
+          "registration": "08-8193",
+          "type": "C17",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 35000,
+          "lat": 51.770702,
+          "lon": -1.34098,
+          "airport": "EGLL",
+          "airportName": "London Heathrow",
+          "airportCountry": "UK",
+          "context": "UK government / FCO departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from London Heathrow)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1774922404269,
+      "flights": [
+        {
+          "icao24": "440bce",
+          "callsign": "BCS30A",
+          "registration": "OE-LNX",
+          "type": "B752",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 33925,
+          "lat": 51.300064,
+          "lon": -0.435296,
+          "airport": "EGLL",
+          "airportName": "London Heathrow",
+          "airportCountry": "UK",
+          "context": "UK government / FCO departures → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: B752 (outbound from London Heathrow)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774869701348,
       "flights": [
