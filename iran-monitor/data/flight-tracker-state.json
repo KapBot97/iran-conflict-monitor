@@ -33,10 +33,75 @@
     "hub:14fc0b": 1774950941241,
     "hub:896462": 1774954664584,
     "33ffad:LIRF": 1774958381903,
-    "hub:ab07be": 1774958381903
+    "hub:ab07be": 1774958381903,
+    "4d21bc:LTFM": 1774962101132,
+    "hub:ae4aea": 1774962101132,
+    "hub:a0840e": 1774962101132
   },
-  "lastRun": 1774958381903,
+  "lastRun": 1774962101132,
   "alerts": [
+    {
+      "ts": 1774962101132,
+      "flights": [
+        {
+          "icao24": "4d21bc",
+          "callsign": "HYP247",
+          "registration": "9H-ASB",
+          "type": "GL5T",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1075,
+          "lat": 40.999237,
+          "lon": 28.882812,
+          "airport": "LTFM",
+          "airportName": "Istanbul",
+          "airportCountry": "Turkey",
+          "context": "Turkey passing messages between US and Iran",
+          "detection": "Diplomatic aircraft type: GL5T",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        },
+        {
+          "icao24": "ae4aea",
+          "callsign": "09-0017",
+          "registration": "09-0017",
+          "type": "B752",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 3950,
+          "lat": 38.731266,
+          "lon": -76.774719,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "a0840e",
+          "callsign": "N132QS",
+          "registration": "N132QS",
+          "type": "GL5T",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 11875,
+          "lat": 40.541508,
+          "lon": -73.612579,
+          "airport": "KJFK",
+          "airportName": "New York JFK",
+          "airportCountry": "USA",
+          "context": "UN-related diplomatic flights → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GL5T (outbound from New York JFK)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774958381903,
       "flights": [
