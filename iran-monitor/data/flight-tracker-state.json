@@ -63,10 +63,55 @@
     "hub:ae624e": 1774982527496,
     "hub:ae6241": 1774982527496,
     "hub:adfdb6": 1774982527496,
-    "hub:adfe85": 1774982527496
+    "hub:adfe85": 1774982527496,
+    "hub:ae624f": 1774986245959,
+    "hub:ae010e": 1774986245959
   },
-  "lastRun": 1774982527496,
+  "lastRun": 1774986245959,
   "alerts": [
+    {
+      "ts": 1774986245959,
+      "flights": [
+        {
+          "icao24": "ae624f",
+          "callsign": "MUSL",
+          "registration": "71-58277",
+          "type": "B212",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 900,
+          "lat": 38.708176,
+          "lon": -77.007477,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "ae010e",
+          "callsign": "SAM502",
+          "registration": "97-0401",
+          "type": "GLF5",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 2550,
+          "lat": 39.008385,
+          "lon": -76.907761,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US Special Air Mission (outbound from Washington Dulles)",
+          "confidence": "HIGH",
+          "signal": "callsign",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774982527496,
       "flights": [
