@@ -80,10 +80,55 @@
     "hub:4d20d7": 1775001125789,
     "hub:ae47eb": 1775006654325,
     "hub:aae64b": 1775006654325,
-    "hub:4079eb": 1775008445687
+    "hub:4079eb": 1775008445687,
+    "8960f4:OMDB": 1775012046364,
+    "hub:0200ac": 1775012046364
   },
-  "lastRun": 1775010246225,
+  "lastRun": 1775013846170,
   "alerts": [
+    {
+      "ts": 1775012046364,
+      "flights": [
+        {
+          "icao24": "8960f4",
+          "callsign": "A6-EDS",
+          "registration": "A6-EDS",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 25.255943,
+          "lon": 55.339508,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "0200ac",
+          "callsign": "MRS1325",
+          "registration": "CN-MMT",
+          "type": "GLF5",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 40000,
+          "lat": 48.280884,
+          "lon": 2.31558,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLF5 (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775008445687,
       "flights": [
