@@ -1,6 +1,5 @@
 {
   "seen": {
-    "781fb4:LSGG": 1774869701348,
     "hub:440bce": 1774922404269,
     "ae042d:LLBG": 1774923700830,
     "hub:ae2fa5": 1774923700830,
@@ -97,10 +96,55 @@
     "hub:3b77ac": 1775037248579,
     "5003ee:OOMS": 1775039050866,
     "hub:adfe87": 1775040847750,
-    "hub:ae4e11": 1775040847750
+    "hub:ae4e11": 1775040847750,
+    "896456:OMDB": 1775044566240,
+    "8960f6:OMDB": 1775044566240
   },
-  "lastRun": 1775040847750,
+  "lastRun": 1775044566240,
   "alerts": [
+    {
+      "ts": 1775044566240,
+      "flights": [
+        {
+          "icao24": "896456",
+          "callsign": "EK002D",
+          "registration": "A6-EUA",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 24.875351,
+          "lon": 55.185192,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "8960f6",
+          "callsign": "A6EDU",
+          "registration": "A6-EDU",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 25.264353,
+          "lon": 55.34333,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        }
+      ]
+    },
     {
       "ts": 1775040847750,
       "flights": [
