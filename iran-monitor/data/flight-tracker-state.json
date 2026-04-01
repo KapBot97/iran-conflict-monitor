@@ -95,10 +95,55 @@
     "hub:ae062b": 1775033650438,
     "hub:440cbc": 1775035449657,
     "hub:3b77ac": 1775037248579,
-    "5003ee:OOMS": 1775039050866
+    "5003ee:OOMS": 1775039050866,
+    "hub:adfe87": 1775040847750,
+    "hub:ae4e11": 1775040847750
   },
-  "lastRun": 1775039050866,
+  "lastRun": 1775040847750,
   "alerts": [
+    {
+      "ts": 1775040847750,
+      "flights": [
+        {
+          "icao24": "adfe87",
+          "callsign": "RCH042",
+          "registration": "92-0552",
+          "type": "C130",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 20900,
+          "lat": 51.376694,
+          "lon": -0.853593,
+          "airport": "EGLL",
+          "airportName": "London Heathrow",
+          "airportCountry": "UK",
+          "context": "UK government / FCO departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from London Heathrow)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "ae4e11",
+          "callsign": "HKY758",
+          "registration": "11-5738",
+          "type": "C30J",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 18000,
+          "lat": 51.359058,
+          "lon": -0.471108,
+          "airport": "EGLL",
+          "airportName": "London Heathrow",
+          "airportCountry": "UK",
+          "context": "UK government / FCO departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from London Heathrow)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775039050866,
       "flights": [
