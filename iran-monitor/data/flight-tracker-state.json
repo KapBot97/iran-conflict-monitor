@@ -82,10 +82,60 @@
     "hub:aae64b": 1775006654325,
     "hub:4079eb": 1775008445687,
     "8960f4:OMDB": 1775012046364,
-    "hub:0200ac": 1775012046364
+    "hub:0200ac": 1775012046364,
+    "06a3b2:OTBH": 1775015646787,
+    "hub:140acb": 1775017446138
   },
-  "lastRun": 1775013846170,
+  "lastRun": 1775017446138,
   "alerts": [
+    {
+      "ts": 1775017446138,
+      "flights": [
+        {
+          "icao24": "140acb",
+          "callsign": "DXT9663",
+          "registration": "RA-02763",
+          "type": "E35L",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 11050,
+          "lat": 55.974922,
+          "lon": 37.425098,
+          "airport": "UUWW",
+          "airportName": "Moscow Vnukovo",
+          "airportCountry": "Russia",
+          "context": "Russian government — IL-96, Tu-214 state fleet → heading toward Iran/Gulf theater",
+          "detection": "Russian state aircraft (Russia) (outbound from Moscow Vnukovo)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1775015646787,
+      "flights": [
+        {
+          "icao24": "06a3b2",
+          "callsign": "A7GQE",
+          "registration": "A7-GQE",
+          "type": "A139",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1525,
+          "lat": 25.530899,
+          "lon": 51.836803,
+          "airport": "OTBH",
+          "airportName": "Doha",
+          "airportCountry": "Qatar",
+          "context": "Qatar active mediator; US CENTCOM base",
+          "detection": "Qatar government/military (Qatar)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        }
+      ]
+    },
     {
       "ts": 1775012046364,
       "flights": [
