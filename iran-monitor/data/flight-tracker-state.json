@@ -74,10 +74,75 @@
     "hub:ae220a": 1774993686473,
     "hub:adfdbe": 1774997405817,
     "hub:ae0449": 1774997405817,
-    "hub:c05613": 1774997405817
+    "hub:c05613": 1774997405817,
+    "89661e:OMDB": 1775001125789,
+    "hub:ae4814": 1775001125789,
+    "hub:4d20d7": 1775001125789
   },
-  "lastRun": 1774997405817,
+  "lastRun": 1775001125789,
   "alerts": [
+    {
+      "ts": 1775001125789,
+      "flights": [
+        {
+          "icao24": "89661e",
+          "callsign": "A6-EXA",
+          "registration": "A6-EXA",
+          "type": "A359",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 25.24173,
+          "lon": 55.373371,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "ae4814",
+          "callsign": "PAT11",
+          "registration": "07-20071",
+          "type": "H60",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 2950,
+          "lat": 38.4231,
+          "lon": -77.476624,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "4d20d7",
+          "callsign": "VJT842",
+          "registration": "9H-VJL",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 14050,
+          "lat": 39.311176,
+          "lon": -76.915955,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1774997405817,
       "flights": [
