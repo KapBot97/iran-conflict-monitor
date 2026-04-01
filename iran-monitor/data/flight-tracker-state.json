@@ -16,7 +16,7 @@
     "896199:OMDB": 1774929101215,
     "hub:ae10c0": 1774929101215,
     "hub:151d4f": 1774934500713,
-    "4d02e2:LSGG": 1774975085684,
+    "4d02e2:LSGG": 1775033650438,
     "89647b:OMDB": 1774936301140,
     "hub:3905cb": 1774936301140,
     "acb223:LIRF": 1774938101135,
@@ -91,10 +91,79 @@
     "hub:4d207f": 1775026448798,
     "8964b6:OMDB": 1775028251028,
     "hub:c07440": 1775028251028,
-    "hub:a901c8": 1775028251028
+    "hub:a901c8": 1775028251028,
+    "hub:ae062b": 1775033650438,
+    "hub:440cbc": 1775035449657
   },
-  "lastRun": 1775031846388,
+  "lastRun": 1775035449657,
   "alerts": [
+    {
+      "ts": 1775035449657,
+      "flights": [
+        {
+          "icao24": "440cbc",
+          "callsign": "GDK46J",
+          "registration": "OE-IRB",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 11325,
+          "lat": 48.926193,
+          "lon": 2.962224,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1775033650438,
+      "flights": [
+        {
+          "icao24": "4d02e2",
+          "callsign": "JFA75Z",
+          "registration": "LX-PAK",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 46.236893,
+          "lon": 6.099232,
+          "airport": "LSGG",
+          "airportName": "Geneva",
+          "airportCountry": "Switzerland",
+          "context": "Neutral ground — previous US-Iran nuclear talks venue",
+          "detection": "Diplomatic aircraft type: GLEX",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        },
+        {
+          "icao24": "ae062b",
+          "callsign": "60-0353",
+          "registration": "60-0353",
+          "type": "K35R",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 32975,
+          "lat": 48.504021,
+          "lon": 2.395653,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775030048682,
       "flights": [
