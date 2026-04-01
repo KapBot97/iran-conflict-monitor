@@ -87,10 +87,100 @@
     "hub:140acb": 1775017446138,
     "hub:ae07e4": 1775024650086,
     "hub:896463": 1775024650086,
-    "hub:3929cc": 1775024650086
+    "hub:3929cc": 1775024650086,
+    "hub:4d207f": 1775026448798,
+    "8964b6:OMDB": 1775028251028,
+    "hub:c07440": 1775028251028,
+    "hub:a901c8": 1775028251028
   },
-  "lastRun": 1775024650086,
+  "lastRun": 1775028251028,
   "alerts": [
+    {
+      "ts": 1775028251028,
+      "flights": [
+        {
+          "icao24": "8964b6",
+          "callsign": "A6-EVH",
+          "registration": "A6-EVH",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 25.20863,
+          "lon": 55.350235,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "c07440",
+          "callsign": "CGSAP",
+          "registration": "C-GSAP",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 45000,
+          "lat": 48.705837,
+          "lon": 2.010281,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        },
+        {
+          "icao24": "a901c8",
+          "callsign": "N68KJ",
+          "registration": "N68KJ",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1675,
+          "lat": 48.968159,
+          "lon": 2.494113,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1775026448798,
+      "flights": [
+        {
+          "icao24": "4d207f",
+          "callsign": "VJT732",
+          "registration": "9H-VJD",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 45000,
+          "lat": 48.56868,
+          "lon": 2.797218,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775024650086,
       "flights": [
