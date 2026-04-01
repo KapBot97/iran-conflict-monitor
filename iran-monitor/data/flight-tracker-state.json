@@ -79,10 +79,35 @@
     "hub:ae4814": 1775001125789,
     "hub:4d20d7": 1775001125789,
     "hub:ae47eb": 1775006654325,
-    "hub:aae64b": 1775006654325
+    "hub:aae64b": 1775006654325,
+    "hub:4079eb": 1775008445687
   },
-  "lastRun": 1775006654325,
+  "lastRun": 1775010246225,
   "alerts": [
+    {
+      "ts": 1775008445687,
+      "flights": [
+        {
+          "icao24": "4079eb",
+          "callsign": "GOMTX",
+          "registration": "G-OMTX",
+          "type": "GL5T",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 3050,
+          "lat": 41.097977,
+          "lon": -74.188477,
+          "airport": "KJFK",
+          "airportName": "New York JFK",
+          "airportCountry": "USA",
+          "context": "UN-related diplomatic flights → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GL5T (outbound from New York JFK)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775006654325,
       "flights": [
