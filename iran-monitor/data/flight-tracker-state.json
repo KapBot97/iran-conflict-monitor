@@ -32,7 +32,7 @@
     "hub:ae018a": 1774950941241,
     "hub:14fc0b": 1774950941241,
     "hub:896462": 1774954664584,
-    "33ffad:LIRF": 1774958381903,
+    "33ffad:LIRF": 1775039050866,
     "hub:ab07be": 1774958381903,
     "4d21bc:LTFM": 1774962101132,
     "hub:ae4aea": 1774962101132,
@@ -93,10 +93,79 @@
     "hub:c07440": 1775028251028,
     "hub:a901c8": 1775028251028,
     "hub:ae062b": 1775033650438,
-    "hub:440cbc": 1775035449657
+    "hub:440cbc": 1775035449657,
+    "hub:3b77ac": 1775037248579,
+    "5003ee:OOMS": 1775039050866
   },
-  "lastRun": 1775035449657,
+  "lastRun": 1775039050866,
   "alerts": [
+    {
+      "ts": 1775039050866,
+      "flights": [
+        {
+          "icao24": "5003ee",
+          "callsign": "VAJ96V",
+          "registration": "T7-LAVI",
+          "type": "GL5T",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 23.595543,
+          "lon": 58.288258,
+          "airport": "OOMS",
+          "airportName": "Muscat",
+          "airportCountry": "Oman",
+          "context": "Primary US-Iran mediation hub (Omani FM)",
+          "detection": "Diplomatic aircraft type: GL5T",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        },
+        {
+          "icao24": "33ffad",
+          "callsign": "IAM3170",
+          "registration": "MM62245",
+          "type": "F900",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 41.798592,
+          "lon": 12.59335,
+          "airport": "LIRF",
+          "airportName": "Rome",
+          "airportCountry": "Italy",
+          "context": "Earlier talks venue (Feb 2026)",
+          "detection": "Diplomatic aircraft type: F900",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        }
+      ]
+    },
+    {
+      "ts": 1775037248579,
+      "flights": [
+        {
+          "icao24": "3b77ac",
+          "callsign": "CTM009",
+          "registration": "F-RAFR",
+          "type": "F900",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 9000,
+          "lat": 48.811279,
+          "lon": 3.052537,
+          "airport": "LFPB",
+          "airportName": "Paris Le Bourget",
+          "airportCountry": "France",
+          "context": "French government flights (Le Bourget = VIP terminal) → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: F900 (outbound from Paris Le Bourget)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775035449657,
       "flights": [
