@@ -23,10 +23,75 @@
     "5002ce:OMDB": 1775679684103,
     "hub:a37211": 1775679684103,
     "hub:aae64b": 1775679684103,
-    "hub:ae6c73": 1775679684103
+    "hub:ae6c73": 1775679684103,
+    "hub:a2aad4": 1775683401250,
+    "hub:ae649b": 1775683401250,
+    "hub:aff009": 1775683401250
   },
-  "lastRun": 1775679684103,
+  "lastRun": 1775683401250,
   "alerts": [
+    {
+      "ts": 1775683401250,
+      "flights": [
+        {
+          "icao24": "a2aad4",
+          "callsign": "N271GL",
+          "registration": "N271GL",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 2375,
+          "lat": 41.07653,
+          "lon": -74.451286,
+          "airport": "KJFK",
+          "airportName": "New York JFK",
+          "airportCountry": "USA",
+          "context": "UN-related diplomatic flights → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from New York JFK)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        },
+        {
+          "icao24": "ae649b",
+          "callsign": "1921088",
+          "registration": "19-21088",
+          "type": "H60",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": -325,
+          "lat": 40.039032,
+          "lon": -74.378235,
+          "airport": "KJFK",
+          "airportName": "New York JFK",
+          "airportCountry": "USA",
+          "context": "UN-related diplomatic flights → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from New York JFK)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "aff009",
+          "callsign": "1820994",
+          "registration": "18-20994",
+          "type": "H60",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": -450,
+          "lat": 40.02943,
+          "lon": -74.349541,
+          "airport": "KJFK",
+          "airportName": "New York JFK",
+          "airportCountry": "USA",
+          "context": "UN-related diplomatic flights → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from New York JFK)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775679684103,
       "flights": [
