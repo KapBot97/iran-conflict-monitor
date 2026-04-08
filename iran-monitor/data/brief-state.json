@@ -1,11 +1,11 @@
 {
-  "last_brent_price": 118.35,
-  "last_wti_price": 101.68,
+  "last_brent_price": 94.44,
+  "last_wti_price": 94.98,
   "last_brief_type": "morning",
-  "last_brief_timestamp": "2026-04-01T15:30:00.000Z",
+  "last_brief_timestamp": "2026-04-08T18:32:00.000Z",
   "key_developments": [
-    "Trump claimed Iran requested ceasefire on Truth Social — Tehran Foreign Ministry denied within 30 min calling it 'false and baseless'; FM Araghchi confirmed backchannel messages with Witkoff but stated 'zero' trust and 'no grounds for negotiations' — diplomatic track bifurcated and low-credibility; April 6 Hormuz deadline remains live",
-    "IRGC Aerospace Force HQ near Chitgar Lake (NW Tehran) struck with bunker-busters — highest-value command node hit since campaign began; Darou Pakhsh (Iran's largest pharma manufacturer) destroyed; HESA aircraft manufacturing (Isfahan) struck; 12,000 US combat sorties total (Op. Epic Fury); 1,000 US paratroopers deployed to region with analyst citing potential Kharg Island/asset seizure mandate",
-    "Brent June reversed sharply to ~$118.35 (+$14.38 vs evening brief $103.97) as ceasefire narrative collapses; Hormuz commercially closed ~0% transit with ~1,000 vessels stranded; IEA warns escalating supply impact on Europe through April; Qatar Ras Laffan LNG/helium (~30-33% global He supply) remains offline — fab buffer stocks now operationally binding"
+    "Delta versus prior brief is de-escalation in paper markets but not normalization on the ground: Brent fell from 118.35 to 94.44 after a two-week U.S.-Iran ceasefire framework, yet physical energy and shipping conditions remain stressed.",
+    "Israel backed the pause on Iran strikes while explicitly excluding Lebanon, and Reuters plus Guardian reporting showed continued heavy strikes in Lebanon despite the broader ceasefire framework.",
+    "Hormuz shifted from outright closure to conditional, permit-based transit only; Reuters reporting indicates shippers still lack clarity, fleets remain stranded or cautious, and Qatar LNG and helium disruption remain unresolved."
   ]
 }
