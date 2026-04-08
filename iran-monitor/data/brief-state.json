@@ -1,11 +1,11 @@
 {
-  "last_brent_price": 103.97,
-  "last_wti_price": 101.38,
-  "last_brief_type": "evening",
-  "last_brief_timestamp": "2026-03-31T21:00:00.000Z",
+  "last_brent_price": 118.35,
+  "last_wti_price": 101.68,
+  "last_brief_type": "morning",
+  "last_brief_timestamp": "2026-04-01T15:30:00.000Z",
   "key_developments": [
-    "Trump told NBC News US military action against Iran is 'coming to an end'; Iranian President Pezeshkian stated Iran has 'necessary will' to end war but requires guarantees — dual-track de-escalation signal triggered S&P +2.91% to 6,528, Nasdaq +3.83%, June Brent -$3.42 to $103.97",
-    "IAF conducted 230+ strikes in 24h including destruction of all anti-aircraft cannons on Tehran government buildings via Delilah cruise missiles and strike on Tofigh Daru Pharmaceutical Company; US PrSM missiles launched from Kuwaiti territory toward Iran — ground-based forward strike systems now operational",
-    "Brent May contract expired at $118.35 (+63% for March, record since 1988); June Brent settled $103.97 reflecting de-escalation premium pricing out; ~1,000 vessels stranded in Hormuz; Qatar LNG/helium 14% annual cut now biting at major fab buffer stock limits"
+    "Trump claimed Iran requested ceasefire on Truth Social — Tehran Foreign Ministry denied within 30 min calling it 'false and baseless'; FM Araghchi confirmed backchannel messages with Witkoff but stated 'zero' trust and 'no grounds for negotiations' — diplomatic track bifurcated and low-credibility; April 6 Hormuz deadline remains live",
+    "IRGC Aerospace Force HQ near Chitgar Lake (NW Tehran) struck with bunker-busters — highest-value command node hit since campaign began; Darou Pakhsh (Iran's largest pharma manufacturer) destroyed; HESA aircraft manufacturing (Isfahan) struck; 12,000 US combat sorties total (Op. Epic Fury); 1,000 US paratroopers deployed to region with analyst citing potential Kharg Island/asset seizure mandate",
+    "Brent June reversed sharply to ~$118.35 (+$14.38 vs evening brief $103.97) as ceasefire narrative collapses; Hormuz commercially closed ~0% transit with ~1,000 vessels stranded; IEA warns escalating supply impact on Europe through April; Qatar Ras Laffan LNG/helium (~30-33% global He supply) remains offline — fab buffer stocks now operationally binding"
   ]
 }
