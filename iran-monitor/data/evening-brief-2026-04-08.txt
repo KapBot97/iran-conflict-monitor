@@ -1,0 +1,63 @@
+IRAN CONFLICT INTELLIGENCE BRIEF
+EVENING | APRIL 8, 2026 | DAY 40
+
+EXECUTIVE SUMMARY
+DELTA VS MORNING BRIEF: markets materially de-escalated on paper, but operating conditions in theater did not normalize. Brent closed at $94.75 versus $94.44 in the morning brief and WTI closed at $94.41 versus $94.98 previously, while shipping through Hormuz remained permit-based and below normal despite the headline two-week US-Iran ceasefire. The biggest substantive change since morning is the emergence of a defined diplomatic track to Islamabad on Friday, offset by major Israeli strikes in Lebanon, fresh Gulf missile/drone alerts, and Iranian claims that key ceasefire terms were violated within hours. For overnight risk, the question is no longer whether war premium collapses immediately; it is whether any shipping normalization is credible before talks begin and whether the Lebanon carve-out blows up the ceasefire architecture.
+
+SITUATION BY THEATER
+- IRAN MAINLAND: Tehran conditionally accepted a two-week ceasefire if attacks stop and says Friday talks in Islamabad will proceed on the basis of its 10-point proposal, including controlled Hormuz transit and sanctions relief; Iranian officials also complained of a drone entering Iranian airspace and said breaches made bilateral negotiations unreasonable.
+- ISRAEL/NORTHERN FRONT: DELTA vs morning is clear deterioration. Israel carried out its heaviest strikes in Lebanon since the Hezbollah front escalated, while publicly stating Lebanon is not covered by the US-Iran ceasefire; this is the single biggest immediate spoiler to the pause framework.
+- GULF STATES: Gulf exposure remains elevated. Reuters reported missile/drone alerts or shelter warnings in the UAE, Qatar and Bahrain; OSINT also flagged a claimed strike on UAE-linked oil infrastructure in Fujairah, but that remains single-source and unverified.
+- STRAIT OF HORMUZ: Traffic remains severely impaired. Reuters says daily transits are still below 10% of historical average, Iran is demanding Sepah navy permission for passage, and shipowners remain in wait-and-see mode despite a handful of reported transits.
+- IRAQ/PROXY THEATER: No clean new escalation versus morning in Iraq itself, but the broader proxy picture remains unstable: Hezbollah has paused some attacks under the ceasefire framework while Israeli operations continue, preserving risk of reactivation across the Iran-aligned network.
+
+DIPLOMATIC TRACK
+Pakistan is now the central mediator, with Egypt, Saudi Arabia, Qatar, Turkey and likely China supporting the channel, according to NBC and public statements cited there. The current pause window is two weeks, but credibility is only medium at best because Washington and Tehran still diverge on scope, Israel rejects Lebanon inclusion, and Iran’s 10-point proposal still contains maximalist asks on Hormuz control, sanctions removal, compensation and regional force posture. The talks matter because they convert an ultimatum into a scheduled negotiation, but the market should treat them as a fragile process checkpoint rather than a durable ceasefire.
+
+ENERGY INFRASTRUCTURE
+- Brent: $94.75 (vs $94.44 at morning brief, +19.3% since pre-war close of $79.45)
+- WTI: $94.41
+- Hormuz: Permit-based transit only; traffic still below 10% of historical average and normalization likely takes weeks, not hours.
+- Qatar LNG: No confirmed normalization. Because Hormuz remains functionally restricted, LNG export risk stays live even with headline ceasefire relief.
+- Primorsk: No major fresh relevance tonight; the key oil-market variable remains Gulf export mechanics, not Baltic rerouting.
+
+MARKET IMPLICATIONS
+- Oil: Ceasefire headlines crushed the extreme tail premium, but the close still embeds a large residual risk premium because physical shipping has not normalized and Iran retained leverage over transit.
+- Rates: Relief on energy inflation pulled Treasury yields lower on the day and revived Fed-cut expectations at the margin.
+- Equities: Classic relief rally. The Dow closed up 2.85% at 47,909.92, the S&P 500 up 2.51% at 6,782.81, and the Nasdaq up 2.80% at 22,635.00.
+
+SEMICONDUCTOR / SUPPLY CHAIN
+Helium and LNG remain the non-obvious but important supply-chain watchpoints. Reuters has previously reported that Qatar-related disruption is already squeezing helium, a key semiconductor input used in cooling, leak detection and precision manufacturing. Even if oil trades calmer overnight, chip and industrial-gas supply risk will persist until Qatar-linked flows through Hormuz are demonstrably stable.
+
+CONFIDENCE ASSESSMENT
+HIGH CONFIDENCE: US-Iran announced a two-week ceasefire framework; Friday Islamabad talks are expected; Brent settled at $94.75 and WTI at $94.41; Lebanon is not clearly covered by the ceasefire; Hormuz transit remains restricted and below normal.
+MEDIUM CONFIDENCE: Iran may begin a controlled reopening on Thursday or Friday ahead of talks; Hezbollah pause dynamics could hold locally even as Israel continues strikes.
+LOW CONFIDENCE: Claimed Iranian strike effects on UAE oil facilities and other Gulf infrastructure details circulating on X; exact vessel count and speed of shipping normalization; any implied willingness by Tehran to transfer enriched uranium absent formal confirmation.
+
+WHAT TO WATCH (NEXT 12H)
+- Any verified Reuters-level confirmation of actual tanker transits through Hormuz because physical movement, not political rhetoric, will drive the next oil leg.
+- Whether Iran eases or tightens its permit regime overnight; a harder radio warning posture would reprice crude higher quickly.
+- Israeli strike tempo in Lebanon; continued heavy activity is the most likely near-term trigger for ceasefire unraveling.
+- Formal US confirmation of delegation composition and agenda for Islamabad talks; this will indicate whether talks are symbolic or substantive.
+- Any Qatar LNG loading, force majeure, or downstream helium/logistics update; this is the clearest path from geopolitics into semiconductor and industrial supply chains.
+
+SOURCES
+https://www.reuters.com/business/energy/us-crude-futures-fall-1204-10090bbl-after-trump-announces-two-week-ceasefire-2026-04-07/
+https://www.reuters.com/business/energy/shippers-seek-clarity-hormuz-reopening-after-us-iran-ceasefire-deal-2026-04-08/
+https://www.reuters.com/world/china/global-markets-global-markets-2026-04-07/
+https://www.reuters.com/world/middle-east/hezbollah-pauses-attacks-under-us-iran-ceasefire-sources-close-group-say-2026-04-08/
+https://www.reuters.com/world/middle-east/trump-says-lebanon-is-not-part-ceasefire-deal-with-iran-pbs-reports-2026-04-08/
+https://www.reuters.com/world/asia-pacific/iran-could-open-strait-hormuz-controlled-way-ahead-meeting-with-us-senior-2026-04-08/
+https://www.aljazeera.com/news/2026/4/8/iran-says-talks-with-us-will-begin-in-pakistans-islamabad-on-friday
+https://www.aljazeera.com/news/2026/4/8/us-iran-ceasefire-deal-what-are-the-terms-and-whats-next
+https://www.aljazeera.com/news/liveblog/2026/4/8/iran-war-live-trump-announces-truce-tehran-agrees-safe-transit-in-hormuz
+https://www.theguardian.com/world/2026/apr/08/trump-iran-war-ceasefire-deadline-what-we-know-so-far
+https://www.theguardian.com/world/live/2026/apr/08/iran-war-ceasefire-live-updates-trump-deadline-middle-east-crisis-latest-news
+https://www.nbcnews.com/world/iran/us-iran-agree-ceasefire-actually-deal-will-last-rcna266838
+https://www.nbcnews.com/world/iran/live-blog/live-updates-iran-war-ceasefire-trump-hormuz-israel-lebanon-rcna267205
+https://x.com/TankerTrackers/status/2041897929703629057
+https://x.com/sentdefender/status/2041967430722031926
+https://x.com/sentdefender/status/2041960172633928041
+https://x.com/JavierBlas/status/2041939683127558559
+https://www.reuters.com/business/energy/helium-prices-soar-qatar-lng-halt-exposes-fragile-supply-chain-2026-03-12/
+https://www.reuters.com/world/asia-pacific/helium-shortage-has-started-impacting-tech-supply-chains-execs-say-2026-03-26/
