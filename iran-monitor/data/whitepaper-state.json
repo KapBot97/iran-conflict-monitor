@@ -1,14 +1,13 @@
 {
-  "last_brent": 94.44,
-  "last_wti": 94.98,
-  "last_type": "morning",
-  "last_timestamp": "2026-04-08T18:31:00.000Z",
+  "last_brent": 96.24,
+  "last_wti": 94.41,
+  "last_type": "evening",
+  "last_timestamp": "2026-04-09T01:31:00.000Z",
   "last_key_points": [
-    "Crude repriced lower on ceasefire expectations, with Brent near 94.44 and WTI near 94.98, but both remain headline-sensitive to Hormuz access and Gulf strike risk.",
-    "Pakistan became the operative diplomatic hub, with first-round U.S.-Iran talks now centered on Islamabad and weekend timing increasingly cited.",
-    "Israel's continued operations in Lebanon emerged as the most immediate threat to ceasefire durability, creating a gap between diplomatic messaging and battlefield reality.",
-    "Post-ceasefire Iranian missile and drone activity against Gulf states kept regional air defenses active and prevented a clean de-escalation narrative.",
-    "Hormuz shifted from near-total disruption to conditional passage for non-enemy shipping, improving flow optics without restoring full commercial normality.",
-    "Confirmed satellite evidence of storage-tank damage at Assaluyeh kept energy-infrastructure risk live even as some viral claims about new Gulf-for-Gulf strikes remained contested."
+    "Lebanon, not direct U.S.-Iran fire, became the primary ceasefire spoiler after heavy Israeli strikes and renewed Hezbollah rocket launches into northern Israel.",
+    "Hormuz remained permit-gated and commercially unclear through the evening, with no convincing evidence of broad tanker-flow normalization despite ceasefire headlines.",
+    "The Pakistan channel hardened from diplomatic speculation into a scheduled Saturday principals-level meeting led by Vice President JD Vance in Islamabad.",
+    "Crude retained a meaningful physical-risk premium, with Brent around 96.24 and WTI around 94.41 even after the panic phase unwound.",
+    "Late OSINT flow raised but did not verify renewed strike risk against UAE-linked energy assets and possible Israeli activity over Iran, keeping headline sensitivity high overnight."
   ]
 }

@@ -43,10 +43,75 @@
     "hub:ae77c4": 1775694326732,
     "hub:ae6244": 1775696120135,
     "hub:424b97": 1775696120135,
-    "hub:a73e80": 1775696120135
+    "hub:a73e80": 1775696120135,
+    "ae04bb:LLBG": 1775697919829,
+    "896196:OMDB": 1775697919829,
+    "hub:ae51b4": 1775697919829
   },
-  "lastRun": 1775696120135,
+  "lastRun": 1775699719149,
   "alerts": [
+    {
+      "ts": 1775697919829,
+      "flights": [
+        {
+          "icao24": "ae04bb",
+          "callsign": "58-0056",
+          "registration": "58-0056",
+          "type": "K35R",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 2550,
+          "lat": 32.135052,
+          "lon": 34.97839,
+          "airport": "LLBG",
+          "airportName": "Tel Aviv",
+          "airportCountry": "Israel",
+          "context": "Israeli capital — arrivals could signal ceasefire talks",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "896196",
+          "callsign": "A6EEW",
+          "registration": "A6-EEW",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 25.26149,
+          "lon": 55.363747,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "ae51b4",
+          "callsign": "PAT27",
+          "registration": "11-20369",
+          "type": "H60",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 925,
+          "lat": 39.27626,
+          "lon": -77.504601,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775696120135,
       "flights": [
