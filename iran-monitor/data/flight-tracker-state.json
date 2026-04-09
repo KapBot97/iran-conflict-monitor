@@ -69,10 +69,55 @@
     "hub:142583": 1775725281444,
     "896584:OMDB": 1775729011092,
     "hub:300619": 1775729011092,
-    "89618b:OMDB": 1775732721707
+    "89618b:OMDB": 1775732721707,
+    "33ffc0:LIRF": 1775736442336,
+    "hub:ae03f7": 1775736442336
   },
-  "lastRun": 1775732842061,
+  "lastRun": 1775736561845,
   "alerts": [
+    {
+      "ts": 1775736442336,
+      "flights": [
+        {
+          "icao24": "33ffc0",
+          "callsign": "IAM3182",
+          "registration": "MM62210",
+          "type": "F900",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1925,
+          "lat": 41.781891,
+          "lon": 12.606109,
+          "airport": "LIRF",
+          "airportName": "Rome",
+          "airportCountry": "Italy",
+          "context": "Earlier talks venue (Feb 2026)",
+          "detection": "Diplomatic aircraft type: F900",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        },
+        {
+          "icao24": "ae03f7",
+          "callsign": "GECKO50",
+          "registration": "84-00150",
+          "type": "BE20",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1025,
+          "lat": 38.908173,
+          "lon": -77.089096,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775732721707,
       "flights": [
