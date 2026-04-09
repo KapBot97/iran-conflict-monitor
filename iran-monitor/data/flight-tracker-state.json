@@ -46,10 +46,35 @@
     "hub:a73e80": 1775696120135,
     "ae04bb:LLBG": 1775697919829,
     "896196:OMDB": 1775697919829,
-    "hub:ae51b4": 1775697919829
+    "hub:ae51b4": 1775697919829,
+    "hub:ac7115": 1775703319209
   },
-  "lastRun": 1775699719149,
+  "lastRun": 1775703444618,
   "alerts": [
+    {
+      "ts": 1775703319209,
+      "flights": [
+        {
+          "icao24": "ac7115",
+          "callsign": "N900VP",
+          "registration": "N900VP",
+          "type": "F900",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 2725,
+          "lat": 39.177807,
+          "lon": -77.462036,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: F900 (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775697919829,
       "flights": [
