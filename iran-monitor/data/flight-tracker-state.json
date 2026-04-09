@@ -55,10 +55,85 @@
     "hub:3e95ca": 1775708719256,
     "89657f:OMDB": 1775710524488,
     "896360:OMDB": 1775710524488,
-    "896174:OMDB": 1775710642236
+    "896174:OMDB": 1775710642236,
+    "4d0297:LSGG": 1775712321688,
+    "hub:491d99": 1775712441230,
+    "ae07a7:LLBG": 1775714121097
   },
-  "lastRun": 1775710642236,
+  "lastRun": 1775714242451,
   "alerts": [
+    {
+      "ts": 1775714121097,
+      "flights": [
+        {
+          "icao24": "ae07a7",
+          "callsign": "59-1498",
+          "registration": "59-1498",
+          "type": "K35R",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 4300,
+          "lat": 32.235634,
+          "lon": 34.867107,
+          "airport": "LLBG",
+          "airportName": "Tel Aviv",
+          "airportCountry": "Israel",
+          "context": "Israeli capital — arrivals could signal ceasefire talks",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        }
+      ]
+    },
+    {
+      "ts": 1775712441230,
+      "flights": [
+        {
+          "icao24": "491d99",
+          "callsign": "NJE299T",
+          "registration": "CS-GLY",
+          "type": "GL5T",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 45000,
+          "lat": 51.138611,
+          "lon": -1.507502,
+          "airport": "EGLL",
+          "airportName": "London Heathrow",
+          "airportCountry": "UK",
+          "context": "UK government / FCO departures → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GL5T (outbound from London Heathrow)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1775712321688,
+      "flights": [
+        {
+          "icao24": "4d0297",
+          "callsign": "LXA32B",
+          "registration": "LX-MCE",
+          "type": "GLF5",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1925,
+          "lat": 46.203873,
+          "lon": 6.058692,
+          "airport": "LSGG",
+          "airportName": "Geneva",
+          "airportCountry": "Switzerland",
+          "context": "Neutral ground — previous US-Iran nuclear talks venue",
+          "detection": "Diplomatic aircraft type: GLF5",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        }
+      ]
+    },
     {
       "ts": 1775710642236,
       "flights": [
