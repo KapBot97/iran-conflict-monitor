@@ -59,10 +59,60 @@
     "4d0297:LSGG": 1775712321688,
     "hub:491d99": 1775712441230,
     "ae07a7:LLBG": 1775714121097,
-    "896649:OMDB": 1775717841557
+    "896649:OMDB": 1775717841557,
+    "4d20d4:LIRF": 1775721563033,
+    "hub:ae4e0e": 1775721690872
   },
-  "lastRun": 1775717961751,
+  "lastRun": 1775721690872,
   "alerts": [
+    {
+      "ts": 1775721690872,
+      "flights": [
+        {
+          "icao24": "ae4e0e",
+          "callsign": "RCH794",
+          "registration": "11-5732",
+          "type": "C30J",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 6300,
+          "lat": 39.910435,
+          "lon": -74.267029,
+          "airport": "KJFK",
+          "airportName": "New York JFK",
+          "airportCountry": "USA",
+          "context": "UN-related diplomatic flights → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from New York JFK)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1775721563033,
+      "flights": [
+        {
+          "icao24": "4d20d4",
+          "callsign": "9HMDU",
+          "registration": "9H-SMB",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1450,
+          "lat": 42.119595,
+          "lon": 12.571826,
+          "airport": "LIRF",
+          "airportName": "Rome",
+          "airportCountry": "Italy",
+          "context": "Earlier talks venue (Feb 2026)",
+          "detection": "Diplomatic aircraft type: GLEX",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        }
+      ]
+    },
     {
       "ts": 1775717841557,
       "flights": [
