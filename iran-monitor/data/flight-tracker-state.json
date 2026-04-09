@@ -8,7 +8,7 @@
     "hub:ae624f": 1775674282597,
     "hub:ae624d": 1775674282597,
     "hub:43c171": 1775690728937,
-    "33ffad:LIRF": 1775676084579,
+    "33ffad:LIRF": 1775732721707,
     "896168:OMDB": 1775690728937,
     "hub:ae4887": 1775676084579,
     "hub:ae6a8d": 1775694326732,
@@ -68,10 +68,54 @@
     "hub:ae04f2": 1775725281444,
     "hub:142583": 1775725281444,
     "896584:OMDB": 1775729011092,
-    "hub:300619": 1775729011092
+    "hub:300619": 1775729011092,
+    "89618b:OMDB": 1775732721707
   },
-  "lastRun": 1775729011092,
+  "lastRun": 1775732842061,
   "alerts": [
+    {
+      "ts": 1775732721707,
+      "flights": [
+        {
+          "icao24": "33ffad",
+          "callsign": "IAM3181",
+          "registration": "MM62245",
+          "type": "F900",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 41.804703,
+          "lon": 12.585701,
+          "airport": "LIRF",
+          "airportName": "Rome",
+          "airportCountry": "Italy",
+          "context": "Earlier talks venue (Feb 2026)",
+          "detection": "Diplomatic aircraft type: F900",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        },
+        {
+          "icao24": "89618b",
+          "callsign": "A6EEL",
+          "registration": "A6-EEL",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 25.252636,
+          "lon": 55.355618,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        }
+      ]
+    },
     {
       "ts": 1775729011092,
       "flights": [
