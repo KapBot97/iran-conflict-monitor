@@ -75,10 +75,55 @@
     "a7f063:LSGG": 1775740162493,
     "4d2200:LSGG": 1775740162493,
     "hub:afb238": 1775740162493,
-    "hub:407d90": 1775740162493
+    "hub:407d90": 1775740162493,
+    "hub:ae47fd": 1775743882397,
+    "hub:502d6d": 1775743882397
   },
-  "lastRun": 1775740162493,
+  "lastRun": 1775743882397,
   "alerts": [
+    {
+      "ts": 1775743882397,
+      "flights": [
+        {
+          "icao24": "ae47fd",
+          "callsign": "PAT01",
+          "registration": "07-20064",
+          "type": "H60",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 325,
+          "lat": 38.686203,
+          "lon": -77.165222,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "502d6d",
+          "callsign": "UAG27G",
+          "registration": "YL-VCR",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 4775,
+          "lat": 52.411835,
+          "lon": 13.672409,
+          "airport": "EDDB",
+          "airportName": "Berlin Brandenburg",
+          "airportCountry": "Germany",
+          "context": "German government flights → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from Berlin Brandenburg)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775740162493,
       "flights": [
