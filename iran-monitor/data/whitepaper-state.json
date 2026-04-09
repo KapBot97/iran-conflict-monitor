@@ -1,13 +1,13 @@
 {
-  "last_brent": 96.24,
-  "last_wti": 94.41,
-  "last_type": "evening",
-  "last_timestamp": "2026-04-09T01:31:00.000Z",
+  "last_brent": 98.16,
+  "last_wti": 99.15,
+  "last_type": "morning",
+  "last_timestamp": "2026-04-09T15:00:00.000Z",
   "last_key_points": [
-    "Lebanon, not direct U.S.-Iran fire, became the primary ceasefire spoiler after heavy Israeli strikes and renewed Hezbollah rocket launches into northern Israel.",
-    "Hormuz remained permit-gated and commercially unclear through the evening, with no convincing evidence of broad tanker-flow normalization despite ceasefire headlines.",
-    "The Pakistan channel hardened from diplomatic speculation into a scheduled Saturday principals-level meeting led by Vice President JD Vance in Islamabad.",
-    "Crude retained a meaningful physical-risk premium, with Brent around 96.24 and WTI around 94.41 even after the panic phase unwound.",
-    "Late OSINT flow raised but did not verify renewed strike risk against UAE-linked energy assets and possible Israeli activity over Iran, keeping headline sensitivity high overnight."
+    "Crude reversed higher after the prior evening memo, with Brent around 98.16 and WTI around 99.15 as traders re-priced persistent physical disruption despite the ceasefire headline.",
+    "Hormuz remained functionally restricted rather than normalized, with Reuters describing traffic as near standstill and OSINT shipping trackers showing sparse, abnormal routing.",
+    "Pakistan became the clearest live diplomatic channel, with NBC reporting active mediation and Islamabad showing visible security preparations for expected U.S.-Iran talks.",
+    "Lebanon remained the main ceasefire spoiler theater as fresh Israeli strikes kept regional escalation risk elevated even without renewed direct U.S.-Iran fire.",
+    "Regional energy infrastructure risk broadened beyond the strait itself, including reported threats to Saudi bypass infrastructure and unverified but notable claims of damage at a Dubai fuel site."
   ]
 }
