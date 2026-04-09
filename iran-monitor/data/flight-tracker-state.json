@@ -66,10 +66,55 @@
     "06a3b2:OTBH": 1775725281444,
     "hub:e0b3cd": 1775725281444,
     "hub:ae04f2": 1775725281444,
-    "hub:142583": 1775725281444
+    "hub:142583": 1775725281444,
+    "896584:OMDB": 1775729011092,
+    "hub:300619": 1775729011092
   },
-  "lastRun": 1775725281444,
+  "lastRun": 1775729011092,
   "alerts": [
+    {
+      "ts": 1775729011092,
+      "flights": [
+        {
+          "icao24": "896584",
+          "callsign": "A6FHE",
+          "registration": "A6-FHE",
+          "type": "A189",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 2500,
+          "lat": 25.164993,
+          "lon": 55.432941,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "300619",
+          "callsign": "ULC25",
+          "registration": "I-PFLY",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 13100,
+          "lat": 39.292969,
+          "lon": -77.154297,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1775725281444,
       "flights": [
