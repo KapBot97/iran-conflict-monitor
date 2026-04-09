@@ -1,11 +1,11 @@
 {
-  "last_brent_price": 94.75,
-  "last_wti_price": 94.41,
-  "last_brief_type": "evening",
-  "last_brief_timestamp": "2026-04-08T21:00:00.000Z",
+  "last_brent_price": 97.71,
+  "last_wti_price": 97.40,
+  "last_brief_type": "morning",
+  "last_brief_timestamp": "2026-04-09T15:30:00.000Z",
   "key_developments": [
-    "DELTA vs morning: US-Iran agreed to a two-week ceasefire brokered by Pakistan; Friday Islamabad talks scheduled; Brent settled at $94.75 (up $0.31 from $94.44 morning) and WTI at $94.41 (down $0.57 from $94.98 morning) on relief that Hormuz could reopen, though physical traffic remains below 10% of normal.",
-    "Israel conducted its heaviest Lebanon strikes since the conflict escalated, publicly stating Lebanon is excluded from the ceasefire; Iranian parliamentary speaker said three key ceasefire clauses were violated within hours of announcement, creating immediate credibility gap.",
-    "Hormuz remains permit-based and effectively restricted: shippers lack clarity on transit terms, Iran Sepah navy warned unapproved vessels will be targeted, and normalization timelines are measured in weeks not hours — Qatar LNG and helium supply chain risk persists."
+    "DELTA vs prior evening brief: Brent at $97.71 (up $2.96 from $94.75) and WTI at $97.40 (up $2.99 from $94.41) as traders repriced ceasefire optimism back to physical-access realism — Hormuz remains functionally restricted, not normalized, with sub-10% traffic via rerouted Iranian-controlled lanes.",
+    "Ceasefire credibility has deteriorated at the margins: Lebanon remains an active combat zone with Israel continuing strikes and evacuation warnings in Beirut's southern suburbs; mediation efforts are under way to bring Lebanon into the arrangement, but compartmentalization is failing.",
+    "Islamabad diplomatic track is the key near-term catalyst: Pakistan-hosted US-Iran talks are expected Friday/Saturday, but the scope mismatch between Pakistan's 'ceasefire everywhere' claim and the US/Israeli position that Lebanon is excluded creates an immediate credibility gap to watch."
   ]
 }
