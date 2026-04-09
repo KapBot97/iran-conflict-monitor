@@ -47,10 +47,55 @@
     "ae04bb:LLBG": 1775697919829,
     "896196:OMDB": 1775697919829,
     "hub:ae51b4": 1775697919829,
-    "hub:ac7115": 1775703319209
+    "hub:ac7115": 1775703319209,
+    "5004d0:OOMS": 1775706923410,
+    "896481:OMDB": 1775706923410
   },
-  "lastRun": 1775703444618,
+  "lastRun": 1775707045275,
   "alerts": [
+    {
+      "ts": 1775706923410,
+      "flights": [
+        {
+          "icao24": "5004d0",
+          "callsign": "T7YES",
+          "registration": "T7-YES",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 23.597168,
+          "lon": 58.276596,
+          "airport": "OOMS",
+          "airportName": "Muscat",
+          "airportCountry": "Oman",
+          "context": "Primary US-Iran mediation hub (Omani FM)",
+          "detection": "Diplomatic aircraft type: GLEX",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": false
+        },
+        {
+          "icao24": "896481",
+          "callsign": "MAINT",
+          "registration": "A6-EUW",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 25.255405,
+          "lon": 55.374767,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        }
+      ]
+    },
     {
       "ts": 1775703319209,
       "flights": [
