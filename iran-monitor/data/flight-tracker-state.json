@@ -58,10 +58,35 @@
     "896174:OMDB": 1775710642236,
     "4d0297:LSGG": 1775712321688,
     "hub:491d99": 1775712441230,
-    "ae07a7:LLBG": 1775714121097
+    "ae07a7:LLBG": 1775714121097,
+    "896649:OMDB": 1775717841557
   },
-  "lastRun": 1775714242451,
+  "lastRun": 1775717961751,
   "alerts": [
+    {
+      "ts": 1775717841557,
+      "flights": [
+        {
+          "icao24": "896649",
+          "callsign": "A6FTA",
+          "registration": "A6-FTA",
+          "type": "EC30",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1025,
+          "lat": 25.027676,
+          "lon": 54.956615,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        }
+      ]
+    },
     {
       "ts": 1775714121097,
       "flights": [
