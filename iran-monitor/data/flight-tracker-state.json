@@ -9,10 +9,120 @@
     "hub:ae649c": 1776210326477,
     "hub:ae6226": 1776210326477,
     "896196:OMDB": 1776212122559,
-    "hub:ae146e": 1776212122559
+    "hub:ae146e": 1776212122559,
+    "896197:OMDB": 1776213922677,
+    "hub:ae624d": 1776213922677,
+    "hub:adfe55": 1776213922677,
+    "hub:c08217": 1776213922677,
+    "hub:4246a7": 1776215723321
   },
-  "lastRun": 1776212122559,
+  "lastRun": 1776215723321,
   "alerts": [
+    {
+      "ts": 1776215723321,
+      "flights": [
+        {
+          "icao24": "4246a7",
+          "callsign": "VPBUT",
+          "registration": "VP-BUT",
+          "type": "GLF5",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 22825,
+          "lat": 39.282269,
+          "lon": 116.457275,
+          "airport": "ZBAA",
+          "airportName": "Beijing Capital",
+          "airportCountry": "China",
+          "context": "Chinese state flights — potential Iran back-channel → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLF5 (outbound from Beijing Capital)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
+    {
+      "ts": 1776213922677,
+      "flights": [
+        {
+          "icao24": "896197",
+          "callsign": "@@@@@@@@",
+          "registration": "A6-EEX",
+          "type": "A388",
+          "country": "Unknown",
+          "onGround": true,
+          "altitude": 0,
+          "lat": 25.251715,
+          "lon": 55.357052,
+          "airport": "OMDB",
+          "airportName": "Dubai",
+          "airportCountry": "UAE",
+          "context": "UAE back-channel and regional financial hub",
+          "detection": "UAE government (UAE)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": false
+        },
+        {
+          "icao24": "ae624d",
+          "callsign": "MUSL",
+          "registration": "69-7537",
+          "type": "B212",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1100,
+          "lat": 39.014328,
+          "lon": -77.682655,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "adfe55",
+          "callsign": "PAT326",
+          "registration": "94-00326",
+          "type": "BE20",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 1475,
+          "lat": 38.766312,
+          "lon": -77.250244,
+          "airport": "KIAD",
+          "airportName": "Washington Dulles",
+          "airportCountry": "USA",
+          "context": "US State Dept / NSC departures → heading toward Iran/Gulf theater",
+          "detection": "US military serial (e.g. 58-0030, 18-46048) (USA) (outbound from Washington Dulles)",
+          "confidence": "MEDIUM",
+          "signal": "mil-reg",
+          "layer3": true
+        },
+        {
+          "icao24": "c08217",
+          "callsign": "CGXGW",
+          "registration": "C-GXGW",
+          "type": "GLEX",
+          "country": "Unknown",
+          "onGround": false,
+          "altitude": 3625,
+          "lat": 41.18811,
+          "lon": -74.308228,
+          "airport": "KJFK",
+          "airportName": "New York JFK",
+          "airportCountry": "USA",
+          "context": "UN-related diplomatic flights → heading toward Iran/Gulf theater",
+          "detection": "Diplomatic aircraft type: GLEX (outbound from New York JFK)",
+          "confidence": "MEDIUM",
+          "signal": "diplo-type",
+          "layer3": true
+        }
+      ]
+    },
     {
       "ts": 1776212122559,
       "flights": [
